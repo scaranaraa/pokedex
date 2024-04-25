@@ -1,5 +1,5 @@
-import ARTISTS from './constants.js';
-import { get_data_from } from './utils.js';
+import { get_data_from } from './utils.js'
+import constants from './constants.js';
 import {
   LevelTrigger,
   OtherTrigger,
@@ -267,7 +267,7 @@ async function get_effects(instance: DataManager) {
   const effects: { [key: number]: MoveEffect } = {};
   for (const row of data) {
     let description = row.short_effect.replace(
-      ARTISTS.DESCRIPTION_LINK_REGEX,
+      constants.DESCRIPTION_LINK_REGEX,
       '$1'
     );
     description = description.replace('$effect_chance', '{effect_chance}');

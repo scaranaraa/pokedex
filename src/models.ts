@@ -34,139 +34,6 @@ function deaccent(text: string) {
 
 class UnregisteredError extends Error {}
 
-class UnregisteredDataManager implements DataManagerBase {
-  pokemon: Species[] = [];
-
-  items: Item[] = [];
-
-  effects: MoveEffect[] = [];
-
-  moves: Move[] = [];
-
-  allPokemon(): Species[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_alolan(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_galarian(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_hisuian(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_paradox(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_mythical(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_legendary(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_ub(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_event(): number[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get list_mega(): Array<number | undefined> {
-    throw new Error('Method not implemented.');
-  }
-
-  get species_id_by_type_index(): Record<string, number[]> {
-    throw new Error('Method not implemented.');
-  }
-
-  get speciesIdByRegionIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  listRegion(region: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  get speciesIdByMoveIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  listMove(moveName: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  allItems(): Item[] {
-    throw new Error('Method not implemented.');
-  }
-
-  get speciesByDexNumberIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  allSpeciesByNumber(number: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  allSpeciesByName(name: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  findSpeciesByNumber(number: any): Species {
-    throw new Error('Method not implemented.');
-  }
-
-  get speciesByNameIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  speciesByName(name: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  itemByNumber(number: any): Item {
-    throw new Error('Method not implemented.');
-  }
-
-  get itemByNameIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  itemByName(name: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  moveByNumber(number: any): Move {
-    throw new Error('Method not implemented.');
-  }
-
-  get moveByNameIndex(): Map<any, any> {
-    throw new Error('Method not implemented.');
-  }
-
-  moveByName(name: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  randomSpawn(rarity?: string): Species {
-    throw new Error('Method not implemented.');
-  }
-
-  weightedRandomChoice(weights: any): number {
-    throw new Error('Method not implemented.');
-  }
-
-  get spawnWeights(): number[] {
-    throw new Error('Method not implemented.');
-  }
-}
 
 class MoveEffect implements MoveEffectBase {
   id: number;
@@ -178,7 +45,7 @@ class MoveEffect implements MoveEffectBase {
   constructor(
     id: number,
     description: string,
-    instance: DataManagerBase = new UnregisteredDataManager()
+    instance: DataManagerBase
   ) {
     this.id = id;
     this.description = description;
@@ -1321,7 +1188,6 @@ class DataManagerBase implements DataManagerBaseType {
   }
 
   allSpeciesByName(name: string) {
-    // Implement deaccent function in JavaScript or use a library
     const st = deaccent(name.toLowerCase().replace('′', "'"));
     return this.speciesByNameIndex.get(st) || [];
   }
@@ -1421,7 +1287,7 @@ class DataManagerBase implements DataManagerBaseType {
       threshold -= weights[i];
     }
 
-    return 0; // Should not reach here if weights are correct
+    return 0;
   }
 
   get spawnWeights() {

@@ -3,10 +3,6 @@ id,name,description,cost,shard,action,page,emote,separate
 2,Great Ball,It is slightly better than the regular Poké Ball,200,,ball,0,
 3,Ultra Ball,It is twice as good as a regular Poké Ball,500,,ball,0,
 4,Master Ball,A very rare Poké Ball that never fails in an attempt to catch a Pokémon.,2000,,ball,0,
-10001,XP Booster 0,Doubles your XP for 30 minutes!,200,,xpboost_30,1,,1
-10002,XP Booster 1,Doubles your XP for 1 hour!,400,,xpboost_60,1,,1
-10003,XP Booster 2,Doubles your XP for 2 hours!,700,,xpboost_120,1,,1
-10004,XP Booster 3,Doubles your XP for 3 hours!,1000,,xpboost_180,1,,1
 10005,Rare Candy,Levels up your pokémon.,750,,level,1,candy_rare,1
 80,Sun Stone,,15000,,evolve_normal,2,stone_sun,
 81,Moon Stone,,15000,,evolve_normal,2,stone_moon,
@@ -96,11 +92,3 @@ id,name,description,cost,shard,action,page,emote,separate
 12001,Mega Evolution,Transforms your pokémon into its mega form!,10000,,evolve_mega,6,,1
 12002,X Mega Evolution,Transforms your pokémon into its X mega form!,10000,,evolve_megax,6,,1
 12003,Y Mega Evolution,Transforms your pokémon into its Y mega form!,10000,,evolve_megay,6,,1
-15001,Shard,,2000,,shard,7,,1
-16001,Redeem,Spawns a random catchable pokémon.,2000,1,redeem,7,,1
-15002,Redeem Common,Spawns any common catchable pokémon of your choice.,10000,1,redeem,7,,1
-16002,Redeem Mythical,Spawns any mythical catchable pokémon of your choice.,20000,1,redeem,7,,1
-16003,Redeem Legendary,Spawns any legendary catchable pokémon of your choice.,25000,1,redeem,7,,1
-16004,Redeem Ultra Beast,Spawns any ultra beast pokémon of your choice.,30000,1,redeem,7,,1
-15003,Incense,Spawns a pokémon every 20 seconds for an hour.,500,1,incense,7,,1
-15004,Shiny Charm,Increases your shiny rate by 20% for 1 week.,1500,1,shiny_charm,7,,1

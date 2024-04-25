@@ -2,6 +2,8 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "A nodejs library to get all the info from a pokedex!",
+  "author": "scaranaraa",
+  "homepage": "https://github.com/scaranaraa/pokedex#readme",
   "main": "dist/index.js",
   "license": "MIT",
   "type": "module",
@@ -15,6 +17,9 @@
     "pokedex",
     "nodejs"
   ],
+  "bugs": {
+    "url": "https://github.com/scaranaraa/pokedex/issues"
+  },
   "packageManager": "yarn@4.1.1",
   "devDependencies": {
     "@types/node": "^20.12.7",

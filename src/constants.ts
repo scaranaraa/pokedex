@@ -123,12 +123,7 @@ const TYPE_EFFICACY = [
   [null, 1, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 2, 2, 1],
 ];
 
-const ARTISTS = {
-  '405452200656109569': 'HiroWilde',
-  '304098467192635392': '@superjedi224',
-  '130438329484181504': '@haltfire302',
-  // ... (remaining ARTISTS data omitted for brevity)
-};
+
 
 const NATURES = [
   'Adamant',
@@ -456,5 +451,4 @@ export default {
   MOVE_TARGETS,
   DAMAGE_CLASSES,
   TYPE_EFFICACY,
-  ARTISTS,
 };
