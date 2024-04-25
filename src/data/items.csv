@@ -1,0 +1,106 @@
+id,name,description,cost,shard,action,page,emote,separate
+1,Poke Ball,The simplest type of Poké Ball,100,,ball,0,
+2,Great Ball,It is slightly better than the regular Poké Ball,200,,ball,0,
+3,Ultra Ball,It is twice as good as a regular Poké Ball,500,,ball,0,
+4,Master Ball,A very rare Poké Ball that never fails in an attempt to catch a Pokémon.,2000,,ball,0,
+10001,XP Booster 0,Doubles your XP for 30 minutes!,200,,xpboost_30,1,,1
+10002,XP Booster 1,Doubles your XP for 1 hour!,400,,xpboost_60,1,,1
+10003,XP Booster 2,Doubles your XP for 2 hours!,700,,xpboost_120,1,,1
+10004,XP Booster 3,Doubles your XP for 3 hours!,1000,,xpboost_180,1,,1
+10005,Rare Candy,Levels up your pokémon.,750,,level,1,candy_rare,1
+80,Sun Stone,,15000,,evolve_normal,2,stone_sun,
+81,Moon Stone,,15000,,evolve_normal,2,stone_moon,
+82,Fire Stone,,15000,,evolve_normal,2,stone_fire,
+83,Thunder Stone,,15000,,evolve_normal,2,stone_thunder,
+84,Water Stone,,15000,,evolve_normal,2,stone_water,
+85,Leaf Stone,,15000,,evolve_normal,2,stone_leaf,
+86,Ice Stone,,15000,,evolve_normal,2,stone_ice,
+107,Shiny Stone,,15000,,evolve_normal,2,stone_shiny,
+108,Dusk Stone,,15000,,evolve_normal,2,stone_dusk,
+109,Dawn Stone,,15000,,evolve_normal,2,stone_dawn,
+2045,Auspicious Armor,,15000,,evolve_normal,2,armor_auspicious,
+1677,Malicious Armor,,15000,,evolve_normal,2,armor_malicious,
+442,Griseous Orb,,15000,,form_item,3,item_griseous_orb,
+444,Gracidea,,15000,,form_item,3,item_gracidea,
+681,Reveal Glass,,1500,,form_item,3,item_reveal_glass,
+806,Prison Bottle,,1500,,form_item,3,item_prison_bottle,
+889,Red Nectar,,1500,,form_item,3,item_red_nectar,
+890,Yellow Nectar,,1500,,form_item,3,item_yellow_nectar,
+891,Pink Nectar,,1500,,form_item,3,item_pink_nectar,
+892,Purple Nectar,,1500,,form_item,3,item_purple_nectar,
+13001,Everstone,Prevents pokémon from evolving.,1500,,held_item,4,item_everstone,1
+13002,XP Blocker,Prevents pokémon from gaining XP.,1500,,held_item,4,,1
+14001,Friendship Bracelet,Causes certain pokémon to evolve when leveled up.,15000,,held_item,4,,1
+110,Oval Stone,,1500,,held_item,4,item_oval_stone,
+198,King's Rock,,1500,,held_item,4,item_kings_rock,
+203,Deep Sea Tooth,,1500,,held_item,4,item_deep_sea_tooth,
+204,Deep Sea Scale,,1500,,held_item,4,item_deep_sea_scale,
+210,Metal Coat,,1500,,held_item,4,item_metal_coat,
+212,Dragon Scale,,1500,,held_item,4,item_dragon_scale,
+229,Upgrade,,15000,,held_item,4,item_upgrade,
+298,Protector,,1500,,held_item,4,item_protector,
+299,Electirizer,,1500,,held_item,4,item_electirizer,
+300,Magmarizer,,1500,,held_item,4,item_magmarizer,
+301,Dubious Disc,,1500,,held_item,4,item_dubious_disc,
+302,Reaper Cloth,,1500,,held_item,4,item_reaper_cloth,
+303,Razor Claw,,1500,,held_item,4,item_razor_claw,
+304,Razor Fang,,1500,,held_item,4,item_razor_fang,
+580,Prism Scale,,1500,,held_item,4,item_prism_scale,
+686,Whipped Dream,,1500,,held_item,4,item_whipped_dream,
+687,Sachet,,1500,,held_item,4,item_sachet,
+11001,Adamant Mint,"+10% Attack
+-10% Sp. Atk",500,,nature_0,5,mint_atk,
+11002,Bashful Mint,No effect,500,,nature_1,5,mint_serious,
+11003,Bold Mint,"+10% Defense
+-10% Attack",500,,nature_2,5,mint_def,
+11004,Brave Mint,"+10% Attack
+-10% Speed",500,,nature_3,5,mint_atk,
+11005,Calm Mint,"+10% Sp. Def
+-10% Attack",500,,nature_4,5,mint_spdef,
+11006,Careful Mint,"+10% Sp. Def
+-10% Sp. Atk",500,,nature_5,5,mint_spdef,
+11007,Docile Mint,No effect,500,,nature_6,5,mint_serious,
+11008,Gentle Mint,"+10% Sp. Def
+-10% Defense",500,,nature_7,5,mint_spdef,
+11009,Hardy Mint,No effect,500,,nature_8,5,mint_serious,
+11010,Hasty Mint,"+10% Speed
+-10% Defense",500,,nature_9,5,mint_spd,
+11011,Impish Mint,"+10% Defense
+-10% Sp. Atk",500,,nature_10,5,mint_def,
+11012,Jolly Mint,"+10% Speed
+-10% Sp. Atk",500,,nature_11,5,mint_spd,
+11013,Lax Mint,"+10% Defense
+-10% Sp. Def",500,,nature_12,5,mint_def,
+11014,Lonely Mint,"+10% Attack
+-10% Defense",500,,nature_13,5,mint_atk,
+11015,Mild Mint,"+10% Sp. Atk
+-10% Defense",500,,nature_14,5,mint_spatk,
+11016,Modest Mint,"+10% Sp. Atk
+-10% Attack",500,,nature_15,5,mint_spatk,
+11017,Naive Mint,"+10% Speed
+-10% Sp. Def",500,,nature_16,5,mint_spd,
+11018,Naughty Mint,"+10% Attack
+-10% Sp. Def",500,,nature_17,5,mint_atk,
+11019,Quiet Mint,"+10% Sp. Atk
+-10% Speed",500,,nature_18,5,mint_spatk,
+11020,Quirky Mint,No effect,500,,nature_19,5,mint_serious,
+11021,Rash Mint,"+10% Sp. Atk
+-10% Sp. Def",500,,nature_20,5,mint_spatk,
+11022,Relaxed Mint,"+10% Defense
+-10% Speed",500,,nature_21,5,mint_def,
+11023,Sassy Mint,"+10% Sp. Def
+-10% Speed",500,,nature_22,5,mint_spdef,
+11024,Serious Mint,No effect,50,,nature_23,5,mint_serious,
+11025,Timid Mint,"+10% Speed
+-10% Attack",500,,nature_24,5,mint_spd,
+12001,Mega Evolution,Transforms your pokémon into its mega form!,10000,,evolve_mega,6,,1
+12002,X Mega Evolution,Transforms your pokémon into its X mega form!,10000,,evolve_megax,6,,1
+12003,Y Mega Evolution,Transforms your pokémon into its Y mega form!,10000,,evolve_megay,6,,1
+15001,Shard,,2000,,shard,7,,1
+16001,Redeem,Spawns a random catchable pokémon.,2000,1,redeem,7,,1
+15002,Redeem Common,Spawns any common catchable pokémon of your choice.,10000,1,redeem,7,,1
+16002,Redeem Mythical,Spawns any mythical catchable pokémon of your choice.,20000,1,redeem,7,,1
+16003,Redeem Legendary,Spawns any legendary catchable pokémon of your choice.,25000,1,redeem,7,,1
+16004,Redeem Ultra Beast,Spawns any ultra beast pokémon of your choice.,30000,1,redeem,7,,1
+15003,Incense,Spawns a pokémon every 20 seconds for an hour.,500,1,incense,7,,1
+15004,Shiny Charm,Increases your shiny rate by 20% for 1 week.,1500,1,shiny_charm,7,,1
