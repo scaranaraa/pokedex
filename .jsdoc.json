@@ -12,9 +12,9 @@
         "plugins/markdown"
     ],
     "templates": {
-        "cleverLinks": true,
+        "cleverLinks": false,
         "monospaceLinks": true,
-        "useLongnameInNav": true,
+        "useLongnameInNav": false,
         "showInheritedInNav": true
     },
     "opts": {
