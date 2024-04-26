@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.2">
+  <meta charset="utf-8">
+  <title>pokedex 1.0.0 &raquo; Source: pokemonbase.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex 1.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: pokemonbase.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>/**
+ * @module
+ */
+import constants from &#x27;./constants.js&#x27;;
+import { LevelTrigger, StatStages } from &#x27;./models.js&#x27;;
+const random_iv &#x3D; () &#x3D;&gt; Math.floor(Math.random() * 32);
+const random_nature &#x3D; () &#x3D;&gt; constants.NATURES[Math.floor(Math.random() * constants.NATURES.length)];
+// Function to calculate stats
+function calcStat(pokemon, stat) {
+    const ivstat &#x3D; &#x60;iv_${stat}&#x60;;
+    const base &#x3D; pokemon.species.base_stats[stat];
+    const iv &#x3D; pokemon[ivstat];
+    return Math.floor((((2 * base + iv + 5) * pokemon.level) / 100 + 5) *
+        constants.NATURE_MULTIPLIERS[pokemon.nature][stat]);
+}
+/**
+ * Represents a base Pokemon instance.
+ *
+ * @class PokemonBase
+ * @property {any} id - Unique identifier for the Pokemon.
+ * @property {string|number} owner_id - ID of the Pokemon&#x27;s owner.
+ * @property {number} idx - Index of the Pokemon within the owner&#x27;s collection.
+ * @property {number} [timestamp] - Timestamp of when the Pokemon was created or obtained.
+ * @property {number} species_id - ID of the Pokemon species.
+ * @property {number} level - Current level of the Pokemon.
+ * @property {number} xp - Current experience points of the Pokemon.
+ * @property {string} nature - Nature of the Pokemon, which affects stat growth.
+ * @property {boolean} shiny - Whether the Pokemon is shiny.
+ * @property {number} iv_hp - Individual Value (IV) for HP.
+ * @property {number} iv_atk - Individual Value (IV) for Attack.
+ * @property {number} iv_defn - Individual Value (IV) for Defense.
+ * @property {number} iv_satk - Individual Value (IV) for Special Attack.
+ * @property {number} iv_sdef - Individual Value (IV) for Special Defense.
+ * @property {number} iv_spd - Individual Value (IV) for Speed.
+ * @property {number} iv_total - Sum of all IVs.
+ * @property {string|undefined} nickname - Nickname of the Pokemon, or undefined if none.
+ * @property {string|false} favorite - Favorite status of the Pokemon.
+ * @property {number|string|undefined} held_item - ID or name of the held item, or undefined if none.
+ * @property {any} moves - List of moves the Pokemon knows.
+ * @property {boolean|false} has_color - Whether the Pokemon has a custom color.
+ * @property {number|undefined} color - Custom color of the Pokemon, or undefined if none.
+ * @property {number|null} _hp - Current HP of the Pokemon.
+ * @property {string[]} ailments - List of ailments affecting the Pokemon.
+ * @property {any} stages - Stat stage modifications affecting the Pokemon.
+ */
+class PokemonBase {
+    id;
+    idx;
+    species_id;
+    level;
+    xp;
+    nature;
+    shiny;
+    iv_hp;
+    iv_atk;
+    iv_defn;
+    iv_satk;
+    iv_sdef;
+    iv_spd;
+    iv_total;
+    nickname;
+    favorite;
+    held_item;
+    moves;
+    has_color;
+    color;
+    _hp;
+    ailments;
+    stages;
+    instance;
+    constructor(data, instance) {
+        this.id &#x3D; data.id;
+        this.idx &#x3D; 1;
+        this.species_id &#x3D; data.id;
+        this.level &#x3D; 0;
+        this.xp &#x3D; 0;
+        this.nature &#x3D; random_nature();
+        this.shiny &#x3D; Math.floor(Math.random() * 4096) &#x3D;&#x3D; 1 ? true : false;
+        this.iv_hp &#x3D; random_iv();
+        this.iv_atk &#x3D; random_iv();
+        this.iv_defn &#x3D; random_iv();
+        this.iv_satk &#x3D; random_iv();
+        this.iv_sdef &#x3D; random_iv();
+        this.iv_spd &#x3D; random_iv();
+        this.iv_total &#x3D; this.iv_hp + this.iv_defn + this.iv_satk + this.iv_atk + this.iv_sdef + this.iv_spd;
+        // Customization
+        this.nickname &#x3D; null;
+        this.favorite &#x3D; false;
+        this.held_item &#x3D; null;
+        this.moves &#x3D; data.moves || [];
+        this.has_color &#x3D; false;
+        this.color &#x3D; null;
+        this._hp &#x3D; null;
+        this.ailments &#x3D; [];
+        this.stages &#x3D; new StatStages();
+        this.instance &#x3D; [instance];
+    }
+    format(spec) {
+        let name &#x3D; this.shiny ? &#x27;✨ &#x27; : &#x27;&#x27;;
+        name +&#x3D; this.species.toString();
+        return name;
+    }
+    toString() {
+        return this.format(&#x27;&#x27;);
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+    get max_xp() {
+        return 500 + 30 * this.level;
+    }
+    get max_hp() {
+        if (this.species_id &#x3D;&#x3D;&#x3D; 292) {
+            return 1;
+        }
+        return Math.floor(((2 * this.species.base_stats.hp + this.iv_hp + 5) * this.level) / 100 +
+            this.level +
+            10);
+    }
+    get hp() {
+        return this._hp &#x3D;&#x3D;&#x3D; null ? this.max_hp : this._hp;
+    }
+    set hp(value) {
+        this._hp &#x3D; value;
+    }
+    get species() {
+        return this.instance[0].findSpeciesByNumber(this.species_id);
+    }
+    get atk() {
+        return calcStat(this, &#x27;atk&#x27;);
+    }
+    get defn() {
+        return calcStat(this, &#x27;defn&#x27;);
+    }
+    get satk() {
+        return calcStat(this, &#x27;satk&#x27;);
+    }
+    get sdef() {
+        return calcStat(this, &#x27;sdef&#x27;);
+    }
+    get spd() {
+        return calcStat(this, &#x27;spd&#x27;);
+    }
+    get ivPercentage() {
+        return ((this.iv_hp +
+            this.iv_atk +
+            this.iv_defn +
+            this.iv_satk +
+            this.iv_sdef +
+            this.iv_spd) /
+            (6 * 31));
+    }
+    getNextEvolution() {
+        if (!this.species.evolution_to || this.held_item &#x3D;&#x3D;&#x3D; 13001) {
+            return null;
+        }
+        const possible &#x3D; [];
+        for (const evo of this.species.evolution_to.items) {
+            if (!(evo.trigger instanceof LevelTrigger)) {
+                continue;
+            }
+            let can &#x3D; true;
+            if (evo.trigger.level &amp;amp;&amp;amp; this.level &amp;lt; evo.trigger.level) {
+                can &#x3D; false;
+            }
+            if (evo.trigger.item &amp;amp;&amp;amp; this.held_item !&#x3D;&#x3D; evo.trigger.item_id) {
+                can &#x3D; false;
+            }
+            if (evo.trigger.move_id &amp;amp;&amp;amp; !this.moves.includes(evo.trigger.move_id)) {
+                can &#x3D; false;
+            }
+            if (evo.trigger.relative_stats &#x3D;&#x3D;&#x3D; 1 &amp;amp;&amp;amp; this.atk &amp;lt;&#x3D; this.defn) {
+                can &#x3D; false;
+            }
+            if (evo.trigger.relative_stats &#x3D;&#x3D;&#x3D; -1 &amp;amp;&amp;amp; this.defn &amp;lt;&#x3D; this.atk) {
+                can &#x3D; false;
+            }
+            if (evo.trigger.relative_stats &#x3D;&#x3D;&#x3D; 0 &amp;amp;&amp;amp; this.atk !&#x3D;&#x3D; this.defn) {
+                can &#x3D; false;
+            }
+            if (can) {
+                possible.push(evo.target);
+            }
+        }
+        if (possible.length &#x3D;&#x3D;&#x3D; 0) {
+            return null;
+        }
+        return possible[Math.floor(Math.random() * possible.length)];
+    }
+    canEvolve() {
+        return this.getNextEvolution() !&#x3D;&#x3D; null;
+    }
+}
+export { PokemonBase, calcStat };
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.2 on April 26, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,850 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.2">
+  <meta charset="utf-8">
+  <title>pokedex 1.0.0 &raquo; Home</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex 1.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>
+              pokedex 1.0.0
+            </h1>
+          </header>
+          <article>
+            <h1>Pokedex</h1>
+            <p>A nodejs library to get all pokemon info from a pokedex!</p>
+            <h2>Examples</h2>
+            <p>ALl examples can be found in <a href="https://github.com/scaranaraa/pokedex/blob/main/examples.js">examples.js</a></p>
+            <h2>Features</h2>
+            <ul>
+              <li>Pokemon Data: Stats, Types, Regions, Evolutions, Descriptions etc</li>
+              <li>Move Data: Effects, Properties, Description</li>
+              <li>Evolution Data: Triggers, Descriptions</li>
+              <li>Items: Effects, Properties</li>
+            </ul>
+            <h2>Example usage</h2>
+            <h3>Initialization</h3>
+            <pre class="prettyprint source lang-js"><code>import {Pokedex} from 'pokedex';
+const pokedex = new Pokedex()
+await pokedex.init() //necessary
+</code></pre>
+            <ol>
+              <li>Get information about specific pokemon</li>
+            </ol>
+            <pre class="prettyprint source lang-js"><code>const charizard = pokedex.speciesByName('charizard');
+console.log(charizard.toJSON())
+/*
+id: 6
+height: 1.7,
+weight: 90.5,
+types: [ 'Fire', 'Flying' ],
+description: 'It is said that Charizard’s fire burns hotter if it has experienced harsh battles.',
+mega_x_id: 10034,
+moves: [Move,Move]
+....
+*/
+</code></pre>
+            <ol start="2">
+              <li>Get evolution information</li>
+            </ol>
+            <pre class="prettyprint source lang-js"><code>const charizard = pokedex.speciesByName('charizard');
+console.log(charizard.evolution_text)
+/*
+Charizard evolves from Charmeleon starting from level 36, 
+which evolves from Charmander starting from level 16.
+*/
+</code></pre>
+            <ol start="3">
+              <li>Get move information</li>
+            </ol>
+            <pre class="prettyprint source lang-js"><code>const move = pokedex.moveByName('dragon pulse');
+console.log(move.toJSON())
+/*
+id: 406,
+slug: 'dragon-pulse',
+name: 'Dragon Pulse',
+power: 85,
+pp: 10,
+accuracy: 100
+  .....
+*/
+</code></pre>
+            <ol start="4">
+              <li>Create a pokemon instance</li>
+            </ol>
+            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex';
+const pokedex = new Pokedex()
+const randompokemon = pokedex.randomSpawn()
+const newpokemon = new Pokemon(randompokemon, pokedex) 
+console.log(newpokemon)
+//this will give the pokemon a random nature, and random iv stats
+</code></pre>
+            <ol start="5">
+              <li>Simulate battle between two Pokemon</li>
+            </ol>
+            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex';
+const pokedex = new Pokedex()
+
+const myPokemon = new Pokemon(pokedex.randomSpawn())
+const opponentPokemon = new Pokemon(pokedex.randomSpawn())
+
+const attack = myPokemon.moves[0].move.calculate_turn(myPokemon,opponentPokemon)
+console.log(attack)
+/*
+MoveResult {
+  success: true,
+  damage: 7,
+  healing: 0,
+  ailment: 'Confusion',
+  messages: [ &quot;It's not very effective...&quot; ],
+  stat_changes: [ StatChange { stat_id: 3, change: -1 } ]
+}
+*/
+</code></pre>
+          </article>
+          <div class="symbol-index">
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models">models</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models.html" class="!symbol-index-name">models</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#allItems" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>allItems()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#allPokemon" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>allPokemon()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#allSpeciesByName" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>allSpeciesByName(name)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#allSpeciesByNumber" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>allSpeciesByNumber(number)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#checkinitialized" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>checkinitialized()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#effects" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>effects</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#findSpeciesByNumber" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>findSpeciesByNumber(number)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#itemByName" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>itemByName(name)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#itemByNameIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>itemByNameIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#itemByNumber" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>itemByNumber(number)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#items" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>items</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#listMove" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>listMove(moveName)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#listRegion" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>listRegion(region)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_alolan" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_alolan</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_event" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_event</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_galarian" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_galarian</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_hisuian" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_hisuian</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_legendary" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_legendary</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_mega" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_mega</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_mythical" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_mythical</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_paradox" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_paradox</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#list_ub" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>list_ub</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#moveByName" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moveByName(name)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#moveByNameIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moveByNameIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#moveByNumber" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moveByNumber(number)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#moves" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moves</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#pokemon" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>pokemon</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#randomSpawn" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>randomSpawn([rarity])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#speciesByDexNumberIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>speciesByDexNumberIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#speciesByName" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>speciesByName(name)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#speciesByNameIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>speciesByNameIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#speciesIdByMoveIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>speciesIdByMoveIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#speciesIdByRegionIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>speciesIdByRegionIndex</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#species_id_by_type_index" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>species_id_by_type_index</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#weightedRandomChoice" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>weightedRandomChoice(weights)</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~Evolution">models~Evolution</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Evolution.html" class="!symbol-index-name">models~<wbr>Evolution()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~EvolutionList">models~EvolutionList</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-EvolutionList.html" class="!symbol-index-name">models~<wbr>EvolutionList()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~EvolutionTrigger">models~EvolutionTrigger</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-EvolutionTrigger.html" class="!symbol-index-name">models~<wbr>EvolutionTrigger()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~Item">models~Item</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Item.html" class="!symbol-index-name">models~<wbr>Item()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~ItemTrigger">models~ItemTrigger</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-ItemTrigger.html" class="!symbol-index-name">models~<wbr>ItemTrigger()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~LevelMethod">models~LevelMethod</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-LevelMethod.html" class="!symbol-index-name">models~<wbr>LevelMethod()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~LevelTrigger">models~LevelTrigger</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-LevelTrigger.html" class="!symbol-index-name">models~<wbr>LevelTrigger()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~Move">models~Move</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Move.html" class="!symbol-index-name">models~<wbr>Move()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~MoveEffect">models~MoveEffect</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-MoveEffect.html" class="!symbol-index-name">models~<wbr>MoveEffect()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~MoveMeta">models~MoveMeta</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-MoveMeta.html" class="!symbol-index-name">models~<wbr>MoveMeta()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~MoveMethod">models~MoveMethod</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-MoveMethod.html" class="!symbol-index-name">models~<wbr>MoveMethod()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~MoveResult">models~MoveResult</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-MoveResult.html" class="!symbol-index-name">models~<wbr>MoveResult()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~OtherTrigger">models~OtherTrigger</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-OtherTrigger.html" class="!symbol-index-name">models~<wbr>OtherTrigger()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~PokemonMove">models~PokemonMove</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-PokemonMove.html" class="!symbol-index-name">models~<wbr>PokemonMove()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~Species">models~Species</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Species.html" class="!symbol-index-name">models~<wbr>Species()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~StatChange">models~StatChange</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-StatChange.html" class="!symbol-index-name">models~<wbr>StatChange()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~StatStages">models~StatStages</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-StatStages.html" class="!symbol-index-name">models~<wbr>StatStages()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~Stats">models~Stats</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Stats.html" class="!symbol-index-name">models~<wbr>Stats()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~TradeTrigger">models~TradeTrigger</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-TradeTrigger.html" class="!symbol-index-name">models~<wbr>TradeTrigger()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="pokemonbase">pokemonbase</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-pokemonbase.html" class="!symbol-index-name">pokemonbase</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="pokemonbase~PokemonBase">pokemonbase~PokemonBase</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-pokemonbase-PokemonBase.html" class="!symbol-index-name">pokemonbase~<wbr>PokemonBase()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.2 on April 26, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

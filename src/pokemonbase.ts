@@ -2,7 +2,7 @@
  * @module
  */
 import constants from './constants.js';
-import { LevelTrigger } from './models.js';
+import { DataManagerBase, LevelTrigger, Species, StatStages } from './models.js';
 
 import { type PokemonBaseDef } from '../index.js';
 
@@ -20,17 +20,43 @@ function calcStat(pokemon: PokemonBase, stat: string): number {
       constants.NATURE_MULTIPLIERS[pokemon.nature][stat]
     );
 }
+/**
+ * Represents a base Pokemon instance.
+ * 
+ * @class PokemonBase
+ * @property {any} id - Unique identifier for the Pokemon.
+ * @property {string|number} owner_id - ID of the Pokemon's owner. 
+ * @property {number} idx - Index of the Pokemon within the owner's collection. 
+ * @property {number} [timestamp] - Timestamp of when the Pokemon was created or obtained.
+ * @property {number} species_id - ID of the Pokemon species. 
+ * @property {number} level - Current level of the Pokemon.
+ * @property {number} xp - Current experience points of the Pokemon. 
+ * @property {string} nature - Nature of the Pokemon, which affects stat growth. 
+ * @property {boolean} shiny - Whether the Pokemon is shiny.
+ * @property {number} iv_hp - Individual Value (IV) for HP.
+ * @property {number} iv_atk - Individual Value (IV) for Attack.
+ * @property {number} iv_defn - Individual Value (IV) for Defense.
+ * @property {number} iv_satk - Individual Value (IV) for Special Attack.
+ * @property {number} iv_sdef - Individual Value (IV) for Special Defense.
+ * @property {number} iv_spd - Individual Value (IV) for Speed.
+ * @property {number} iv_total - Sum of all IVs. 
+ * @property {string|undefined} nickname - Nickname of the Pokemon, or undefined if none. 
+ * @property {string|false} favorite - Favorite status of the Pokemon. 
+ * @property {number|string|undefined} held_item - ID or name of the held item, or undefined if none. 
+ * @property {any} moves - List of moves the Pokemon knows.
+ * @property {boolean|false} has_color - Whether the Pokemon has a custom color.
+ * @property {number|undefined} color - Custom color of the Pokemon, or undefined if none. 
+ * @property {number|null} _hp - Current HP of the Pokemon.
+ * @property {string[]|number[]|[]} ailments - List of ailments affecting the Pokemon.
+ * @property {any} stages - Stat stage modifications affecting the Pokemon.
+ */
 
 class PokemonBase implements PokemonBaseDef {
   [key: string]: any;
 
   id: any;
 
-  owner_id: string | number;
-
   idx: number;
-
-  timestamp?: number;
 
   species_id: number;
 
@@ -72,38 +98,39 @@ class PokemonBase implements PokemonBaseDef {
 
   ailments: string[] | number[] | [];
 
-  stages: any;
+  stages: StatStages;
 
-  constructor(data: any) {
+  instance: DataManagerBase[]
+
+  constructor(data: Species, instance: DataManagerBase) {
       this.id = data.id;
-      this.timestamp = data.timestamp || new Date();
-      this.owner_id = data.owner_id;
-      this.idx = data.idx;
-      this.species_id = data.species_id;
-      this.level = data.level;
-      this.xp = data.xp;
-      this.nature = data.nature;
-      this.shiny = data.shiny;
-      this.iv_hp = data.iv_hp;
-      this.iv_atk = data.iv_atk;
-      this.iv_defn = data.iv_defn;
-      this.iv_satk = data.iv_satk;
-      this.iv_sdef = data.iv_sdef;
-      this.iv_spd = data.iv_spd;
+      this.idx =  1;
+      this.species_id = data.id;
+      this.level =  0;
+      this.xp =  0;
+      this.nature =  random_nature();
+      this.shiny = Math.floor(Math.random() * 4096) == 1 ? true : false
+      this.iv_hp =  random_iv();
+      this.iv_atk = random_iv();
+      this.iv_defn =  random_iv();
+      this.iv_satk =  random_iv();
+      this.iv_sdef =  random_iv();
+      this.iv_spd =  random_iv();
 
-      this.iv_total = data.iv_total;
+      this.iv_total = this.iv_hp + this.iv_defn + this.iv_satk + this.iv_atk + this.iv_sdef + this.iv_spd
 
       // Customization
-      this.nickname = data.nickname || null;
-      this.favorite = data.favorite || false;
-      this.held_item = data.held_item || null;
+      this.nickname = null;
+      this.favorite =  false;
+      this.held_item =  null;
       this.moves = data.moves || [];
-      this.has_color = data.has_color || false;
-      this.color = data.color || null;
+      this.has_color =  false;
+      this.color =  null;
 
       this._hp = null;
       this.ailments = [];
-      this.stages = null;
+      this.stages = new StatStages();
+      this.instance = [instance]
   }
 
   format(spec: string) {
@@ -115,7 +142,11 @@ class PokemonBase implements PokemonBaseDef {
   toString() {
       return this.format('');
   }
-
+  toJSON() {
+    const copy = { ...this };
+    delete copy.instance
+    return copy;
+  }
   get max_xp() {
       return 500 + 30 * this.level;
   }
@@ -139,6 +170,10 @@ class PokemonBase implements PokemonBaseDef {
   set hp(value) {
       this._hp = value;
   }
+
+  get species() {
+		return this.instance[0].findSpeciesByNumber(this.species_id);
+	}
 
   get atk() {
       return calcStat(this, 'atk');

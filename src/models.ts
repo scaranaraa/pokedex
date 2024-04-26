@@ -36,7 +36,14 @@ function deaccent(text: string) {
 
 class UnregisteredError extends Error {}
 
-
+/**
+ * Represents the effect of a Pokemon move.
+ *
+ * @class MoveEffect
+ * @property {number} id - The ID of the move effect.
+ * @property {string} description - The description of the move effect.
+ * @property {DataManagerBase} instance - The DataManagerBase instance.
+ */
 class MoveEffect implements MoveEffectBase {
     id: number;
 
@@ -57,8 +64,19 @@ class MoveEffect implements MoveEffectBase {
     format(): string {
         return this.description;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
-
+/**
+ * Represents a change to a Pokemon's stat stages.
+ *
+ * @class StatChange
+ * @property {number} stat_id - The ID of the stat that is being changed.
+ * @property {number} change - The amount by which the stat stage is being changed.
+ */
 class StatChange implements StatChangeBase {
     stat_id: number;
 
@@ -75,7 +93,20 @@ class StatChange implements StatChangeBase {
         ];
     }
 }
-
+/**
+ * Represents the stat stages of a Pokemon.
+ *
+ * @class StatStages
+ * @property {number} hp - The HP stat stage.
+ * @property {number} atk - The Attack stat stage.
+ * @property {number} defn - The Defense stat stage.
+ * @property {number} satk - The Special Attack stat stage.
+ * @property {number} sdef - The Special Defense stat stage.
+ * @property {number} spd - The Speed stat stage.
+ * @property {number} evasion - The evasion stat stage.
+ * @property {number} accuracy - The accuracy stat stage.
+ * @property {number} crit - The critical hit rate stat stage.
+ */
 class StatStages implements StatStagesBase {
     hp: number;
 
@@ -129,7 +160,17 @@ class StatStages implements StatStagesBase {
         this.crit += stages.crit;
     }
 }
-
+/**
+ * Represents the results of a Pokemon move being used.
+ *
+ * @class MoveResult
+ * @property {boolean} success - Whether the move was successful.
+ * @property {number} damage - The amount of damage dealt by the move.
+ * @property {number} healing - The amount of HP healed by the move.
+ * @property {string|null} ailment - The ailment inflicted by the move, or null if none.
+ * @property {string[]} messages - Additional messages about the move's effect.
+ * @property {StatChange[]} stat_changes - A list of stat changes caused by the move.
+ */
 class MoveResult implements MoveResultBase {
     success: boolean;
 
@@ -159,7 +200,24 @@ class MoveResult implements MoveResultBase {
         this.stat_changes = stat_changes;
     }
 }
-
+/**
+ * Additional information about the mechanics of a Pokemon move.
+ *
+ * @class MoveMeta
+ * @property {number} meta_category_id - The ID of the move's meta category (e.g., damage dealing, status inflicting).
+ * @property {string} meta_ailment_id - The ID of the ailment that the move can inflict.
+ * @property {number} drain - The damage dealt that is healed back to the user.
+ * @property {number} healing - Thethe user's max HP that is healed.
+ * @property {number} crit_rate - The additional critical hit rate of the move.
+ * @property {number} ailment_chance - The chance that the move will inflict an ailment.
+ * @property {number} flinch_chance - The chance that the move will cause the target to flinch.
+ * @property {number} stat_chance - The chance that the move will cause a stat change.
+ * @property {number|null} min_hits - The minimum number of times the move can hit, or null if it always hits once.
+ * @property {number|null} max_hits - The maximum number of times the move can hit, or null if it always hits once.
+ * @property {number|null} min_turns - The minimum number of turns the move's effect lasts, or null if it lasts one turn.
+ * @property {number|null} max_turns - The maximum number of turns the move's effect lasts, or null if it lasts one turn.
+ * @property {StatChange[]} stat_changes - A list of stat changes that the move can cause.
+ */
 class MoveMeta implements MoveMetaBase {
     meta_category_id: number;
 
@@ -226,6 +284,25 @@ class MoveMeta implements MoveMetaBase {
     }
 }
 
+/**
+ * Represents a Pokemon move. 
+ *
+ * @class Move
+ * @property {number} id - The ID of the move. 
+ * @property {string} slug - The slug for the move
+ * @property {string} name - The name of the move. 
+ * @property {number|null} power - The power of the move, or null if it doesn't deal damage.
+ * @property {number} pp - The number of Power Points (PP) the move has. 
+ * @property {number|null} accuracy - The accuracy of the move, or null if it never misses. 
+ * @property {number} priority - The priority of the move (higher values go first). 
+ * @property {number} target_id - The ID of the move's target (e.g., one opponent, all Pokemon).
+ * @property {number} type_id - The ID of the move's type (e.g., Electric, Fire).
+ * @property {number} damage_class_id - The ID of the move's damage class (e.g., Physical, Special, Status).
+ * @property {number} effect_id - The ID of the move's effect.
+ * @property {number|null} effect_chance - The chance that the move's effect will occur, or null if it always occurs.
+ * @property {MoveMeta} meta - Additional information about the move's mechanics.
+ * @property {DataManagerBase} instance - The DataManagerBase instance
+ */ 
 class Move implements MoveBase {
     id: number;
 
@@ -286,7 +363,11 @@ class Move implements MoveBase {
         this.meta = meta;
         this.instance = instance;
     }
-
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
     get type() {
         return constants.TYPES[this.type_id];
     }
@@ -402,7 +483,7 @@ class Move implements MoveBase {
 
         damage *= Number(typ_mult);
         const messages = [];
-        if (typ_mult === 0) {
+        if (typ_mult == 0) {
             messages.push('It\'s not effective...');
         } else if (typ_mult > 1) {
             messages.push('It\'s super effective!');
@@ -435,7 +516,21 @@ class Move implements MoveBase {
         );
     }
 }
-
+/**
+ * Represents an item. 
+ *
+ * @class Item 
+ * @property {number} id - The ID of the item.
+ * @property {string} name - The name of the item. 
+ * @property {string|null} description - The description of the item, or null if none. 
+ * @property {number} cost - The cost of the item in PokeDollars. 
+ * @property {number} page - The page number in the bag where the item is found.
+ * @property {string} action - The action that is performed when the item is used. 
+ * @property {boolean} inline - Whether the item is used inline (without opening the bag). 
+ * @property {string|null} emote - The emote associated with using the item, or null if none.
+ * @property {boolean} shard - Whether the item is a shard. 
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this item. 
+ */
 class Item implements ItemBase {
     id: number;
 
@@ -484,10 +579,28 @@ class Item implements ItemBase {
     toString() {
         return this.name;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
 
+/**
+ * Represents a method by which a Pokemon can learn a move.
+ *
+ * @class MoveMethod
+ */
 class MoveMethod implements MoveMethodBase {}
 
+/**
+ * Represents the method of learning a move by leveling up. 
+ * 
+ * @class LevelMethod
+ * @extends MoveMethod
+ * @property {number} level - The level at which the Pokemon learns the move. 
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this move method. 
+ */ 
 class LevelMethod extends MoveMethod implements LevelMethodBase {
     level: number;
 
@@ -502,8 +615,20 @@ class LevelMethod extends MoveMethod implements LevelMethodBase {
     get text() {
         return `Level ${this.level}`;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
-
+/**
+ * Represents a move that a Pokemon can learn, along with the method for learning it.
+ * 
+ * @class PokemonMove
+ * @property {number} move_id - The ID of the move that the Pokemon can learn.
+ * @property {MoveMethod} method - The method by which the Pokemon learns the move.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this Pokemon move.
+ */
 class PokemonMove implements PokemonMoveBase {
     constructor(move_id: number, method: MoveMethod, instance: DataManagerBase) {
         this.move_id = move_id;
@@ -524,12 +649,35 @@ class PokemonMove implements PokemonMoveBase {
     get text() {
         return `Move ${this.method}`;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
 
+/**
+ * Represents the trigger for an evolution.
+ * 
+ * @class EvolutionTrigger 
+ */
 class EvolutionTrigger implements EvolutionTriggerBase {
   [x: string]: unknown;
 }
 
+/**
+ * Represents the trigger for an evolution that occurs when a Pokemon levels up.
+ * 
+ * @class LevelTrigger
+ * @extends EvolutionTrigger
+ * @property {number|null} level - The level at which the Pokemon evolves, or null if it evolves upon level up regardless of level. 
+ * @property {number|null} item_id - The ID of the item that the Pokemon must be holding to evolve, or null if no item is required. 
+ * @property {number|null} move_id - The ID of the move that the Pokemon must know to evolve, or null if no move is required. 
+ * @property {number|null} move_type_id - The ID of the type of move that the Pokemon must know to evolve, or null if no specific type is required.
+ * @property {number|null} time - The time of day when the Pokemon evolves (e.g., "day", "night"), or null if time of day doesn't matter. 
+ * @property {number|null} relative_stats - The relative stat requirement for evolution (1 for Attack > Defense, -1 for Defense > Attack, 0 for Attack = Defense), or null if no stat requirement. 
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */ 
 class LevelTrigger extends EvolutionTrigger implements LevelTriggerBase {
     level: number;
 
@@ -539,7 +687,7 @@ class LevelTrigger extends EvolutionTrigger implements LevelTriggerBase {
 
     move_type_id: number;
 
-    time: number;
+    time: string;
 
     relative_stats: number;
 
@@ -550,7 +698,7 @@ class LevelTrigger extends EvolutionTrigger implements LevelTriggerBase {
         item_id: number,
         move_id: number,
         move_type_id: number,
-        time: number,
+        time: string,
         relative_stats: number,
         instance: DataManagerBase
     ) {
@@ -573,7 +721,11 @@ class LevelTrigger extends EvolutionTrigger implements LevelTriggerBase {
 
       return this.instance.items[this.item_id];
   }
-
+  toJSON() {
+    const copy = { ...this };
+    delete copy.instance
+    return copy;
+  }
   get move() {
       if (this.move_id === null) {
           return null;
@@ -619,13 +771,21 @@ class LevelTrigger extends EvolutionTrigger implements LevelTriggerBase {
       }
 
       if (this.time !== null) {
-          text += ` in the ${this.time}time`;
+          text += ` in the ${this.time} time`;
       }
 
       return text;
   }
 }
 
+/**
+ * Represents the trigger for an evolution that occurs when an item is used on a Pokemon. 
+ *
+ * @class ItemTrigger 
+ * @extends EvolutionTrigger
+ * @property {number} item_id - The ID of the item that must be used to trigger the evolution.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger. 
+ */ 
 class ItemTrigger extends EvolutionTrigger implements ItemTriggerBase {
     constructor(item_id: number, instance: DataManagerBase) {
         super();
@@ -644,8 +804,21 @@ class ItemTrigger extends EvolutionTrigger implements ItemTriggerBase {
     get text() {
         return `using a ${this.item}`;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
 
+/**
+ * Represents the trigger for an evolution that occurs when a Pokemon is traded.
+ * 
+ * @class TradeTrigger
+ * @extends EvolutionTrigger 
+ * @property {number|null} item_id - The ID of the item that the Pokemon must be holding to evolve when traded, or null if no item is required.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */
 class TradeTrigger extends EvolutionTrigger implements TradeTriggerBase {
     constructor(item_id: number | undefined = null, instance: DataManagerBase) {
         super();
@@ -672,8 +845,19 @@ class TradeTrigger extends EvolutionTrigger implements TradeTriggerBase {
 
         return `when traded while holding a ${this.item}`;
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
-
+/** 
+ * Represents the trigger for an evolution that occurs under other, less common conditions.
+ *
+ * @class OtherTrigger 
+ * @extends EvolutionTrigger
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger. 
+ */
 class OtherTrigger extends EvolutionTrigger implements OtherTriggerBase {
     instance: DataManagerBase;
 
@@ -685,8 +869,21 @@ class OtherTrigger extends EvolutionTrigger implements OtherTriggerBase {
     get text() {
         return 'somehow';
     }
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
 }
-
+/**
+ * Represents a pokemon evolution.
+ *
+ * @class Evolution
+ * @property {number} target_id - The ID of the Pokemon species that this evolution evolves to or from. 
+ * @property {EvolutionTrigger} trigger - The trigger for this evolution (e.g., level up, trade, item).
+ * @property {boolean} type - The direction of the evolution (true for evolving to, false for evolving from).
+ * @property {DataManagerBase} instance - The DataManagerBase instance. 
+ */
 class Evolution implements EvolutionBase {
     constructor(
         target_id: number,
@@ -699,7 +896,11 @@ class Evolution implements EvolutionBase {
         this.type = type;
         this.instance = instance;
     }
-
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
     async evolve_from(
         target: number,
         trigger: EvolutionTrigger,
@@ -758,6 +959,12 @@ class Evolution implements EvolutionBase {
     }
 }
 
+/**
+ * Represents a list of evolutions.
+ *
+ * @class EvolutionList 
+ * @property {Evolution[]} items - A list of Evolution objects representing the evolutions in the list. 
+ */
 class EvolutionList implements EvolutionListBase {
     constructor(evolutions: Evolution[]) {
         if (evolutions instanceof Evolution) {
@@ -775,6 +982,18 @@ class EvolutionList implements EvolutionListBase {
         return txt;
     }
 }
+
+/**
+ * Represents the base stats of a Pokemon. 
+ * 
+ * @class Stats
+ * @property {number} hp - The base HP stat.
+ * @property {number} atk - The base Attack stat.
+ * @property {number} defn - The base Defense stat.
+ * @property {number} satk - The base Special Attack stat.
+ * @property {number} sdef - The base Special Defense stat. 
+ * @property {number} spd - The base Speed stat. 
+ */
 
 class Stats implements StatsBase {
   [key: string]: any;
@@ -807,6 +1026,39 @@ class Stats implements StatsBase {
 
   spd: number;
 }
+/**
+ * Represents a Pokemon species.
+ *
+ * @class Species
+ * @property {number} id - The ID of the species.
+ * @property {string[][]} names - A list of names for the species in different languages. Each sub-array contains a language code and the name in that language.
+ * @property {string} slug - The slug for the species (e.g., "pikachu").
+ * @property {Stats} base_stats - The base stats for the species.
+ * @property {number} height - The height of the species in meters.
+ * @property {number} weight - The weight of the species in kilograms. 
+ * @property {number} dex_number - The Pokedex number of the species.
+ * @property {boolean} catchable - Whether the species can be caught in the wild.
+ * @property {string[]} types - A list of types for the species (e.g., ["Electric"]).
+ * @property {number} abundance - The abundance of the species in the wild (higher values mean more common).
+ * @property {number} gender_rate - The gender rate of the species (-1 for genderless, 0-8 for female ratio).
+ * @property {boolean} has_gender_differences - Whether the species has gender differences.
+ * @property {string|null} description - The description of the species, or null if none.
+ * @property {number|null} mega_id - The ID of the species' Mega Evolution, or null if none.
+ * @property {number|null} mega_x_id - The ID of the species' Mega X Evolution, or null if none.
+ * @property {number|null} mega_y_id - The ID of the species' Mega Y Evolution, or null if none.
+ * @property {EvolutionList|null} evolution_from - The EvolutionList representing how this species evolves from others, or null if none.
+ * @property {EvolutionList|null} evolution_to - The EvolutionList representing how this species evolves into others, or null if none.
+ * @property {boolean} mythical - Whether the species is a Mythical Pokemon.
+ * @property {boolean} legendary - Whether the species is a Legendary Pokemon.
+ * @property {boolean} ultra_beast - Whether the species is an Ultra Beast.
+ * @property {boolean} event - Whether the species is an event-exclusive Pokemon.
+ * @property {boolean} is_form - Whether the species is a form of another Pokemon.
+ * @property {number|null} form_item - The ID of the item used to change into this form, or null if none.
+ * @property {string} region - The region where the species was introduced. 
+ * @property {string|null} art_credit - The artist who created the artwork for the species, or null if unknown. 
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this species.
+ * @property {PokemonMove[]} moves - A list of PokemonMove objects representing the moves that the species can learn.
+ */
 
 class Species implements SpeciesBase {
     constructor(
@@ -937,7 +1189,11 @@ class Species implements SpeciesBase {
     toString() {
         return this.name;
     }
-
+    toJSON() {
+      const copy = { ...this };
+      delete copy.instance
+      return copy;
+    }
     get moveset() {
         return this.moves.map(x => this.instance.moves[x.move_id]);
     }
@@ -1006,37 +1262,72 @@ class Species implements SpeciesBase {
 }
 
 class DataManagerBase implements DataManagerBaseType {
+  
+    /**
+     * Checks if the DataManager has been initialized.
+     * @throws {Error} If the DataManager is not initialized.
+     */
     checkinitialized(): void {
         throw new Error('Method not implemented.');
     }
+    /**
+     * A dictionary of Pokemon species, indexed by ID.
+     * @type {Object.<number, Species>}
+     */
     pokemon!: {
     [key: number]: Species;
   };
-
+    /**
+     * A dictionary of items, indexed by ID.
+     * @type {Object.<number, Item>}
+     */
     items!: {
     [key: number]: Item;
   };
-
+    /**
+     * A dictionary of move effects, indexed by ID.
+     * @type {Object.<number, MoveEffect>}
+     */
     effects!: {
     [key: number]: MoveEffect;
   };
-
+    /**
+     * A dictionary of moves, indexed by ID.
+     * @type {Object.<number, Move>}
+     */
     moves!: {
     [key: number]: Move;
   };
-
+  toJSON(){
+    return { 
+      pokemonCount: Object.keys(this.pokemon).length,
+      itemCount: Object.keys(this.items).length,
+      effectCount: Object.keys(this.effects).length,
+      moveCount: Object.keys(this.moves).length,
+    };
+  }
+    /**
+     * Gets a list of all Pokemon species.
+     * @returns {Species[]} A list of all Pokemon species. 
+     */
     allPokemon() {
         this.checkinitialized();
         return Object.values(this.pokemon);
     }
-
+    /**
+     * Gets a list of Alolan Pokemon species IDs.
+     * @type {number[]}
+     */
     get list_alolan() {
         return [
             10091, 10092, 10093, 10100, 10101, 10102, 10103, 10104, 10105, 10106,
             10107, 10108, 10109, 10110, 10111, 10112, 10113, 10114, 10115, 50076,
         ];
     }
-
+    /**
+     * Gets a list of Galarian Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_galarian() {
         return [
             10158, 10159, 10160, 10161, 10162, 10163, 10164, 10165, 10166, 10167,
@@ -1044,20 +1335,30 @@ class DataManagerBase implements DataManagerBaseType {
             50053,
         ];
     }
-
+    /**
+     * Gets a list of Hisuian Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_hisuian() {
         return [
             10221, 10222, 10223, 10224, 10225, 10226, 10227, 10228, 10229, 10230,
             10231, 10232, 10233, 10234, 10235, 10236, 10237, 10238, 10239, 50145,
         ];
     }
-
+    /**
+     * Gets a list of Paradox Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_paradox() {
         return [
             984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006,
             1007, 1008, 1009, 1010,
         ];
     }
+    /**
+     * Gets a list of Mythical Pokemon species IDs. 
+     * @type {number[]} 
+     */
 
     get list_mythical() {
         this.checkinitialized();
@@ -1065,28 +1366,40 @@ class DataManagerBase implements DataManagerBaseType {
             .filter(v => v.mythical)
             .map(v => v.id);
     }
-
+    /** 
+     * Gets a list of Legendary Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_legendary() {
         this.checkinitialized();
         return Object.values(this.pokemon)
             .filter(v => v.legendary)
             .map(v => v.id);
     }
-
+    /** 
+     * Gets a list of Ultra Beast Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_ub() {
         this.checkinitialized();
         return Object.values(this.pokemon)
             .filter(v => v.ultra_beast)
             .map(v => v.id);
     }
-
+    /** 
+     * Gets a list of Event Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_event() {
         this.checkinitialized();
         return Object.values(this.pokemon)
             .filter(v => v.event)
             .map(v => v.id);
     }
-
+    /** 
+     * Gets a list of Mega Evolution Pokemon species IDs.
+     * @type {number[]} 
+     */
     get list_mega() {
         this.checkinitialized();
         return [
@@ -1101,7 +1414,10 @@ class DataManagerBase implements DataManagerBaseType {
                 .map(v => v.mega_y_id),
         ];
     }
-
+    /** 
+     * Gets a dictionary of species IDs indexed by Pokemon type.
+     * @type {Record<string, number[]>}
+     */
     get species_id_by_type_index() {
         this.checkinitialized();
         const ret: Record<string, number[]> = {};
@@ -1117,7 +1433,10 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /** 
+     * Gets a Map of species IDs indexed by Pokemon region.
+     * @type {Map<string, number[]>} 
+     */
     get speciesIdByRegionIndex() {
         this.checkinitialized();
         const ret: Map<string,number[]> = new Map();
@@ -1133,11 +1452,19 @@ class DataManagerBase implements DataManagerBaseType {
         return ret;
     }
 
+    /** 
+     * Gets a list of Pokemon species IDs for a given region.
+     * @param {string} region - The name of the region.
+     * @returns {number[]} A list of Pokemon species IDs. 
+     */
     listRegion(region: string) {
         this.checkinitialized();
         return this.speciesIdByRegionIndex.get(region.toLowerCase()) || [];
     }
-
+    /** 
+     * Gets a Map of species IDs indexed by move ID.
+     * @type {Map<number, number[]>} 
+     */
     get speciesIdByMoveIndex() {
         this.checkinitialized();
         const ret: Map<number,number[]> = new Map();
@@ -1156,7 +1483,11 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /** 
+     * Gets a list of Pokemon species IDs that can learn a given move.
+     * @param {string} moveName - The name of the move.
+     * @returns {number[]} A list of Pokemon species IDs. 
+     */
     listMove(moveName: string) {
         this.checkinitialized();
         if (!moveName) {
@@ -1172,12 +1503,18 @@ class DataManagerBase implements DataManagerBaseType {
 
         return this.speciesIdByMoveIndex.get(move.id) || [];
     }
-
+    /**
+     * Gets a list of all items.
+     * @returns {Item[]} A list of all items. 
+     */
     allItems() {
         this.checkinitialized();
         return Object.values(this.items);
     }
-
+    /**
+     * Gets a Map of species indexed by their dex number.
+     * @type {Map<number, Species[]>} 
+     */ 
     get speciesByDexNumberIndex() {
         this.checkinitialized();
         const ret: Map<number,Species[]> = new Map();
@@ -1198,23 +1535,38 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /** 
+     * Gets a list of all species with the given dex number.
+     * @param {number} number - The dex number.
+     * @returns {Species[]} A list of Pokemon species. 
+     */
     allSpeciesByNumber(number: number) {
         this.checkinitialized();
         return this.speciesByDexNumberIndex.get(number) || [];
     }
-
+    /** 
+    * Gets a list of all species with the given name.
+    * @param {string} name - The name of the Pokemon species.
+    * @returns {Species[]} A list of Pokemon species. 
+    */
     allSpeciesByName(name: string): Species[] {
         this.checkinitialized();
         const st = deaccent(name.toLowerCase().replace('′', '\''));
         return this.speciesByNameIndex.get(st) || [];
     }
-
+    /** 
+     * Finds a species by its dex number. 
+     * @param {number} number - The dex number.
+     * @returns {Species|null} The Pokemon species with the given dex number, or null if not found. 
+     */ 
     findSpeciesByNumber(number: number) {
         this.checkinitialized();
         return this.pokemon[number] || null;
     }
-
+    /**
+     * Gets a Map of species indexed by their name.
+     * @type {Map<string, Species[]>} 
+     */ 
     get speciesByNameIndex() {
         this.checkinitialized();
         const ret: Map<string,Species[]>  = new Map();
@@ -1232,19 +1584,30 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /**
+     * Finds a species by its name.
+     * @param {string} name - The name of the Pokemon species.
+     * @returns {Species|null} The Pokemon species with the given name, or null if not found. 
+     */ 
     speciesByName(name: string) {
         this.checkinitialized();
         const st = deaccent(name.toLowerCase().replace('′', '\''));
         const speciesList = this.speciesByNameIndex.get(st);
         return speciesList ? speciesList[0] : null;
     }
-
+    /** 
+     * Finds an item by its ID.
+     * @param {number} number - The ID of the item.
+     * @returns {Item|null} The item with the given ID, or null if not found. 
+     */
     itemByNumber(number: number) {
         this.checkinitialized();
         return this.items[number] || null;
     }
-
+    /** 
+     * Gets a Map of items indexed by their name.
+     * @type {Map<string, Item>} 
+     */
     get itemByNameIndex() {
         this.checkinitialized();
         const ret: Map<string,Item> = new Map();
@@ -1254,19 +1617,30 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /** 
+     * Finds an item by its name.
+     * @param {string} name - The name of the item. 
+     * @returns {Item|null} The item with the given name, or null if not found. 
+     */
     itemByName(name: string) {
         this.checkinitialized();
         return this.itemByNameIndex.get(
             deaccent(name.toLowerCase().replace('′', '\''))
         );
     }
-
+    /** 
+     * Finds a move by its ID. 
+     * @param {number} number - The ID of the move. 
+     * @returns {Move|null} The move with the given ID, or null if not found. 
+     */
     moveByNumber(number: number) {
         this.checkinitialized();
         return this.moves[number] || null;
     }
-
+    /** 
+     * Gets a Map of moves indexed by their name.
+     * @type {Map<string, Move>}
+     */
     get moveByNameIndex() {
         this.checkinitialized();
         const ret: Map<string,Move> = new Map();
@@ -1276,14 +1650,23 @@ class DataManagerBase implements DataManagerBaseType {
 
         return ret;
     }
-
+    /** 
+     * Finds a move by its name. 
+     * @param {string} name - The name of the move. 
+     * @returns {Move|null} The move with the given name, or null if not found. 
+     */
     moveByName(name: string) {
         this.checkinitialized();
         return this.moveByNameIndex.get(
             deaccent(name.toLowerCase().replace('′', '’'))
         );
     }
-
+    /**
+ * Returns a random Pokemon species.
+ *
+ * @param {string} [rarity='normal'] - The rarity of the Pokemon to spawn. Can be 'normal', 'mythical', 'legendary', or 'ultra_beast'.
+ * @returns {Species} A random Pokemon species.
+ */
     randomSpawn(rarity = 'normal') {
         this.checkinitialized();
         let pool;
@@ -1301,7 +1684,11 @@ class DataManagerBase implements DataManagerBaseType {
         const randomIndex = this.weightedRandomChoice(weights);
         return pool[randomIndex];
     }
-
+    /** 
+     * Chooses a random element from a list of weights using weighted random selection. 
+     * @param {number[]} weights - A list of weights. 
+     * @returns {number} The index of the chosen element. 
+     */
     weightedRandomChoice(weights: number[]) {
         this.checkinitialized();
         const total = weights.reduce((acc, w) => acc + w, 0);

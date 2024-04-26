@@ -1,0 +1,1381 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.2">
+  <meta charset="utf-8">
+  <title>pokedex 1.0.0 &raquo; Source: models.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex 1.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: models.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>/**
+ * @module
+ */
+import constants from &#x27;./constants.js&#x27;;
+function deaccent(text) {
+    const norm &#x3D; text.normalize(&#x27;NFD&#x27;);
+    const result &#x3D; Array.from(norm)
+        .filter(ch &#x3D;&gt; !/[\u0300-\u036f]/.test(ch))
+        .join(&#x27;&#x27;);
+    return result.normalize(&#x27;NFKC&#x27;);
+}
+class UnregisteredError extends Error {
+}
+/**
+ * Represents the effect of a Pokemon move.
+ *
+ * @class MoveEffect
+ * @property {number} id - The ID of the move effect.
+ * @property {string} description - The description of the move effect.
+ * @property {DataManagerBase} instance - The DataManagerBase instance.
+ */
+class MoveEffect {
+    id;
+    description;
+    instance;
+    constructor(id, description, instance) {
+        this.id &#x3D; id;
+        this.description &#x3D; description;
+        this.instance &#x3D; instance;
+    }
+    format() {
+        return this.description;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents a change to a Pokemon&#x27;s stat stages.
+ *
+ * @class StatChange
+ * @property {number} stat_id - The ID of the stat that is being changed.
+ * @property {number} change - The amount by which the stat stage is being changed.
+ */
+class StatChange {
+    stat_id;
+    change;
+    constructor(stat_id, change) {
+        this.stat_id &#x3D; stat_id;
+        this.change &#x3D; change;
+    }
+    get stat() {
+        return [&#x27;hp&#x27;, &#x27;atk&#x27;, &#x27;defn&#x27;, &#x27;satk&#x27;, &#x27;sdef&#x27;, &#x27;spd&#x27;, &#x27;evasion&#x27;, &#x27;accuracy&#x27;][this.stat_id - 1];
+    }
+}
+/**
+ * Represents the stat stages of a Pokemon.
+ *
+ * @class StatStages
+ * @property {number} hp - The HP stat stage.
+ * @property {number} atk - The Attack stat stage.
+ * @property {number} defn - The Defense stat stage.
+ * @property {number} satk - The Special Attack stat stage.
+ * @property {number} sdef - The Special Defense stat stage.
+ * @property {number} spd - The Speed stat stage.
+ * @property {number} evasion - The evasion stat stage.
+ * @property {number} accuracy - The accuracy stat stage.
+ * @property {number} crit - The critical hit rate stat stage.
+ */
+class StatStages {
+    hp;
+    atk;
+    defn;
+    satk;
+    sdef;
+    spd;
+    evasion;
+    accuracy;
+    crit;
+    constructor(hp &#x3D; 0, atk &#x3D; 0, defn &#x3D; 0, satk &#x3D; 0, sdef &#x3D; 0, spd &#x3D; 0, evasion &#x3D; 0, accuracy &#x3D; 0, crit &#x3D; 0) {
+        this.hp &#x3D; hp;
+        this.atk &#x3D; atk;
+        this.defn &#x3D; defn;
+        this.satk &#x3D; satk;
+        this.sdef &#x3D; sdef;
+        this.spd &#x3D; spd;
+        this.evasion &#x3D; evasion;
+        this.accuracy &#x3D; accuracy;
+        this.crit &#x3D; crit;
+    }
+    update(stages) {
+        this.hp +&#x3D; stages.hp;
+        this.atk +&#x3D; stages.atk;
+        this.defn +&#x3D; stages.defn;
+        this.satk +&#x3D; stages.satk;
+        this.sdef +&#x3D; stages.sdef;
+        this.spd +&#x3D; stages.spd;
+        this.evasion +&#x3D; stages.evasion;
+        this.accuracy +&#x3D; stages.accuracy;
+        this.crit +&#x3D; stages.crit;
+    }
+}
+/**
+ * Represents the results of a Pokemon move being used.
+ *
+ * @class MoveResult
+ * @property {boolean} success - Whether the move was successful.
+ * @property {number} damage - The amount of damage dealt by the move.
+ * @property {number} healing - The amount of HP healed by the move.
+ * @property {string|null} ailment - The ailment inflicted by the move, or null if none.
+ * @property {string[]} messages - Additional messages about the move&#x27;s effect.
+ * @property {StatChange[]} stat_changes - A list of stat changes caused by the move.
+ */
+class MoveResult {
+    success;
+    damage;
+    healing;
+    ailment;
+    messages;
+    stat_changes;
+    constructor(success, damage, healing, ailment, messages, stat_changes) {
+        this.success &#x3D; success;
+        this.damage &#x3D; damage;
+        this.healing &#x3D; healing;
+        this.ailment &#x3D; ailment || null;
+        this.messages &#x3D; messages;
+        this.stat_changes &#x3D; stat_changes;
+    }
+}
+/**
+ * Additional information about the mechanics of a Pokemon move.
+ *
+ * @class MoveMeta
+ * @property {number} meta_category_id - The ID of the move&#x27;s meta category (e.g., damage dealing, status inflicting).
+ * @property {string} meta_ailment_id - The ID of the ailment that the move can inflict.
+ * @property {number} drain - The damage dealt that is healed back to the user.
+ * @property {number} healing - Thethe user&#x27;s max HP that is healed.
+ * @property {number} crit_rate - The additional critical hit rate of the move.
+ * @property {number} ailment_chance - The chance that the move will inflict an ailment.
+ * @property {number} flinch_chance - The chance that the move will cause the target to flinch.
+ * @property {number} stat_chance - The chance that the move will cause a stat change.
+ * @property {number|null} min_hits - The minimum number of times the move can hit, or null if it always hits once.
+ * @property {number|null} max_hits - The maximum number of times the move can hit, or null if it always hits once.
+ * @property {number|null} min_turns - The minimum number of turns the move&#x27;s effect lasts, or null if it lasts one turn.
+ * @property {number|null} max_turns - The maximum number of turns the move&#x27;s effect lasts, or null if it lasts one turn.
+ * @property {StatChange[]} stat_changes - A list of stat changes that the move can cause.
+ */
+class MoveMeta {
+    meta_category_id;
+    meta_ailment_id;
+    drain;
+    healing;
+    crit_rate;
+    ailment_chance;
+    flinch_chance;
+    stat_chance;
+    min_hits;
+    max_hits;
+    min_turns;
+    max_turns;
+    stat_changes;
+    constructor(meta_category_id, meta_ailment_id, drain, healing, crit_rate, ailment_chance, flinch_chance, stat_chance, min_hits &#x3D; null, max_hits &#x3D; null, min_turns &#x3D; null, max_turns &#x3D; null, stat_changes &#x3D; []) {
+        this.meta_category_id &#x3D; meta_category_id;
+        this.meta_ailment_id &#x3D; meta_ailment_id;
+        this.drain &#x3D; drain;
+        this.healing &#x3D; healing;
+        this.crit_rate &#x3D; crit_rate;
+        this.ailment_chance &#x3D; ailment_chance;
+        this.flinch_chance &#x3D; flinch_chance;
+        this.stat_chance &#x3D; stat_chance;
+        this.min_hits &#x3D; min_hits;
+        this.max_hits &#x3D; max_hits;
+        this.min_turns &#x3D; min_turns;
+        this.max_turns &#x3D; max_turns;
+        this.stat_changes &#x3D; stat_changes || [];
+    }
+    get meta_category() {
+        return constants.MOVE_META_CATEGORIES[this.meta_category_id];
+    }
+    get meta_ailment() {
+        return constants.MOVE_AILMENTS[this.meta_ailment_id];
+    }
+}
+/**
+ * Represents a Pokemon move.
+ *
+ * @class Move
+ * @property {number} id - The ID of the move.
+ * @property {string} slug - The slug for the move
+ * @property {string} name - The name of the move.
+ * @property {number|null} power - The power of the move, or null if it doesn&#x27;t deal damage.
+ * @property {number} pp - The number of Power Points (PP) the move has.
+ * @property {number|null} accuracy - The accuracy of the move, or null if it never misses.
+ * @property {number} priority - The priority of the move (higher values go first).
+ * @property {number} target_id - The ID of the move&#x27;s target (e.g., one opponent, all Pokemon).
+ * @property {number} type_id - The ID of the move&#x27;s type (e.g., Electric, Fire).
+ * @property {number} damage_class_id - The ID of the move&#x27;s damage class (e.g., Physical, Special, Status).
+ * @property {number} effect_id - The ID of the move&#x27;s effect.
+ * @property {number|null} effect_chance - The chance that the move&#x27;s effect will occur, or null if it always occurs.
+ * @property {MoveMeta} meta - Additional information about the move&#x27;s mechanics.
+ * @property {DataManagerBase} instance - The DataManagerBase instance
+ */
+class Move {
+    id;
+    slug;
+    name;
+    power;
+    pp;
+    accuracy;
+    priority;
+    target_id;
+    type_id;
+    damage_class_id;
+    effect_id;
+    effect_chance;
+    meta;
+    instance;
+    constructor(id, slug, name, power, pp, accuracy, priority, target_id, type_id, damage_class_id, effect_id, effect_chance, meta, instance) {
+        this.id &#x3D; id;
+        this.slug &#x3D; slug;
+        this.name &#x3D; name;
+        this.power &#x3D; power;
+        this.pp &#x3D; pp;
+        this.accuracy &#x3D; accuracy;
+        this.priority &#x3D; priority;
+        this.target_id &#x3D; target_id;
+        this.type_id &#x3D; type_id;
+        this.damage_class_id &#x3D; damage_class_id;
+        this.effect_id &#x3D; effect_id;
+        this.effect_chance &#x3D; effect_chance;
+        this.meta &#x3D; meta;
+        this.instance &#x3D; instance;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+    get type() {
+        return constants.TYPES[this.type_id];
+    }
+    get target_text() {
+        return constants.MOVE_TARGETS[this.target_id];
+    }
+    get damage_class() {
+        return constants.DAMAGE_CLASSES[this.damage_class_id];
+    }
+    get effect() {
+        return this.instance.effects[this.effect_id];
+    }
+    get description() {
+        return this.effect.description;
+    }
+    calculate_turn(pokemon, opponent) {
+        let success;
+        let damage &#x3D; 0;
+        let hits &#x3D; 0;
+        if (this.damage_class_id &#x3D;&#x3D; 1 || this.power &#x3D;&#x3D;&#x3D; null) {
+            success &#x3D; true;
+            damage &#x3D; 0;
+            hits &#x3D; 0;
+        }
+        else {
+            success &#x3D;
+                Math.random() &amp;lt;
+                    (Number(this.accuracy || 0) *
+                        (constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.accuracy)] *
+                            2 +
+                            1)) /
+                        (Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.evasion)]) *
+                            2 +
+                            1);
+            hits &#x3D;
+                Math.floor(Math.random() *
+                    (Number(this.meta.max_hits || 1) -
+                        Number(this.meta.min_hits || 1) +
+                        1)) + Number(this.meta.min_hits || 1);
+            let atk &#x3D; 0;
+            let defn &#x3D; 0;
+            if (this.damage_class_id &#x3D;&#x3D; 2) {
+                atk &#x3D;
+                    Number(pokemon.atk) *
+                        Number(constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.atk)]);
+                defn &#x3D;
+                    Number(opponent.defn) *
+                        Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.defn)]);
+            }
+            else {
+                atk &#x3D;
+                    Number(pokemon.satk) *
+                        Number(constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.satk)]);
+                defn &#x3D;
+                    Number(opponent.sdef) *
+                        Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.sdef)]);
+            }
+            damage &#x3D; Math.floor((((2 * Number(pokemon.level)) / 5 + 2) * Number(this.power) * atk) /
+                defn /
+                50 +
+                2);
+        }
+        let healing &#x3D; (Number(damage) * Number(this.meta.drain)) / 100;
+        healing +&#x3D; (Number(pokemon.max_hp) * Number(this.meta.healing)) / 100;
+        for (const ailment of pokemon.ailments) {
+            if (ailment &#x3D;&#x3D;&#x3D; &#x27;Paralysis&#x27;) {
+                if (Math.random() &amp;lt; 0.25) {
+                    success &#x3D; false;
+                }
+            }
+            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Sleep&#x27;) {
+                if (![173, 214].includes(this.id)) {
+                    success &#x3D; false;
+                }
+            }
+            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Freeze&#x27;) {
+                if (![588, 172, 221, 293, 503, 592].includes(this.id)) {
+                    success &#x3D; false;
+                }
+            }
+            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Burn&#x27;) {
+                if (this.damage_class_id &#x3D;&#x3D;&#x3D; 2) {
+                    damage /&#x3D; 2;
+                }
+            }
+        }
+        const ailment &#x3D; Math.random() &amp;lt; this.meta.ailment_chance ? this.meta.meta_ailment : null;
+        let typ_mult &#x3D; 1;
+        for (const typ of opponent.species.types) {
+            try {
+                const mult &#x3D; constants.TYPE_EFFICACY[this.type_id];
+                if (mult) {
+                    const multi &#x3D; mult[constants.TYPES.indexOf(typ)];
+                    typ_mult *&#x3D; multi || 1;
+                }
+            }
+            catch (error) { }
+        }
+        damage *&#x3D; Number(typ_mult);
+        const messages &#x3D; [];
+        if (typ_mult &#x3D;&#x3D; 0) {
+            messages.push(&#x27;It\&#x27;s not effective...&#x27;);
+        }
+        else if (typ_mult &gt; 1) {
+            messages.push(&#x27;It\&#x27;s super effective!&#x27;);
+        }
+        else if (typ_mult &amp;lt; 1) {
+            messages.push(&#x27;It\&#x27;s not very effective...&#x27;);
+        }
+        if (hits &gt; 1) {
+            messages.push(&#x60;It hit ${hits} times!&#x60;);
+        }
+        const changes &#x3D; [];
+        for (const change of this.meta.stat_changes) {
+            if (Math.random() &amp;lt; this.meta.stat_chance) {
+                changes.push(change);
+            }
+        }
+        if (this.type &amp;amp;&amp;amp; this.type in pokemon.species.types) {
+            damage *&#x3D; 1.5;
+        }
+        return new MoveResult(success, Number(damage), Number(healing), ailment, messages, changes);
+    }
+}
+/**
+ * Represents an item.
+ *
+ * @class Item
+ * @property {number} id - The ID of the item.
+ * @property {string} name - The name of the item.
+ * @property {string|null} description - The description of the item, or null if none.
+ * @property {number} cost - The cost of the item in PokeDollars.
+ * @property {number} page - The page number in the bag where the item is found.
+ * @property {string} action - The action that is performed when the item is used.
+ * @property {boolean} inline - Whether the item is used inline (without opening the bag).
+ * @property {string|null} emote - The emote associated with using the item, or null if none.
+ * @property {boolean} shard - Whether the item is a shard.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this item.
+ */
+class Item {
+    id;
+    name;
+    description;
+    cost;
+    page;
+    action;
+    inline;
+    emote;
+    shard;
+    instance;
+    constructor(id, name, description, cost, page, action, inline, emote &#x3D; null, shard &#x3D; false, instance) {
+        this.id &#x3D; id;
+        this.name &#x3D; name;
+        this.description &#x3D; description;
+        this.cost &#x3D; cost;
+        this.page &#x3D; page;
+        this.action &#x3D; action;
+        this.inline &#x3D; inline;
+        this.emote &#x3D; emote;
+        this.shard &#x3D; shard;
+        this.instance &#x3D; instance;
+    }
+    toString() {
+        return this.name;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents a method by which a Pokemon can learn a move.
+ *
+ * @class MoveMethod
+ */
+class MoveMethod {
+}
+/**
+ * Represents the method of learning a move by leveling up.
+ *
+ * @class LevelMethod
+ * @extends MoveMethod
+ * @property {number} level - The level at which the Pokemon learns the move.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this move method.
+ */
+class LevelMethod extends MoveMethod {
+    level;
+    instance;
+    constructor(level, instance) {
+        super();
+        this.level &#x3D; level;
+        this.instance &#x3D; instance;
+    }
+    get text() {
+        return &#x60;Level ${this.level}&#x60;;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents a move that a Pokemon can learn, along with the method for learning it.
+ *
+ * @class PokemonMove
+ * @property {number} move_id - The ID of the move that the Pokemon can learn.
+ * @property {MoveMethod} method - The method by which the Pokemon learns the move.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this Pokemon move.
+ */
+class PokemonMove {
+    constructor(move_id, method, instance) {
+        this.move_id &#x3D; move_id;
+        this.method &#x3D; method;
+        this.instance &#x3D; instance;
+    }
+    move_id;
+    method;
+    instance;
+    get move() {
+        return this.instance.moves[this.move_id];
+    }
+    get text() {
+        return &#x60;Move ${this.method}&#x60;;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents the trigger for an evolution.
+ *
+ * @class EvolutionTrigger
+ */
+class EvolutionTrigger {
+}
+/**
+ * Represents the trigger for an evolution that occurs when a Pokemon levels up.
+ *
+ * @class LevelTrigger
+ * @extends EvolutionTrigger
+ * @property {number|null} level - The level at which the Pokemon evolves, or null if it evolves upon level up regardless of level.
+ * @property {number|null} item_id - The ID of the item that the Pokemon must be holding to evolve, or null if no item is required.
+ * @property {number|null} move_id - The ID of the move that the Pokemon must know to evolve, or null if no move is required.
+ * @property {number|null} move_type_id - The ID of the type of move that the Pokemon must know to evolve, or null if no specific type is required.
+ * @property {number|null} time - The time of day when the Pokemon evolves (e.g., &quot;day&quot;, &quot;night&quot;), or null if time of day doesn&#x27;t matter.
+ * @property {number|null} relative_stats - The relative stat requirement for evolution (1 for Attack &gt; Defense, -1 for Defense &gt; Attack, 0 for Attack &#x3D; Defense), or null if no stat requirement.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */
+class LevelTrigger extends EvolutionTrigger {
+    level;
+    item_id;
+    move_id;
+    move_type_id;
+    time;
+    relative_stats;
+    instance;
+    constructor(level, item_id, move_id, move_type_id, time, relative_stats, instance) {
+        super();
+        this.level &#x3D; level;
+        this.item_id &#x3D; item_id;
+        this.move_id &#x3D; move_id;
+        this.move_type_id &#x3D; move_type_id;
+        this.time &#x3D; time;
+        this.relative_stats &#x3D; relative_stats;
+        this.instance &#x3D; instance;
+    }
+    get item() {
+        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.items[this.item_id];
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+    get move() {
+        if (this.move_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.moves[this.move_id];
+    }
+    get move_type() {
+        if (this.move_type_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return constants.TYPES[this.move_type_id];
+    }
+    get text() {
+        let text;
+        if (this.level &#x3D;&#x3D;&#x3D; null) {
+            text &#x3D; &#x27;when leveled up&#x27;;
+        }
+        else {
+            text &#x3D; &#x60;starting from level ${this.level}&#x60;;
+        }
+        if (this.item !&#x3D;&#x3D; null) {
+            text +&#x3D; &#x60; while holding a ${this.item}&#x60;;
+        }
+        if (this.move !&#x3D;&#x3D; null) {
+            text +&#x3D; &#x60; while knowing ${this.move}&#x60;;
+        }
+        if (this.move_type !&#x3D;&#x3D; null) {
+            text +&#x3D; &#x60; while knowing a ${this.move_type}-type move&#x60;;
+        }
+        if (this.relative_stats &#x3D;&#x3D;&#x3D; 1) {
+            text +&#x3D; &#x27; when its Attack is higher than its Defense&#x27;;
+        }
+        else if (this.relative_stats &#x3D;&#x3D;&#x3D; -1) {
+            text +&#x3D; &#x27; when its Defense is higher than its Attack&#x27;;
+        }
+        else if (this.relative_stats &#x3D;&#x3D;&#x3D; 0) {
+            text +&#x3D; &#x27; when its Attack is equal to its Defense&#x27;;
+        }
+        if (this.time !&#x3D;&#x3D; null) {
+            text +&#x3D; &#x60; in the ${this.time} time&#x60;;
+        }
+        return text;
+    }
+}
+/**
+ * Represents the trigger for an evolution that occurs when an item is used on a Pokemon.
+ *
+ * @class ItemTrigger
+ * @extends EvolutionTrigger
+ * @property {number} item_id - The ID of the item that must be used to trigger the evolution.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */
+class ItemTrigger extends EvolutionTrigger {
+    constructor(item_id, instance) {
+        super();
+        this.item_id &#x3D; item_id;
+        this.instance &#x3D; instance;
+    }
+    item_id;
+    instance;
+    get item() {
+        return this.instance.items[this.item_id];
+    }
+    get text() {
+        return &#x60;using a ${this.item}&#x60;;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents the trigger for an evolution that occurs when a Pokemon is traded.
+ *
+ * @class TradeTrigger
+ * @extends EvolutionTrigger
+ * @property {number|null} item_id - The ID of the item that the Pokemon must be holding to evolve when traded, or null if no item is required.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */
+class TradeTrigger extends EvolutionTrigger {
+    constructor(item_id &#x3D; null, instance) {
+        super();
+        this.item_id &#x3D; item_id;
+        this.instance &#x3D; instance;
+    }
+    item_id;
+    instance;
+    get item() {
+        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.items[this.item_id];
+    }
+    get text() {
+        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
+            return &#x27;when traded&#x27;;
+        }
+        return &#x60;when traded while holding a ${this.item}&#x60;;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents the trigger for an evolution that occurs under other, less common conditions.
+ *
+ * @class OtherTrigger
+ * @extends EvolutionTrigger
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
+ */
+class OtherTrigger extends EvolutionTrigger {
+    instance;
+    constructor(instance) {
+        super();
+        this.instance &#x3D; instance;
+    }
+    get text() {
+        return &#x27;somehow&#x27;;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+}
+/**
+ * Represents a pokemon evolution.
+ *
+ * @class Evolution
+ * @property {number} target_id - The ID of the Pokemon species that this evolution evolves to or from.
+ * @property {EvolutionTrigger} trigger - The trigger for this evolution (e.g., level up, trade, item).
+ * @property {boolean} type - The direction of the evolution (true for evolving to, false for evolving from).
+ * @property {DataManagerBase} instance - The DataManagerBase instance.
+ */
+class Evolution {
+    constructor(target_id, trigger, type, instance) {
+        this.target_id &#x3D; target_id;
+        this.trigger &#x3D; trigger;
+        this.type &#x3D; type;
+        this.instance &#x3D; instance;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+    async evolve_from(target, trigger, instance) {
+        throw new Error(&#x27;Method not implemented.&#x27;);
+    }
+    async evolve_to(target, trigger, instance) {
+        throw new Error(&#x27;Method not implemented.&#x27;);
+    }
+    target_id;
+    trigger;
+    type;
+    instance;
+    static async evolve_from(target, trigger, instance) {
+        return new Evolution(target, trigger, false, instance);
+    }
+    static async evolve_to(target, trigger, instance) {
+        return new Evolution(target, trigger, true, instance);
+    }
+    get dir() {
+        return this.type ? &#x27;to&#x27; : !this.type ? &#x27;from&#x27; : &#x27;to&#x27;;
+    }
+    get target() {
+        return this.instance.pokemon[this.target_id];
+    }
+    get text() {
+        if (this.target[&#x60;evolution_${this.dir}&#x60;] !&#x3D;&#x3D; null) {
+            const pevo &#x3D; this.target[&#x60;evolution_${this.dir}&#x60;];
+            return &#x60;evolves ${this.dir} ${this.target} ${this.trigger.text}, which ${pevo.text} &#x60;;
+        }
+        return &#x60;evolves ${this.dir} ${this.target} ${this.trigger.text}&#x60;;
+    }
+}
+/**
+ * Represents a list of evolutions.
+ *
+ * @class EvolutionList
+ * @property {Evolution[]} items - A list of Evolution objects representing the evolutions in the list.
+ */
+class EvolutionList {
+    constructor(evolutions) {
+        if (evolutions instanceof Evolution) {
+            evolutions &#x3D; [evolutions];
+        }
+        this.items &#x3D; evolutions;
+    }
+    items;
+    get text() {
+        let txt &#x3D; this.items.map(e &#x3D;&gt; e.text).join(&#x27; and &#x27;);
+        txt &#x3D; txt.replace(&#x27; and &#x27;, &#x27;, &#x27;);
+        return txt;
+    }
+}
+/**
+ * Represents the base stats of a Pokemon.
+ *
+ * @class Stats
+ * @property {number} hp - The base HP stat.
+ * @property {number} atk - The base Attack stat.
+ * @property {number} defn - The base Defense stat.
+ * @property {number} satk - The base Special Attack stat.
+ * @property {number} sdef - The base Special Defense stat.
+ * @property {number} spd - The base Speed stat.
+ */
+class Stats {
+    constructor(hp, atk, defn, satk, sdef, spd) {
+        this.hp &#x3D; hp;
+        this.atk &#x3D; atk;
+        this.defn &#x3D; defn;
+        this.satk &#x3D; satk;
+        this.sdef &#x3D; sdef;
+        this.spd &#x3D; spd;
+    }
+    hp;
+    atk;
+    defn;
+    satk;
+    sdef;
+    spd;
+}
+/**
+ * Represents a Pokemon species.
+ *
+ * @class Species
+ * @property {number} id - The ID of the species.
+ * @property {string[][]} names - A list of names for the species in different languages. Each sub-array contains a language code and the name in that language.
+ * @property {string} slug - The slug for the species (e.g., &quot;pikachu&quot;).
+ * @property {Stats} base_stats - The base stats for the species.
+ * @property {number} height - The height of the species in meters.
+ * @property {number} weight - The weight of the species in kilograms.
+ * @property {number} dex_number - The Pokedex number of the species.
+ * @property {boolean} catchable - Whether the species can be caught in the wild.
+ * @property {string[]} types - A list of types for the species (e.g., [&quot;Electric&quot;]).
+ * @property {number} abundance - The abundance of the species in the wild (higher values mean more common).
+ * @property {number} gender_rate - The gender rate of the species (-1 for genderless, 0-8 for female ratio).
+ * @property {boolean} has_gender_differences - Whether the species has gender differences.
+ * @property {string|null} description - The description of the species, or null if none.
+ * @property {number|null} mega_id - The ID of the species&#x27; Mega Evolution, or null if none.
+ * @property {number|null} mega_x_id - The ID of the species&#x27; Mega X Evolution, or null if none.
+ * @property {number|null} mega_y_id - The ID of the species&#x27; Mega Y Evolution, or null if none.
+ * @property {EvolutionList|null} evolution_from - The EvolutionList representing how this species evolves from others, or null if none.
+ * @property {EvolutionList|null} evolution_to - The EvolutionList representing how this species evolves into others, or null if none.
+ * @property {boolean} mythical - Whether the species is a Mythical Pokemon.
+ * @property {boolean} legendary - Whether the species is a Legendary Pokemon.
+ * @property {boolean} ultra_beast - Whether the species is an Ultra Beast.
+ * @property {boolean} event - Whether the species is an event-exclusive Pokemon.
+ * @property {boolean} is_form - Whether the species is a form of another Pokemon.
+ * @property {number|null} form_item - The ID of the item used to change into this form, or null if none.
+ * @property {string} region - The region where the species was introduced.
+ * @property {string|null} art_credit - The artist who created the artwork for the species, or null if unknown.
+ * @property {DataManagerBase} instance - The DataManagerBase instance associated with this species.
+ * @property {PokemonMove[]} moves - A list of PokemonMove objects representing the moves that the species can learn.
+ */
+class Species {
+    constructor(id, names, slug, base_stats, height, weight, dex_number, catchable, types, abundance, gender_rate, has_gender_differences, description &#x3D; null, mega_id &#x3D; null, mega_x_id &#x3D; null, mega_y_id &#x3D; null, evolution_from &#x3D; null, evolution_to &#x3D; null, mythical &#x3D; false, legendary &#x3D; false, ultra_beast &#x3D; false, event &#x3D; false, is_form &#x3D; false, form_item &#x3D; null, region, art_credit &#x3D; null, instance, moves &#x3D; []) {
+        this.id &#x3D; id;
+        this.names &#x3D; names;
+        this.slug &#x3D; slug;
+        this.base_stats &#x3D; base_stats;
+        this.height &#x3D; height;
+        this.weight &#x3D; weight;
+        this.dex_number &#x3D; dex_number;
+        this.catchable &#x3D; catchable;
+        this.types &#x3D; types;
+        this.abundance &#x3D; abundance;
+        this.gender_rate &#x3D; gender_rate;
+        this.has_gender_differences &#x3D; has_gender_differences;
+        this.description &#x3D; description;
+        this.mega_id &#x3D; mega_id;
+        this.mega_x_id &#x3D; mega_x_id;
+        this.mega_y_id &#x3D; mega_y_id;
+        this.evolution_from &#x3D; evolution_from;
+        this.evolution_to &#x3D; evolution_to;
+        this.mythical &#x3D; mythical;
+        this.legendary &#x3D; legendary;
+        this.ultra_beast &#x3D; ultra_beast;
+        this.event &#x3D; event;
+        this.is_form &#x3D; is_form;
+        this.form_item &#x3D; form_item;
+        this.region &#x3D; region;
+        this.art_credit &#x3D; art_credit;
+        this.instance &#x3D; instance;
+        this.moves &#x3D; moves;
+    }
+    id;
+    names;
+    slug;
+    base_stats;
+    height;
+    weight;
+    dex_number;
+    catchable;
+    types;
+    abundance;
+    gender_rate;
+    has_gender_differences;
+    description;
+    mega_id;
+    mega_x_id;
+    mega_y_id;
+    evolution_from;
+    evolution_to;
+    mythical;
+    legendary;
+    ultra_beast;
+    event;
+    is_form;
+    form_item;
+    region;
+    art_credit;
+    instance;
+    moves;
+    get name() {
+        const found &#x3D; this.names.find(x &#x3D;&gt; (x[0] ? x[0] &#x3D;&#x3D;&#x3D; &#x27;🇬🇧&#x27; : null));
+        if (found &#x3D;&#x3D; null) {
+            return null;
+        }
+        return found[1];
+    }
+    toString() {
+        return this.name;
+    }
+    toJSON() {
+        const copy &#x3D; { ...this };
+        delete copy.instance;
+        return copy;
+    }
+    get moveset() {
+        return this.moves.map(x &#x3D;&gt; this.instance.moves[x.move_id]);
+    }
+    get mega() {
+        if (this.mega_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.pokemon[this.mega_id];
+    }
+    get mega_x() {
+        if (this.mega_x_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.pokemon[this.mega_x_id];
+    }
+    get mega_y() {
+        if (this.mega_y_id &#x3D;&#x3D;&#x3D; null) {
+            return null;
+        }
+        return this.instance.pokemon[this.mega_y_id];
+    }
+    get correct_guesses() {
+        return [this.names.map(x &#x3D;&gt; deaccent(x[1].toLowerCase())), this.slug];
+    }
+    get trade_evolutions() {
+        if (this.evolution_to &#x3D;&#x3D;&#x3D; null) {
+            return [];
+        }
+        const evos &#x3D; [];
+        for (const e of this.evolution_to.items) {
+            if (e.trigger instanceof TradeTrigger) {
+                evos.push(e);
+            }
+        }
+        return evos;
+    }
+    get evolution_text() {
+        if (this.is_form &amp;amp;&amp;amp; this.form_item !&#x3D;&#x3D; null) {
+            const species &#x3D; this.instance.pokemon[this.dex_number];
+            const item &#x3D; this.instance.items[this.form_item];
+            return &#x60;${this.name} transforms from ${species} when given a ${item.name}.&#x60;;
+        }
+        if (this.evolution_from !&#x3D;&#x3D; null &amp;amp;&amp;amp; this.evolution_to !&#x3D;&#x3D; null) {
+            return &#x60;${this.name} ${this.evolution_from.text} and ${this.evolution_to.text}.&#x60;;
+        }
+        if (this.evolution_from !&#x3D;&#x3D; null) {
+            return &#x60;${this.name} ${this.evolution_from.text}.&#x60;;
+        }
+        if (this.evolution_to !&#x3D;&#x3D; null) {
+            return &#x60;${this.name} ${this.evolution_to.text}.&#x60;;
+        }
+        return null;
+    }
+}
+class DataManagerBase {
+    /**
+     * Checks if the DataManager has been initialized.
+     * @throws {Error} If the DataManager is not initialized.
+     */
+    checkinitialized() {
+        throw new Error(&#x27;Method not implemented.&#x27;);
+    }
+    /**
+     * A dictionary of Pokemon species, indexed by ID.
+     * @type {Object.&amp;lt;number, Species&gt;}
+     */
+    pokemon;
+    /**
+     * A dictionary of items, indexed by ID.
+     * @type {Object.&amp;lt;number, Item&gt;}
+     */
+    items;
+    /**
+     * A dictionary of move effects, indexed by ID.
+     * @type {Object.&amp;lt;number, MoveEffect&gt;}
+     */
+    effects;
+    /**
+     * A dictionary of moves, indexed by ID.
+     * @type {Object.&amp;lt;number, Move&gt;}
+     */
+    moves;
+    toJSON() {
+        return {
+            pokemonCount: Object.keys(this.pokemon).length,
+            itemCount: Object.keys(this.items).length,
+            effectCount: Object.keys(this.effects).length,
+            moveCount: Object.keys(this.moves).length,
+        };
+    }
+    /**
+     * Gets a list of all Pokemon species.
+     * @returns {Species[]} A list of all Pokemon species.
+     */
+    allPokemon() {
+        this.checkinitialized();
+        return Object.values(this.pokemon);
+    }
+    /**
+     * Gets a list of Alolan Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_alolan() {
+        return [
+            10091, 10092, 10093, 10100, 10101, 10102, 10103, 10104, 10105, 10106,
+            10107, 10108, 10109, 10110, 10111, 10112, 10113, 10114, 10115, 50076,
+        ];
+    }
+    /**
+     * Gets a list of Galarian Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_galarian() {
+        return [
+            10158, 10159, 10160, 10161, 10162, 10163, 10164, 10165, 10166, 10167,
+            10168, 10169, 10170, 10171, 10172, 10173, 10174, 10175, 10176, 10177,
+            50053,
+        ];
+    }
+    /**
+     * Gets a list of Hisuian Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_hisuian() {
+        return [
+            10221, 10222, 10223, 10224, 10225, 10226, 10227, 10228, 10229, 10230,
+            10231, 10232, 10233, 10234, 10235, 10236, 10237, 10238, 10239, 50145,
+        ];
+    }
+    /**
+     * Gets a list of Paradox Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_paradox() {
+        return [
+            984, 985, 986, 987, 988, 989, 990, 991, 992, 993, 994, 995, 1005, 1006,
+            1007, 1008, 1009, 1010,
+        ];
+    }
+    /**
+     * Gets a list of Mythical Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_mythical() {
+        this.checkinitialized();
+        return Object.values(this.pokemon)
+            .filter(v &#x3D;&gt; v.mythical)
+            .map(v &#x3D;&gt; v.id);
+    }
+    /**
+     * Gets a list of Legendary Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_legendary() {
+        this.checkinitialized();
+        return Object.values(this.pokemon)
+            .filter(v &#x3D;&gt; v.legendary)
+            .map(v &#x3D;&gt; v.id);
+    }
+    /**
+     * Gets a list of Ultra Beast Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_ub() {
+        this.checkinitialized();
+        return Object.values(this.pokemon)
+            .filter(v &#x3D;&gt; v.ultra_beast)
+            .map(v &#x3D;&gt; v.id);
+    }
+    /**
+     * Gets a list of Event Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_event() {
+        this.checkinitialized();
+        return Object.values(this.pokemon)
+            .filter(v &#x3D;&gt; v.event)
+            .map(v &#x3D;&gt; v.id);
+    }
+    /**
+     * Gets a list of Mega Evolution Pokemon species IDs.
+     * @type {number[]}
+     */
+    get list_mega() {
+        this.checkinitialized();
+        return [
+            ...Object.values(this.pokemon)
+                .filter(v &#x3D;&gt; v.mega_id !&#x3D;&#x3D; null)
+                .map(v &#x3D;&gt; v.mega_id),
+            ...Object.values(this.pokemon)
+                .filter(v &#x3D;&gt; v.mega_x_id !&#x3D;&#x3D; null)
+                .map(v &#x3D;&gt; v.mega_x_id),
+            ...Object.values(this.pokemon)
+                .filter(v &#x3D;&gt; v.mega_y_id !&#x3D;&#x3D; null)
+                .map(v &#x3D;&gt; v.mega_y_id),
+        ];
+    }
+    /**
+     * Gets a dictionary of species IDs indexed by Pokemon type.
+     * @type {Record&amp;lt;string, number[]&gt;}
+     */
+    get species_id_by_type_index() {
+        this.checkinitialized();
+        const ret &#x3D; {};
+        for (const pokemon of Object.values(this.pokemon)) {
+            for (const typ of pokemon.types) {
+                if (!ret[typ]) {
+                    ret[typ] &#x3D; [];
+                }
+                ret[typ].push(pokemon.id);
+            }
+        }
+        return ret;
+    }
+    /**
+     * Gets a Map of species IDs indexed by Pokemon region.
+     * @type {Map&amp;lt;string, number[]&gt;}
+     */
+    get speciesIdByRegionIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const pokemon of Object.values(this.pokemon)) {
+            const region &#x3D; pokemon.region.toLowerCase();
+            if (!ret.has(region)) {
+                ret.set(region, []);
+            }
+            ret.get(region).push(pokemon.id);
+        }
+        return ret;
+    }
+    /**
+     * Gets a list of Pokemon species IDs for a given region.
+     * @param {string} region - The name of the region.
+     * @returns {number[]} A list of Pokemon species IDs.
+     */
+    listRegion(region) {
+        this.checkinitialized();
+        return this.speciesIdByRegionIndex.get(region.toLowerCase()) || [];
+    }
+    /**
+     * Gets a Map of species IDs indexed by move ID.
+     * @type {Map&amp;lt;number, number[]&gt;}
+     */
+    get speciesIdByMoveIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const pokemon of this.allPokemon()) {
+            for (const pmove of pokemon.moves) {
+                if (!ret.has(pmove.move_id)) {
+                    ret.set(pmove.move_id, []);
+                }
+                const ls &#x3D; ret.get(pmove.move_id);
+                if (!ls.includes(pokemon.id)) {
+                    ls.push(pokemon.id);
+                }
+            }
+        }
+        return ret;
+    }
+    /**
+     * Gets a list of Pokemon species IDs that can learn a given move.
+     * @param {string} moveName - The name of the move.
+     * @returns {number[]} A list of Pokemon species IDs.
+     */
+    listMove(moveName) {
+        this.checkinitialized();
+        if (!moveName) {
+            return this.allPokemon()
+                .filter(s &#x3D;&gt; s.moves)
+                .map(s &#x3D;&gt; s.id);
+        }
+        const move &#x3D; this.moveByName(moveName);
+        if (!move) {
+            return [];
+        }
+        return this.speciesIdByMoveIndex.get(move.id) || [];
+    }
+    /**
+     * Gets a list of all items.
+     * @returns {Item[]} A list of all items.
+     */
+    allItems() {
+        this.checkinitialized();
+        return Object.values(this.items);
+    }
+    /**
+     * Gets a Map of species indexed by their dex number.
+     * @type {Map&amp;lt;number, Species[]&gt;}
+     */
+    get speciesByDexNumberIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const pokemon of Object.values(this.pokemon)) {
+            if (!ret.has(pokemon.id)) {
+                ret.set(pokemon.id, []);
+            }
+            ret.get(pokemon.id).push(pokemon);
+            if (pokemon.id !&#x3D;&#x3D; pokemon.dex_number) {
+                if (!ret.has(pokemon.dex_number)) {
+                    ret.set(pokemon.dex_number, []);
+                }
+                ret.get(pokemon.dex_number).push(pokemon);
+            }
+        }
+        return ret;
+    }
+    /**
+     * Gets a list of all species with the given dex number.
+     * @param {number} number - The dex number.
+     * @returns {Species[]} A list of Pokemon species.
+     */
+    allSpeciesByNumber(number) {
+        this.checkinitialized();
+        return this.speciesByDexNumberIndex.get(number) || [];
+    }
+    /**
+    * Gets a list of all species with the given name.
+    * @param {string} name - The name of the Pokemon species.
+    * @returns {Species[]} A list of Pokemon species.
+    */
+    allSpeciesByName(name) {
+        this.checkinitialized();
+        const st &#x3D; deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;));
+        return this.speciesByNameIndex.get(st) || [];
+    }
+    /**
+     * Finds a species by its dex number.
+     * @param {number} number - The dex number.
+     * @returns {Species|null} The Pokemon species with the given dex number, or null if not found.
+     */
+    findSpeciesByNumber(number) {
+        this.checkinitialized();
+        return this.pokemon[number] || null;
+    }
+    /**
+     * Gets a Map of species indexed by their name.
+     * @type {Map&amp;lt;string, Species[]&gt;}
+     */
+    get speciesByNameIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const pokemon of Object.values(this.pokemon)) {
+            const guess &#x3D; pokemon.correct_guesses;
+            for (let name of guess) {
+                if (typeof name !&#x3D; &#x27;string&#x27;)
+                    name &#x3D; name[0];
+                if (!ret.has(name)) {
+                    ret.set(name, []);
+                }
+                ret.get(name).push(pokemon);
+            }
+        }
+        return ret;
+    }
+    /**
+     * Finds a species by its name.
+     * @param {string} name - The name of the Pokemon species.
+     * @returns {Species|null} The Pokemon species with the given name, or null if not found.
+     */
+    speciesByName(name) {
+        this.checkinitialized();
+        const st &#x3D; deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;));
+        const speciesList &#x3D; this.speciesByNameIndex.get(st);
+        return speciesList ? speciesList[0] : null;
+    }
+    /**
+     * Finds an item by its ID.
+     * @param {number} number - The ID of the item.
+     * @returns {Item|null} The item with the given ID, or null if not found.
+     */
+    itemByNumber(number) {
+        this.checkinitialized();
+        return this.items[number] || null;
+    }
+    /**
+     * Gets a Map of items indexed by their name.
+     * @type {Map&amp;lt;string, Item&gt;}
+     */
+    get itemByNameIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const item of Object.values(this.items)) {
+            ret.set(item.name.toLowerCase(), item);
+        }
+        return ret;
+    }
+    /**
+     * Finds an item by its name.
+     * @param {string} name - The name of the item.
+     * @returns {Item|null} The item with the given name, or null if not found.
+     */
+    itemByName(name) {
+        this.checkinitialized();
+        return this.itemByNameIndex.get(deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;)));
+    }
+    /**
+     * Finds a move by its ID.
+     * @param {number} number - The ID of the move.
+     * @returns {Move|null} The move with the given ID, or null if not found.
+     */
+    moveByNumber(number) {
+        this.checkinitialized();
+        return this.moves[number] || null;
+    }
+    /**
+     * Gets a Map of moves indexed by their name.
+     * @type {Map&amp;lt;string, Move&gt;}
+     */
+    get moveByNameIndex() {
+        this.checkinitialized();
+        const ret &#x3D; new Map();
+        for (const move of Object.values(this.moves)) {
+            ret.set(move.name.toLowerCase(), move);
+        }
+        return ret;
+    }
+    /**
+     * Finds a move by its name.
+     * @param {string} name - The name of the move.
+     * @returns {Move|null} The move with the given name, or null if not found.
+     */
+    moveByName(name) {
+        this.checkinitialized();
+        return this.moveByNameIndex.get(deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;’&#x27;)));
+    }
+    /**
+ * Returns a random Pokemon species.
+ *
+ * @param {string} [rarity&#x3D;&#x27;normal&#x27;] - The rarity of the Pokemon to spawn. Can be &#x27;normal&#x27;, &#x27;mythical&#x27;, &#x27;legendary&#x27;, or &#x27;ultra_beast&#x27;.
+ * @returns {Species} A random Pokemon species.
+ */
+    randomSpawn(rarity &#x3D; &#x27;normal&#x27;) {
+        this.checkinitialized();
+        let pool;
+        if (rarity &#x3D;&#x3D;&#x3D; &#x27;mythical&#x27;) {
+            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.mythical);
+        }
+        else if (rarity &#x3D;&#x3D;&#x3D; &#x27;legendary&#x27;) {
+            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.legendary);
+        }
+        else if (rarity &#x3D;&#x3D;&#x3D; &#x27;ultra_beast&#x27;) {
+            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.ultra_beast);
+        }
+        else {
+            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable);
+        }
+        const weights &#x3D; pool.map(x &#x3D;&gt; x.abundance);
+        const randomIndex &#x3D; this.weightedRandomChoice(weights);
+        return pool[randomIndex];
+    }
+    /**
+     * Chooses a random element from a list of weights using weighted random selection.
+     * @param {number[]} weights - A list of weights.
+     * @returns {number} The index of the chosen element.
+     */
+    weightedRandomChoice(weights) {
+        this.checkinitialized();
+        const total &#x3D; weights.reduce((acc, w) &#x3D;&gt; acc + w, 0);
+        let threshold &#x3D; Math.random() * total;
+        for (let i &#x3D; 0; i &amp;lt; weights.length; i++) {
+            if (weights[i] &gt;&#x3D; threshold) {
+                return i;
+            }
+            threshold -&#x3D; weights[i];
+        }
+        return 0;
+    }
+    get spawnWeights() {
+        this.checkinitialized();
+        return Object.values(this.pokemon).map(p &#x3D;&gt; p.abundance);
+    }
+}
+export { DataManagerBase, MoveMeta, MoveResult, MoveMethod, Move, ItemTrigger, LevelTrigger, LevelMethod, PokemonMove, Species, StatStages, Stats, StatChange, OtherTrigger, TradeTrigger, Item, MoveEffect, Evolution, EvolutionTrigger, EvolutionList, };
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.2 on April 26, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

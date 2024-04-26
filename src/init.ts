@@ -71,7 +71,7 @@ async function get_pokemon(instance: DataManager) {
                 item,
                 move,
                 movetype,
-                parseInt(time),
+                time,
                 relative_stats,
                 instance
             );
@@ -390,6 +390,15 @@ class DataManager extends DataManagerBase {
         if(!this._isInitialized){
             throw new Error('Pokedex not initialized, call init() first');
         }
+    }
+
+    toJSON(){
+      return { 
+        pokemonCount: Object.keys(this.pokemon).length,
+        itemCount: Object.keys(this.items).length,
+        effectCount: Object.keys(this.effects).length,
+        moveCount: Object.keys(this.moves).length,
+      };
     }
 
 }

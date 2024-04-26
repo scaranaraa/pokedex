@@ -96,7 +96,7 @@ export type LevelTriggerBase = {
   item_id: number;
   move_id: number;
   move_type_id: number;
-  time: number;
+  time: string;
   relative_stats: number;
   instance: DataManagerBase;
 
@@ -250,9 +250,7 @@ export type PokemonBaseDef = {
   [key: string]: any;
 
   id: any;
-  owner_id: string | number;
   idx: number;
-  timestamp?: number;
   species_id: number;
   level: number;
   xp: number;
@@ -315,133 +313,51 @@ export type DataManagerBaseType = {
   moves: {
     [key: number]: Move;
   };
-  /**
-    * Get all pokemon
-    * @returns {Species[]} List of all pokemon
-  */
+  
   allPokemon: () => Species[];
-  /**
-    * Get all alolan pokemon
-    * @returns {number[]} List of pokemon ids
-  */
+ 
   list_alolan: number[];
-  /**
-    * Get all galarian pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+ 
   list_galarian: number[];
-  /**
-    * Get all hisuian pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+  
   list_hisuian: number[];
-  /**
-    * Get all paradox pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+  
   list_paradox: number[];
-  /**
-    * Get all mythical pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+  
   list_mythical: number[];
-  /**
-    * Get all legendary pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+  
   list_legendary: number[];
-  /**
-    * Get all ultra beast pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+
   list_ub: number[];
-  /**
-    * Get all event ids
-    * @returns {number[]} List of ids
-  */
+
   list_event: number[];
-  /**
-    * Get all mega pokemon ids
-    * @returns {number[]} List of pokemon ids
-  */
+
   list_mega: Array<number | undefined>;
 
   species_id_by_type_index: Record<string, number[]>;
   speciesIdByRegionIndex: Map<string, number[]>;
-   /**
-    * List all pokemon by region
-    * @param {string} region Name of region
-    * @returns {Species[]} Pokemon
-  */
   listRegion: (region: string) => number[];
   speciesIdByMoveIndex: Map<number, number[]>;
-   /**
-    * Get all pokemon by move
-    * @param {string} name Name of move
-    * @returns {Species[]} Pokemon
-  */
   listMove: (move: string) => number[];
-   /**
-    * Get all items
-    * @returns {Species[]} Items
-  */
   allItems: () => Item[];
   allSpeciesByNumber: (number: number) => Species[];
-  /**
-    * Get all species by name
-    * @param {string} name Name of pokemon
-    * @returns {Species[]} Pokemon
-  */
   allSpeciesByName: (name: string) => Species[];
-
-   /**
-    * Get species by number
-    * @param {string} number Pokemon id
-    * @returns {Species} Pokemon
-  */
   findSpeciesByNumber: (number: number) => Species;
-  /**
-    * Get species by name
-    * @param {string} number Pokemon name
-    * @returns {Species} Pokemon
-  */
   speciesByName: (name: string) => Species;
   speciesByNameIndex: Map<string, Species[]>;
   checkinitialized(): void;
-  /**
-    * Get item by number
-    * @param {string} number Item id
-    * @returns {Species} Item
-  */
   itemByNumber(number: number): Item;
 
   itemByNameIndex: Map<string, Item>;
 
-  /**
-    * Get item by name
-    * @param {string} name Item id
-    * @returns {Species} Item
-  */
   itemByName(name: string): Item;
-  /**
-    * Get move by number
-    * @param {string} number Move id
-    * @returns {Species} Move
-  */
+
   moveByNumber(number: number): Move;
 
   moveByNameIndex: Map<string, Move>;
- /**
-    * Get move by name
-    * @param {string} name Move name
-    * @returns {Species} Move
-  */
+
   moveByName(name: string): Move;
- /**
-    * Get a random pokemon
-    * @param {string} rarity Pokemon rarity - Optional
-    * @returns {Species} Pokemon
-  */
+
   randomSpawn(rarity?: string): Species;
 
   weightedRandomChoice(weights: number[]): number;

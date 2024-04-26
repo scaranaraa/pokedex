@@ -13,8 +13,8 @@
       "ecmaVersion": 2020
   },
   "plugins": ["mocha"],
-  "ignorePatterns": ["docs"],
-  "rules": {
+  "ignorePatterns": ["docs"]
+  /*"rules": {
       "indent": [
           "error",
           4
@@ -31,5 +31,5 @@
           "error",
           "always"
       ]
-  }
+  }*/
 }

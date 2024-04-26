@@ -1,0 +1,470 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 4.0.2">
+  <meta charset="utf-8">
+  <title>pokedex 1.0.0 &raquo; Class: Species</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex 1.<wbr>0.<wbr>0</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <div class="symbol-detail-labels"><span class="label label-kind">class</span>&nbsp;<span class="label label-inner">inner</span></div>
+            <h1><small><a href="module-models.html">models</a>~<wbr></small><span class="symbol-name">Species</span></h1>
+            <p class="source-link">Source: <a href="models.js.html#source-line-748">models.<wbr>js:748</a></p>
+            <dl class="dl-compact">
+            </dl>
+          </header>
+          <section id="summary">
+          </section>
+          <section>
+            <h2 id="Species">new&nbsp;<span class="symbol-name">Species</span><span class="signature"><span class="signature-params">()</span></span></h2>
+            <p>Represents a Pokemon species.</p>
+            <section>
+              <h3>Properties</h3>
+              <table class="jsdoc-details-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Optional</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>id</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The ID of the species.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>names</p>
+                    </td>
+                    <td>
+                      <p>Array of Array of string</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>A list of names for the species in different languages. Each sub-array contains a language code and the name in that language.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>slug</p>
+                    </td>
+                    <td>
+                      <p>string</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The slug for the species (e.g., &quot;pikachu&quot;).</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>base_stats</p>
+                    </td>
+                    <td>
+                      <p>Stats</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The base stats for the species.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>height</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The height of the species in meters.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>weight</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The weight of the species in kilograms.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>dex_number</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The Pokedex number of the species.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>catchable</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species can be caught in the wild.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>types</p>
+                    </td>
+                    <td>
+                      <p>Array of string</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>A list of types for the species (e.g., [&quot;Electric&quot;]).</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>abundance</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The abundance of the species in the wild (higher values mean more common).</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>gender_rate</p>
+                    </td>
+                    <td>
+                      <p>number</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The gender rate of the species (-1 for genderless, 0-8 for female ratio).</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>has_gender_differences</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species has gender differences.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>description</p>
+                    </td>
+                    <td>
+                      <p>(string or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The description of the species, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>mega_id</p>
+                    </td>
+                    <td>
+                      <p>(number or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The ID of the species' Mega Evolution, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>mega_x_id</p>
+                    </td>
+                    <td>
+                      <p>(number or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The ID of the species' Mega X Evolution, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>mega_y_id</p>
+                    </td>
+                    <td>
+                      <p>(number or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The ID of the species' Mega Y Evolution, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>evolution_from</p>
+                    </td>
+                    <td>
+                      <p>(EvolutionList or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The EvolutionList representing how this species evolves from others, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>evolution_to</p>
+                    </td>
+                    <td>
+                      <p>(EvolutionList or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The EvolutionList representing how this species evolves into others, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>mythical</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species is a Mythical Pokemon.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>legendary</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species is a Legendary Pokemon.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>ultra_beast</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species is an Ultra Beast.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>event</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species is an event-exclusive Pokemon.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>is_form</p>
+                    </td>
+                    <td>
+                      <p>boolean</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>Whether the species is a form of another Pokemon.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>form_item</p>
+                    </td>
+                    <td>
+                      <p>(number or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The ID of the item used to change into this form, or null if none.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>region</p>
+                    </td>
+                    <td>
+                      <p>string</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The region where the species was introduced.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>art_credit</p>
+                    </td>
+                    <td>
+                      <p>(string or null)</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The artist who created the artwork for the species, or null if unknown.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>instance</p>
+                    </td>
+                    <td>
+                      <p>DataManagerBase</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>The DataManagerBase instance associated with this species.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p>moves</p>
+                    </td>
+                    <td>
+                      <p>Array of PokemonMove</p>
+                    </td>
+                    <td>
+                      <p>&nbsp;</p>
+                    </td>
+                    <td>
+                      <p>A list of PokemonMove objects representing the moves that the species can learn.</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <dl class="dl-compact">
+            </dl>
+          </section>
+          <section>
+          </section>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.2 on April 26, 2024.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>
