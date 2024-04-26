@@ -25,7 +25,6 @@ id,name,description,cost,shard,action,page,emote,separate
 891,Pink Nectar,,1500,,form_item,3,item_pink_nectar,
 892,Purple Nectar,,1500,,form_item,3,item_purple_nectar,
 13001,Everstone,Prevents pokémon from evolving.,1500,,held_item,4,item_everstone,1
-13002,XP Blocker,Prevents pokémon from gaining XP.,1500,,held_item,4,,1
 14001,Friendship Bracelet,Causes certain pokémon to evolve when leveled up.,15000,,held_item,4,,1
 110,Oval Stone,,1500,,held_item,4,item_oval_stone,
 198,King's Rock,,1500,,held_item,4,item_kings_rock,

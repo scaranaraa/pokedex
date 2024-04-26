@@ -21,7 +21,7 @@ await pokedex.init() //necessary
 1. Get information about specific pokemon
 ```js
 const charizard = pokedex.speciesByName('charizard');
-console.log(charizard.toJSON())
+console.log(charizard.toJSON()) // .toJSON() is called to avoid unsanitized output
 /*
 id: 6
 height: 1.7,
