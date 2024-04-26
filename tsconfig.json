@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2022",                                   
-    "module": "ES2020",                                
-    "outDir": "./dist",
+    "module": "NodeNext",                                
+    "outDir": "dist",
     "esModuleInterop": true,   
     "declaration": false,                            
     "forceConsistentCasingInFileNames": true,            
     "strict": true,                   
     "inlineSourceMap": false,    
     "strictNullChecks": false,           
-    "moduleResolution": "Bundler",       
-    "skipLibCheck": true ,                               
+    "moduleResolution": "NodeNext",       
+    "skipLibCheck": false ,                               
     "rootDir": "./src",
   }
 }

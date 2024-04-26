@@ -1,21 +1,21 @@
 import {
-  type DataManagerBase,
-  type Evolution,
-  type EvolutionList,
-  type EvolutionTrigger,
-  type Item,
-  type Move,
-  type MoveEffect,
-  type MoveMeta,
-  type MoveMethod,
-  type MoveResult,
-  type PokemonMove,
-  type Species,
-  type StatChange,
-  type Stats,
-  type StatStages,
-} from './src/models.js';
-import { type PokemonBase } from './src/pokemonbase.js';
+    type DataManagerBase,
+    type Evolution,
+    type EvolutionList,
+    type EvolutionTrigger,
+    type Item,
+    type Move,
+    type MoveEffect,
+    type MoveMeta,
+    type MoveMethod,
+    type MoveResult,
+    type PokemonMove,
+    type Species,
+    type StatChange,
+    type Stats,
+    type StatStages,
+} from './dist/models.js';
+import { type PokemonBase } from './src/pokemonbase.ts';
 
 export type StatsBase = {
   hp: number;
@@ -315,48 +315,141 @@ export type DataManagerBaseType = {
   moves: {
     [key: number]: Move;
   };
+  /**
+    * Get all pokemon
+    * @returns {Species[]} List of all pokemon
+  */
   allPokemon: () => Species[];
+  /**
+    * Get all alolan pokemon
+    * @returns {number[]} List of pokemon ids
+  */
   list_alolan: number[];
+  /**
+    * Get all galarian pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_galarian: number[];
+  /**
+    * Get all hisuian pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_hisuian: number[];
+  /**
+    * Get all paradox pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_paradox: number[];
+  /**
+    * Get all mythical pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_mythical: number[];
+  /**
+    * Get all legendary pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_legendary: number[];
+  /**
+    * Get all ultra beast pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_ub: number[];
+  /**
+    * Get all event ids
+    * @returns {number[]} List of ids
+  */
   list_event: number[];
+  /**
+    * Get all mega pokemon ids
+    * @returns {number[]} List of pokemon ids
+  */
   list_mega: Array<number | undefined>;
+
   species_id_by_type_index: Record<string, number[]>;
   speciesIdByRegionIndex: Map<string, number[]>;
+   /**
+    * List all pokemon by region
+    * @param {string} region Name of region
+    * @returns {Species[]} Pokemon
+  */
   listRegion: (region: string) => number[];
-  speciesIdByMoveIndex: Map<string, number[]>;
+  speciesIdByMoveIndex: Map<number, number[]>;
+   /**
+    * Get all pokemon by move
+    * @param {string} name Name of move
+    * @returns {Species[]} Pokemon
+  */
   listMove: (move: string) => number[];
+   /**
+    * Get all items
+    * @returns {Species[]} Items
+  */
   allItems: () => Item[];
   allSpeciesByNumber: (number: number) => Species[];
+  /**
+    * Get all species by name
+    * @param {string} name Name of pokemon
+    * @returns {Species[]} Pokemon
+  */
   allSpeciesByName: (name: string) => Species[];
+
+   /**
+    * Get species by number
+    * @param {string} number Pokemon id
+    * @returns {Species} Pokemon
+  */
   findSpeciesByNumber: (number: number) => Species;
+  /**
+    * Get species by name
+    * @param {string} number Pokemon name
+    * @returns {Species} Pokemon
+  */
   speciesByName: (name: string) => Species;
   speciesByNameIndex: Map<string, Species[]>;
-
+  checkinitialized(): void;
+  /**
+    * Get item by number
+    * @param {string} number Item id
+    * @returns {Species} Item
+  */
   itemByNumber(number: number): Item;
 
   itemByNameIndex: Map<string, Item>;
 
+  /**
+    * Get item by name
+    * @param {string} name Item id
+    * @returns {Species} Item
+  */
   itemByName(name: string): Item;
-
+  /**
+    * Get move by number
+    * @param {string} number Move id
+    * @returns {Species} Move
+  */
   moveByNumber(number: number): Move;
 
   moveByNameIndex: Map<string, Move>;
-
+ /**
+    * Get move by name
+    * @param {string} name Move name
+    * @returns {Species} Move
+  */
   moveByName(name: string): Move;
-
-  randomSpawn(rarity: string): Species;
+ /**
+    * Get a random pokemon
+    * @param {string} rarity Pokemon rarity - Optional
+    * @returns {Species} Pokemon
+  */
+  randomSpawn(rarity?: string): Species;
 
   weightedRandomChoice(weights: number[]): number;
 
   spawnWeights: number[];
 };
 
-export interface Evolution {
+export interface IEvolution {
   id: number;
   evolved_species_id: number;
   evolution_trigger_id: number;
@@ -452,57 +545,7 @@ export interface IPokemonMove {
   order: number;
 }
 
-/* export interface Pokemon {
-    id: number;
-    dex_number: number;
-    region: string;
-    slug: string;
-    description: string;
-    credit: string | null;
-    enabled: number;
-    catchable: number;
-    abundance: number;
-    gender_rate: number;
-    has_gender_differences: number;
-    "name.to": {
-      ja: string;
-      ja_r: string;
-      ja_t: string;
-      en: string;
-      en2: string | null;
-      de: string;
-      fr: string;
-    };
-    type: {
-      "0": string;
-      "1": string | null;
-    };
-    mythical: number;
-    legendary: number;
-    ultra_beast: number;
-    event: number;
-    height: number;
-    weight: number;
-    evo: {
-      to: number | null;
-      from: number | null;
-      mega: number | null;
-      mega_x: number | null;
-      mega_y: number | null;
-    };
-    base: {
-      hp: number;
-      atk: number;
-      def: number;
-      satk: number;
-      sdef: number;
-      spd: number;
-    };
-    is_form: number;
-    form_item: number | null;
-  }
-*/
-export interface Pokemon {
+export interface IPokemon {
   id: string;
   dex_number: string;
   region: string;

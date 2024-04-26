@@ -1,4 +1,6 @@
-import DataManager from "./init.js"
+/**
+ * @module
+ */
+import DataManager from './init.js';
 
-
-export {DataManager as Pokedex}
+export {DataManager as Pokedex};
