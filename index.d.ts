@@ -15,7 +15,10 @@ import {
     type Stats,
     type StatStages,
 } from './dist/models.js';
-import { type PokemonBase } from './src/pokemonbase.ts';
+import DataManager from './dist/init.js';
+import { PokemonBase } from './dist/pokemonbase.js';
+export { DataManager as Pokedex };
+export { PokemonBase as Pokemon };
 
 export type StatsBase = {
   hp: number;

@@ -2,7 +2,7 @@
 A nodejs library to get all pokemon info from a pokedex!
 
 ## Examples
-ALl examples can be found in [examples.js](https://github.com/scaranaraa/pokedex/blob/main/examples.js)
+All examples can be found in [examples.js](https://github.com/scaranaraa/pokedex/blob/main/examples.js)
 
 ## Features
 - Pokemon Data: Stats, Types, Regions, Evolutions, Descriptions etc
@@ -13,7 +13,7 @@ ALl examples can be found in [examples.js](https://github.com/scaranaraa/pokedex
 ## Example usage
 ### Initialization 
 ```js
-import {Pokedex} from 'pokedex';
+import {Pokedex} from 'pokedex-v2';
 const pokedex = new Pokedex()
 await pokedex.init() //necessary
 ```
@@ -61,7 +61,7 @@ accuracy: 100
 
 4. Create a pokemon instance
 ```js
-import {Pokedex, Pokemon} from 'pokedex';
+import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 const randompokemon = pokedex.randomSpawn()
 const newpokemon = new Pokemon(randompokemon, pokedex) 
@@ -71,7 +71,7 @@ console.log(newpokemon)
 
 5. Simulate battle between two Pokemon
 ```js
-import {Pokedex, Pokemon} from 'pokedex';
+import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 
 const myPokemon = new Pokemon(pokedex.randomSpawn())

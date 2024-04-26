@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 4.0.2">
   <meta charset="utf-8">
-  <title>pokedex 1.0.0 &raquo; Home</title>
+  <title>pokedex-v2 1.0.3 &raquo; Home</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -15,7 +15,7 @@
   <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
     <div id="jsdoc-navbar-container">
       <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pokedex 1.<wbr>0.<wbr>0</a>
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex-v2 1.<wbr>0.<wbr>3</a>
       </div>
     </div>
   </nav>
@@ -27,14 +27,14 @@
         <div id="jsdoc-main" role="main">
           <header class="page-header">
             <h1>
-              pokedex 1.0.0
+              pokedex-v2 1.0.3
             </h1>
           </header>
           <article>
             <h1>Pokedex</h1>
             <p>A nodejs library to get all pokemon info from a pokedex!</p>
             <h2>Examples</h2>
-            <p>ALl examples can be found in <a href="https://github.com/scaranaraa/pokedex/blob/main/examples.js">examples.js</a></p>
+            <p>All examples can be found in <a href="https://github.com/scaranaraa/pokedex/blob/main/examples.js">examples.js</a></p>
             <h2>Features</h2>
             <ul>
               <li>Pokemon Data: Stats, Types, Regions, Evolutions, Descriptions etc</li>
@@ -44,7 +44,7 @@
             </ul>
             <h2>Example usage</h2>
             <h3>Initialization</h3>
-            <pre class="prettyprint source lang-js"><code>import {Pokedex} from 'pokedex';
+            <pre class="prettyprint source lang-js"><code>import {Pokedex} from 'pokedex-v2';
 const pokedex = new Pokedex()
 await pokedex.init() //necessary
 </code></pre>
@@ -52,7 +52,7 @@ await pokedex.init() //necessary
               <li>Get information about specific pokemon</li>
             </ol>
             <pre class="prettyprint source lang-js"><code>const charizard = pokedex.speciesByName('charizard');
-console.log(charizard.toJSON())
+console.log(charizard.toJSON()) // .toJSON() is called to sanitize output
 /*
 id: 6
 height: 1.7,
@@ -92,7 +92,7 @@ accuracy: 100
             <ol start="4">
               <li>Create a pokemon instance</li>
             </ol>
-            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex';
+            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 const randompokemon = pokedex.randomSpawn()
 const newpokemon = new Pokemon(randompokemon, pokedex) 
@@ -102,7 +102,7 @@ console.log(newpokemon)
             <ol start="5">
               <li>Simulate battle between two Pokemon</li>
             </ol>
-            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex';
+            <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 
 const myPokemon = new Pokemon(pokedex.randomSpawn())
@@ -123,6 +123,78 @@ MoveResult {
 </code></pre>
           </article>
           <div class="symbol-index">
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="constants">constants</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-constants.html" class="!symbol-index-name">constants</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="index">index</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-index.html" class="!symbol-index-name">index</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="init">init</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-init.html" class="!symbol-index-name">init</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
             <section>
               <div class="symbol-index-content">
                 <h2 id="models">models</h2>
@@ -810,6 +882,30 @@ MoveResult {
                     <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="module-pokemonbase-PokemonBase.html" class="!symbol-index-name">pokemonbase~<wbr>PokemonBase()</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="utils">utils</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-utils.html" class="!symbol-index-name">utils</a>
                       </dt>
                       <dd>
                       </dd>

@@ -1,6 +1,6 @@
 {
-  "name": "pokedex",
-  "version": "1.0.0",
+  "name": "pokedex-v2",
+  "version": "1.0.3",
   "description": "A nodejs library to get all the info from a pokedex!",
   "author": "scaranaraa",
   "homepage": "https://github.com/scaranaraa/pokedex#readme",
