@@ -47,7 +47,7 @@ function calcStat(pokemon: PokemonBase, stat: string): number {
  * @property {boolean|false} has_color - Whether the Pokemon has a custom color.
  * @property {number|undefined} color - Custom color of the Pokemon, or undefined if none. 
  * @property {number|null} _hp - Current HP of the Pokemon.
- * @property {string[]|number[]|[]} ailments - List of ailments affecting the Pokemon.
+ * @property {string[]} ailments - List of ailments affecting the Pokemon.
  * @property {any} stages - Stat stage modifications affecting the Pokemon.
  */
 

@@ -4,6 +4,9 @@ A nodejs library to get all pokemon info from a pokedex!
 ## Examples
 All examples can be found in [examples.js](https://github.com/scaranaraa/pokedex/blob/main/examples.js)
 
+## Documentation 
+Documentation can be found [here](https://scaranaraa.github.io/pokedex/)
+
 ## Features
 - Pokemon Data: Stats, Types, Regions, Evolutions, Descriptions etc
 - Move Data: Effects, Properties, Description

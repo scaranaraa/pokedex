@@ -10,7 +10,7 @@
     "inlineSourceMap": false,    
     "strictNullChecks": false,           
     "moduleResolution": "NodeNext",       
-    "skipLibCheck": false ,                               
+    "skipLibCheck": true ,                               
     "rootDir": "./src",
   }
 }
