@@ -35,6 +35,8 @@
             <p>A nodejs library to get all pokemon info from a pokedex!</p>
             <h2>Examples</h2>
             <p>All examples can be found in <a href="https://github.com/scaranaraa/pokedex/blob/main/examples.js">examples.js</a></p>
+            <h2>Documentation</h2>
+            <p>Documentation can be found <a href="https://scaranaraa.github.io/pokedex/">here</a></p>
             <h2>Features</h2>
             <ul>
               <li>Pokemon Data: Stats, Types, Regions, Evolutions, Descriptions etc</li>
@@ -94,8 +96,7 @@ accuracy: 100
             </ol>
             <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
-const randompokemon = pokedex.randomSpawn()
-const newpokemon = new Pokemon(randompokemon, pokedex) 
+const randompokemon = pokedex.randomSpawnPokemon()
 console.log(newpokemon)
 //this will give the pokemon a random nature, and random iv stats
 </code></pre>
@@ -105,10 +106,11 @@ console.log(newpokemon)
             <pre class="prettyprint source lang-js"><code>import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 
-const myPokemon = new Pokemon(pokedex.randomSpawn())
-const opponentPokemon = new Pokemon(pokedex.randomSpawn())
+const myPokemon = pokedex.randomSpawnPokemon()
+const opponentPokemon = pokedex.randomSpawnPokemon()
 
-const attack = myPokemon.moves[0].move.calculate_turn(myPokemon,opponentPokemon)
+// choose a move from the list of available moves for that pokemon instance
+const attack = myPokemon.moves[0].calc_turn(myPokemon,opponentPokemon) 
 console.log(attack)
 /*
 MoveResult {
@@ -206,6 +208,30 @@ MoveResult {
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="models~DataManagerBase">models~DataManagerBase</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html" class="!symbol-index-name">models~<wbr>DataManagerBase()</a>
+                      </dt>
+                      <dd>
+                      </dd>
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#allItems" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>allItems()</a>
                       </dt>
@@ -261,15 +287,15 @@ MoveResult {
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#listMove" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>listMove(moveName)</a>
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#listRegion" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>listRegion(region)</a>
                       </dt>
@@ -325,10 +351,6 @@ MoveResult {
                       </dt>
                       <dd>
                       </dd>
-                    </dl>
-                  </div>
-                  <div class="symbol-index-column">
-                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#moveByNameIndex" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moveByNameIndex</a>
                       </dt>
@@ -339,6 +361,10 @@ MoveResult {
                       </dt>
                       <dd>
                       </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#moves" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>moves</a>
                       </dt>
@@ -351,6 +377,11 @@ MoveResult {
                       </dd>
                       <dt class="symbol-index-name">
                         <a href="module-models-DataManagerBase.html#randomSpawn" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>randomSpawn([rarity])</a>
+                      </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                        <a href="module-models-DataManagerBase.html#randomSpawnPokemon" class="!symbol-index-name">models~<wbr>DataManagerBase#<wbr>randomSpawnPokemon([rarity])</a>
                       </dt>
                       <dd>
                       </dd>
@@ -577,6 +608,11 @@ MoveResult {
                   </div>
                   <div class="symbol-index-column">
                     <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-Move.html#calculate_turn" class="!symbol-index-name">models~<wbr>Move#<wbr>calculate_turn(pokemon, opponent)</a>
+                      </dt>
+                      <dd>
+                      </dd>
                     </dl>
                   </div>
                   <div class="symbol-index-column">
@@ -721,6 +757,11 @@ MoveResult {
                   </div>
                   <div class="symbol-index-column">
                     <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                        <a href="module-models-PokemonMove.html#calc_turn" class="!symbol-index-name">models~<wbr>PokemonMove#<wbr>calc_turn(pokemon, opponent)</a>
+                      </dt>
+                      <dd>
+                      </dd>
                     </dl>
                   </div>
                   <div class="symbol-index-column">

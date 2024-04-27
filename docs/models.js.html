@@ -33,6 +33,7 @@
  * @module
  */
 import constants from &#x27;./constants.js&#x27;;
+import { PokemonBase } from &#x27;./pokemonbase.js&#x27;;
 function deaccent(text) {
     const norm &#x3D; text.normalize(&#x27;NFD&#x27;);
     const result &#x3D; Array.from(norm)
@@ -284,6 +285,12 @@ class Move {
     get description() {
         return this.effect.description;
     }
+    /**
+    * Simulate a fight between two pokemon instances
+    * @param {PokemonBase} pokemon - The pokemon performing the move
+    * @param {PokemonBase} opponent - Opponent pokemon
+    * @returns {MoveResult} The result of a move.
+    */
     calculate_turn(pokemon, opponent) {
         let success;
         let damage &#x3D; 0;
@@ -494,6 +501,15 @@ class PokemonMove {
     }
     get text() {
         return &#x60;Move ${this.method}&#x60;;
+    }
+    /**
+    * Simulate a fight between two pokemon instances
+    * @param {PokemonBase} pokemon - The pokemon performing the move
+    * @param {PokemonBase} opponent - Opponent pokemon
+    * @returns {MoveResult} The result of a move.
+    */
+    calc_turn(pokemon, opponent) {
+        return this.move.calculate_turn(pokemon, opponent);
     }
     toJSON() {
         const copy &#x3D; { ...this };
@@ -937,6 +953,11 @@ class Species {
         return null;
     }
 }
+/**
+ * Represents a Pokedex.
+ *
+ * @class DataManagerBase
+ */
 class DataManagerBase {
     /**
      * Checks if the DataManager has been initialized.
@@ -1332,6 +1353,17 @@ class DataManagerBase {
         const weights &#x3D; pool.map(x &#x3D;&gt; x.abundance);
         const randomIndex &#x3D; this.weightedRandomChoice(weights);
         return pool[randomIndex];
+    }
+    /**
+     * Returns a random Pokemon.
+     *
+     * @param {string} [rarity&#x3D;&#x27;normal&#x27;] - The rarity of the Pokemon to spawn. Can be &#x27;normal&#x27;, &#x27;mythical&#x27;, &#x27;legendary&#x27;, or &#x27;ultra_beast&#x27;.
+     * @returns {PokemonBase} A random Pokemon instance.
+     */
+    randomSpawnPokemon(rarity &#x3D; &#x27;normal&#x27;) {
+        this.checkinitialized();
+        const spawned &#x3D; this.randomSpawn(rarity);
+        return new PokemonBase(spawned, this);
     }
     /**
      * Chooses a random element from a list of weights using weighted random selection.

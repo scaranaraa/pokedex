@@ -4,7 +4,7 @@
 <head>
   <meta name="generator" content="JSDoc 4.0.2">
   <meta charset="utf-8">
-  <title>pokedex-v2 1.0.3 &raquo; Class: DataManagerBase</title>
+  <title>pokedex-v2 1.0.4 &raquo; Class: DataManagerBase</title>
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
@@ -15,7 +15,7 @@
   <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
     <div id="jsdoc-navbar-container">
       <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pokedex-v2 1.<wbr>0.<wbr>3</a>
+        <a href="index.html" class="jsdoc-navbar-package-name">pokedex-v2 1.<wbr>0.<wbr>4</a>
       </div>
     </div>
   </nav>
@@ -26,7 +26,7 @@
           <header class="page-header">
             <div class="symbol-detail-labels"><span class="label label-kind">class</span>&nbsp;<span class="label label-inner">inner</span></div>
             <h1><small><a href="module-models.html">models</a>~<wbr></small><span class="symbol-name">DataManagerBase</span></h1>
-            <p class="source-link">Source: <a href="models.js.html#source-line-909">models.<wbr>js:909</a></p>
+            <p class="source-link">Source: <a href="models.js.html#source-line-925">models.<wbr>js:925</a></p>
             <dl class="dl-compact">
             </dl>
           </header>
@@ -128,13 +128,13 @@
                     <dt><a href="module-models-DataManagerBase.html#checkinitialized">checkinitialized()</a></dt>
                     <dd>
                     </dd>
+                    <dt><a href="module-models-DataManagerBase.html#findSpeciesByNumber">findSpeciesByNumber(number)</a></dt>
+                    <dd>
+                    </dd>
                   </dl>
                 </div>
                 <div class="summary-column">
                   <dl class="dl-summary-callout">
-                    <dt><a href="module-models-DataManagerBase.html#findSpeciesByNumber">findSpeciesByNumber(number)</a></dt>
-                    <dd>
-                    </dd>
                     <dt><a href="module-models-DataManagerBase.html#itemByName">itemByName(name)</a></dt>
                     <dd>
                     </dd>
@@ -147,17 +147,20 @@
                     <dt><a href="module-models-DataManagerBase.html#listRegion">listRegion(region)</a></dt>
                     <dd>
                     </dd>
-                  </dl>
-                </div>
-                <div class="summary-column">
-                  <dl class="dl-summary-callout">
                     <dt><a href="module-models-DataManagerBase.html#moveByName">moveByName(name)</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="module-models-DataManagerBase.html#moveByNumber">moveByNumber(number)</a></dt>
                     <dd>
                     </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
                     <dt><a href="module-models-DataManagerBase.html#randomSpawn">randomSpawn([rarity])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="module-models-DataManagerBase.html#randomSpawnPokemon">randomSpawnPokemon([rarity])</a></dt>
                     <dd>
                     </dd>
                     <dt><a href="module-models-DataManagerBase.html#speciesByName">speciesByName(name)</a></dt>
@@ -701,6 +704,46 @@
                 <dd>
                   <p><code>Species</code> 
                   <p>A random Pokemon species.</p>
+                  </p>
+                </dd>
+              </dl>
+              <h3 id="randomSpawnPokemon"><span class="symbol-name">randomSpawnPokemon</span><span class="signature"><span class="signature-params">([rarity])</span>&nbsp;&rarr; <span class="signature-returns"> PokemonBase</span></span></h3>
+              <p>Returns a random Pokemon.</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>rarity</p>
+                      </td>
+                      <td>
+                        <p>string</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>The rarity of the Pokemon to spawn. Can be 'normal', 'mythical', 'legendary', or 'ultra_beast'.</p>
+                        <p>Defaults to <code>'normal'</code>.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>PokemonBase</code> 
+                  <p>A random Pokemon instance.</p>
                   </p>
                 </dd>
               </dl>

@@ -2,7 +2,7 @@
  * @module
  */
 import constants from './constants.js';
-import { DataManagerBase, LevelTrigger, Species, StatStages } from './models.js';
+import { DataManagerBase, LevelTrigger, PokemonMove, Species, StatStages } from './models.js';
 
 import { type PokemonBaseDef } from '../index.js';
 
@@ -24,7 +24,7 @@ function calcStat(pokemon: PokemonBase, stat: string): number {
  * Represents a base Pokemon instance.
  * 
  * @class PokemonBase
- * @property {any} id - Unique identifier for the Pokemon.
+ * @property {number} id - Unique identifier for the Pokemon.
  * @property {string|number} owner_id - ID of the Pokemon's owner. 
  * @property {number} idx - Index of the Pokemon within the owner's collection. 
  * @property {number} [timestamp] - Timestamp of when the Pokemon was created or obtained.
@@ -43,18 +43,18 @@ function calcStat(pokemon: PokemonBase, stat: string): number {
  * @property {string|undefined} nickname - Nickname of the Pokemon, or undefined if none. 
  * @property {string|false} favorite - Favorite status of the Pokemon. 
  * @property {number|string|undefined} held_item - ID or name of the held item, or undefined if none. 
- * @property {any} moves - List of moves the Pokemon knows.
+ * @property {PokemonMove[]} moves - List of moves the Pokemon knows.
  * @property {boolean|false} has_color - Whether the Pokemon has a custom color.
  * @property {number|undefined} color - Custom color of the Pokemon, or undefined if none. 
  * @property {number|null} _hp - Current HP of the Pokemon.
  * @property {string[]} ailments - List of ailments affecting the Pokemon.
- * @property {any} stages - Stat stage modifications affecting the Pokemon.
+ * @property {StatStages} stages - Stat stage modifications affecting the Pokemon.
  */
 
 class PokemonBase implements PokemonBaseDef {
   [key: string]: any;
 
-  id: any;
+  id: number;
 
   idx: number;
 
@@ -88,7 +88,7 @@ class PokemonBase implements PokemonBaseDef {
 
   held_item: number | string | undefined;
 
-  moves: any;
+  moves: PokemonMove[];
 
   has_color: boolean | false;
 
@@ -229,9 +229,10 @@ class PokemonBase implements PokemonBaseDef {
               can = false;
           }
 
-          if (evo.trigger.move_id && !this.moves.includes(evo.trigger.move_id)) {
+          //TODO
+          /*if (evo.trigger.move_id) {
               can = false;
-          }
+          }*/
 
           if (evo.trigger.relative_stats === 1 && this.atk <= this.defn) {
               can = false;

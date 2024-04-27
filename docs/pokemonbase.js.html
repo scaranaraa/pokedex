@@ -48,7 +48,7 @@ function calcStat(pokemon, stat) {
  * Represents a base Pokemon instance.
  *
  * @class PokemonBase
- * @property {any} id - Unique identifier for the Pokemon.
+ * @property {number} id - Unique identifier for the Pokemon.
  * @property {string|number} owner_id - ID of the Pokemon&#x27;s owner.
  * @property {number} idx - Index of the Pokemon within the owner&#x27;s collection.
  * @property {number} [timestamp] - Timestamp of when the Pokemon was created or obtained.
@@ -67,12 +67,12 @@ function calcStat(pokemon, stat) {
  * @property {string|undefined} nickname - Nickname of the Pokemon, or undefined if none.
  * @property {string|false} favorite - Favorite status of the Pokemon.
  * @property {number|string|undefined} held_item - ID or name of the held item, or undefined if none.
- * @property {any} moves - List of moves the Pokemon knows.
+ * @property {PokemonMove[]} moves - List of moves the Pokemon knows.
  * @property {boolean|false} has_color - Whether the Pokemon has a custom color.
  * @property {number|undefined} color - Custom color of the Pokemon, or undefined if none.
  * @property {number|null} _hp - Current HP of the Pokemon.
  * @property {string[]} ailments - List of ailments affecting the Pokemon.
- * @property {any} stages - Stat stage modifications affecting the Pokemon.
+ * @property {StatStages} stages - Stat stage modifications affecting the Pokemon.
  */
 class PokemonBase {
     id;
@@ -199,9 +199,10 @@ class PokemonBase {
             if (evo.trigger.item &amp;amp;&amp;amp; this.held_item !&#x3D;&#x3D; evo.trigger.item_id) {
                 can &#x3D; false;
             }
-            if (evo.trigger.move_id &amp;amp;&amp;amp; !this.moves.includes(evo.trigger.move_id)) {
+            //TODO
+            /*if (evo.trigger.move_id) {
                 can &#x3D; false;
-            }
+            }*/
             if (evo.trigger.relative_stats &#x3D;&#x3D;&#x3D; 1 &amp;amp;&amp;amp; this.atk &amp;lt;&#x3D; this.defn) {
                 can &#x3D; false;
             }

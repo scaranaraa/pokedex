@@ -203,6 +203,7 @@ export type PokemonMoveBase = {
   method: MoveMethod;
   instance: DataManagerBase;
   move: Move;
+  calc_turn(pokemon: PokemonBase, opponent: PokemonBase): MoveResult
   text: string;
 };
 
@@ -252,7 +253,7 @@ export type EvolutionListBase = {
 export type PokemonBaseDef = {
   [key: string]: any;
 
-  id: any;
+  id: number;
   idx: number;
   species_id: number;
   level: number;
@@ -271,12 +272,12 @@ export type PokemonBaseDef = {
   nickname: string | undefined;
   favorite: string | false;
   held_item: number | string | undefined;
-  moves: any;
+  moves: PokemonMove[];
   has_color: boolean | false;
   color: number | undefined;
 
   _hp?: number | null;
-  ailments: string[] | number[] | [];
+  ailments: string[] | number[]
   stages: any;
 
   format(spec: string): string;

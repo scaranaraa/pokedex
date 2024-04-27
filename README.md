@@ -66,8 +66,7 @@ accuracy: 100
 ```js
 import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
-const randompokemon = pokedex.randomSpawn()
-const newpokemon = new Pokemon(randompokemon, pokedex) 
+const randompokemon = pokedex.randomSpawnPokemon()
 console.log(newpokemon)
 //this will give the pokemon a random nature, and random iv stats
 ```
@@ -77,10 +76,11 @@ console.log(newpokemon)
 import {Pokedex, Pokemon} from 'pokedex-v2';
 const pokedex = new Pokedex()
 
-const myPokemon = new Pokemon(pokedex.randomSpawn())
-const opponentPokemon = new Pokemon(pokedex.randomSpawn())
+const myPokemon = pokedex.randomSpawnPokemon()
+const opponentPokemon = pokedex.randomSpawnPokemon()
 
-const attack = myPokemon.moves[0].move.calculate_turn(myPokemon,opponentPokemon)
+// choose a move from the list of available moves for that pokemon instance
+const attack = myPokemon.moves[0].calc_turn(myPokemon,opponentPokemon) 
 console.log(attack)
 /*
 MoveResult {

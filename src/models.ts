@@ -2,7 +2,7 @@
  * @module
  */
 import constants from './constants.js';
-import { type PokemonBase } from './pokemonbase.js';
+import { PokemonBase } from './pokemonbase.js';
 import {
     type DataManagerBaseType,
     type EvolutionBase,
@@ -282,6 +282,7 @@ class MoveMeta implements MoveMetaBase {
     get meta_ailment() {
         return constants.MOVE_AILMENTS[this.meta_ailment_id];
     }
+
 }
 
 /**
@@ -387,7 +388,12 @@ class Move implements MoveBase {
     get description() {
         return this.effect.description;
     }
-
+    /** 
+    * Simulate a fight between two pokemon instances
+    * @param {PokemonBase} pokemon - The pokemon performing the move
+    * @param {PokemonBase} opponent - Opponent pokemon
+    * @returns {MoveResult} The result of a move.
+    */
     calculate_turn(pokemon: PokemonBase, opponent: PokemonBase): MoveResult {
         let success;
         let damage = 0;
@@ -649,6 +655,17 @@ class PokemonMove implements PokemonMoveBase {
     get text() {
         return `Move ${this.method}`;
     }
+
+    /** 
+    * Simulate a fight between two pokemon instances
+    * @param {PokemonBase} pokemon - The pokemon performing the move
+    * @param {PokemonBase} opponent - Opponent pokemon
+    * @returns {MoveResult} The result of a move.
+    */
+    calc_turn(pokemon: PokemonBase, opponent: PokemonBase): MoveResult {
+        return this.move.calculate_turn(pokemon, opponent)
+    }
+
     toJSON() {
       const copy = { ...this };
       delete copy.instance
@@ -1260,7 +1277,11 @@ class Species implements SpeciesBase {
         return null;
     }
 }
-
+/**
+ * Represents a Pokedex.
+ *
+ * @class DataManagerBase
+ */
 class DataManagerBase implements DataManagerBaseType {
   
     /**
@@ -1684,6 +1705,19 @@ class DataManagerBase implements DataManagerBaseType {
         const randomIndex = this.weightedRandomChoice(weights);
         return pool[randomIndex];
     }
+
+    /**
+     * Returns a random Pokemon.
+     *
+     * @param {string} [rarity='normal'] - The rarity of the Pokemon to spawn. Can be 'normal', 'mythical', 'legendary', or 'ultra_beast'.
+     * @returns {PokemonBase} A random Pokemon instance.
+     */
+    randomSpawnPokemon(rarity = 'normal'){
+        this.checkinitialized();
+        const spawned = this.randomSpawn(rarity)
+        return new PokemonBase(spawned,this)
+    }
+
     /** 
      * Chooses a random element from a list of weights using weighted random selection. 
      * @param {number[]} weights - A list of weights. 
