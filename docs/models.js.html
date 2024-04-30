@@ -1,45 +1,16 @@
-<!doctype html>
-<html>
-
-<head>
-  <meta name="generator" content="JSDoc 4.0.2">
-  <meta charset="utf-8">
-  <title>pokedex-v2 1.0.4 &raquo; Source: models.js</title>
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
-  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
-  <link href="css/baseline.css" rel="stylesheet">
-</head>
-
-<body onload="prettyPrint()">
-  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
-    <div id="jsdoc-navbar-container">
-      <div id="jsdoc-navbar-content">
-        <a href="index.html" class="jsdoc-navbar-package-name">pokedex-v2 1.<wbr>0.<wbr>4</a>
-      </div>
-    </div>
-  </nav>
-  <div id="jsdoc-body-container">
-    <div id="jsdoc-content">
-      <div id="jsdoc-content-container">
-        <div id="jsdoc-banner" role="banner">
-        </div>
-        <div id="jsdoc-main" role="main">
-          <header class="page-header">
-            <h1>Source: models.js</h1>
-          </header>
-          <article>
-            <pre class="prettyprint linenums"><code>/**
+<!DOCTYPE html><html lang="en" style="font-size:16px"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Source: models.js</title><!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]--><script src="scripts/third-party/hljs.js" defer="defer"></script><script src="scripts/third-party/hljs-line-num.js" defer="defer"></script><script src="scripts/third-party/popper.js" defer="defer"></script><script src="scripts/third-party/tippy.js" defer="defer"></script><script src="scripts/third-party/tocbot.min.js"></script><script>var baseURL="/",locationPathname="";baseURL=(locationPathname=document.location.pathname).substr(0,locationPathname.lastIndexOf("/")+1)</script><link rel="stylesheet" href="styles/clean-jsdoc-theme.min.css"><svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none"><defs><symbol id="copy-icon" viewbox="0 0 488.3 488.3"><g><path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/><path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z"/></g></symbol><symbol id="search-icon" viewBox="0 0 512 512"><g><g><path d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z"/></g></g><g><g><path d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z"/></g></g></symbol><symbol id="font-size-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11.246 15H4.754l-2 5H.6L7 4h2l6.4 16h-2.154l-2-5zm-.8-2L8 6.885 5.554 13h4.892zM21 12.535V12h2v8h-2v-.535a4 4 0 1 1 0-6.93zM19 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></symbol><symbol id="add-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></symbol><symbol id="minus-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 11h14v2H5z"/></symbol><symbol id="dark-theme-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol><symbol id="light-theme-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol><symbol id="reset-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.537 19.567A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10c0 2.136-.67 4.116-1.81 5.74L17 12h3a8 8 0 1 0-2.46 5.772l.997 1.795z"/></symbol><symbol id="down-icon" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"></path></symbol><symbol id="codepen-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M16.5 13.202L13 15.535v3.596L19.197 15 16.5 13.202zM14.697 12L12 10.202 9.303 12 12 13.798 14.697 12zM20 10.869L18.303 12 20 13.131V10.87zM19.197 9L13 4.869v3.596l3.5 2.333L19.197 9zM7.5 10.798L11 8.465V4.869L4.803 9 7.5 10.798zM4.803 15L11 19.131v-3.596l-3.5-2.333L4.803 15zM4 13.131L5.697 12 4 10.869v2.262zM2 9a1 1 0 0 1 .445-.832l9-6a1 1 0 0 1 1.11 0l9 6A1 1 0 0 1 22 9v6a1 1 0 0 1-.445.832l-9 6a1 1 0 0 1-1.11 0l-9-6A1 1 0 0 1 2 15V9z"/></symbol><symbol id="close-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/></symbol><symbol id="menu-icon" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></symbol></defs></svg></head><body data-theme="dark"><div class="sidebar-container"><div class="sidebar" id="sidebar"><a href="/" class="sidebar-title sidebar-title-anchor">Home</a><div class="sidebar-items-container"><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-modules"><div>Modules</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="module-dist_models.html">dist/models</a></div><div class="sidebar-section-children"><a href="module-dist_pokemonbase.html">dist/pokemonbase</a></div></div><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-classes"><div>Classes</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="module-dist_models-DataManagerBase.html">DataManagerBase</a></div><div class="sidebar-section-children"><a href="module-dist_models-Evolution.html">Evolution</a></div><div class="sidebar-section-children"><a href="module-dist_models-EvolutionList.html">EvolutionList</a></div><div class="sidebar-section-children"><a href="module-dist_models-EvolutionTrigger.html">EvolutionTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-Item.html">Item</a></div><div class="sidebar-section-children"><a href="module-dist_models-ItemTrigger.html">ItemTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-LevelMethod.html">LevelMethod</a></div><div class="sidebar-section-children"><a href="module-dist_models-LevelTrigger.html">LevelTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-Move.html">Move</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveEffect.html">MoveEffect</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveMeta.html">MoveMeta</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveMethod.html">MoveMethod</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveResult.html">MoveResult</a></div><div class="sidebar-section-children"><a href="module-dist_models-OtherTrigger.html">OtherTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-PokemonMove.html">PokemonMove</a></div><div class="sidebar-section-children"><a href="module-dist_models-Species.html">Species</a></div><div class="sidebar-section-children"><a href="module-dist_models-StatChange.html">StatChange</a></div><div class="sidebar-section-children"><a href="module-dist_models-StatStages.html">StatStages</a></div><div class="sidebar-section-children"><a href="module-dist_models-Stats.html">Stats</a></div><div class="sidebar-section-children"><a href="module-dist_models-TradeTrigger.html">TradeTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_pokemonbase-PokemonBase.html">PokemonBase</a></div></div></div></div></div><div class="navbar-container" id="VuAckcnZhf"><nav class="navbar"><div class="navbar-left-items"></div><div class="navbar-right-items"><div class="navbar-right-item"><button class="icon-button search-button" aria-label="open-search"><svg><use xlink:href="#search-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button theme-toggle" aria-label="toggle-theme"><svg><use class="theme-svg-use" xlink:href="#light-theme-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button font-size" aria-label="change-font-size"><svg><use xlink:href="#font-size-icon"></use></svg></button></div></div><nav></nav></nav></div><div class="toc-container"><div class="toc-content"><span class="bold">On this page</span><div id="eed4d2a0bfd64539bb9df78095dec881"></div></div></div><div class="body-wrapper"><div class="main-content"><div class="main-wrapper"><section id="source-page" class="source-page"><header><h1 id="title" class="has-anchor">models.js</h1></header><article><pre class="prettyprint source lang-js"><code>/**
  * @module
  */
-import constants from &#x27;./constants.js&#x27;;
-import { PokemonBase } from &#x27;./pokemonbase.js&#x27;;
+import constants from './constants.js';
+import { PokemonBase } from './pokemonbase.js';
 function deaccent(text) {
-    const norm &#x3D; text.normalize(&#x27;NFD&#x27;);
-    const result &#x3D; Array.from(norm)
-        .filter(ch &#x3D;&gt; !/[\u0300-\u036f]/.test(ch))
-        .join(&#x27;&#x27;);
-    return result.normalize(&#x27;NFKC&#x27;);
+    const norm = text.normalize('NFD');
+    const result = Array.from(norm)
+        .filter(ch => !/[\u0300-\u036f]/.test(ch))
+        .join('');
+    return result.normalize('NFKC');
 }
 class UnregisteredError extends Error {
 }
@@ -56,21 +27,21 @@ class MoveEffect {
     description;
     instance;
     constructor(id, description, instance) {
-        this.id &#x3D; id;
-        this.description &#x3D; description;
-        this.instance &#x3D; instance;
+        this.id = id;
+        this.description = description;
+        this.instance = instance;
     }
     format() {
         return this.description;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
 }
 /**
- * Represents a change to a Pokemon&#x27;s stat stages.
+ * Represents a change to a Pokemon's stat stages.
  *
  * @class StatChange
  * @property {number} stat_id - The ID of the stat that is being changed.
@@ -80,11 +51,11 @@ class StatChange {
     stat_id;
     change;
     constructor(stat_id, change) {
-        this.stat_id &#x3D; stat_id;
-        this.change &#x3D; change;
+        this.stat_id = stat_id;
+        this.change = change;
     }
     get stat() {
-        return [&#x27;hp&#x27;, &#x27;atk&#x27;, &#x27;defn&#x27;, &#x27;satk&#x27;, &#x27;sdef&#x27;, &#x27;spd&#x27;, &#x27;evasion&#x27;, &#x27;accuracy&#x27;][this.stat_id - 1];
+        return ['hp', 'atk', 'defn', 'satk', 'sdef', 'spd', 'evasion', 'accuracy'][this.stat_id - 1];
     }
 }
 /**
@@ -111,27 +82,27 @@ class StatStages {
     evasion;
     accuracy;
     crit;
-    constructor(hp &#x3D; 0, atk &#x3D; 0, defn &#x3D; 0, satk &#x3D; 0, sdef &#x3D; 0, spd &#x3D; 0, evasion &#x3D; 0, accuracy &#x3D; 0, crit &#x3D; 0) {
-        this.hp &#x3D; hp;
-        this.atk &#x3D; atk;
-        this.defn &#x3D; defn;
-        this.satk &#x3D; satk;
-        this.sdef &#x3D; sdef;
-        this.spd &#x3D; spd;
-        this.evasion &#x3D; evasion;
-        this.accuracy &#x3D; accuracy;
-        this.crit &#x3D; crit;
+    constructor(hp = 0, atk = 0, defn = 0, satk = 0, sdef = 0, spd = 0, evasion = 0, accuracy = 0, crit = 0) {
+        this.hp = hp;
+        this.atk = atk;
+        this.defn = defn;
+        this.satk = satk;
+        this.sdef = sdef;
+        this.spd = spd;
+        this.evasion = evasion;
+        this.accuracy = accuracy;
+        this.crit = crit;
     }
     update(stages) {
-        this.hp +&#x3D; stages.hp;
-        this.atk +&#x3D; stages.atk;
-        this.defn +&#x3D; stages.defn;
-        this.satk +&#x3D; stages.satk;
-        this.sdef +&#x3D; stages.sdef;
-        this.spd +&#x3D; stages.spd;
-        this.evasion +&#x3D; stages.evasion;
-        this.accuracy +&#x3D; stages.accuracy;
-        this.crit +&#x3D; stages.crit;
+        this.hp += stages.hp;
+        this.atk += stages.atk;
+        this.defn += stages.defn;
+        this.satk += stages.satk;
+        this.sdef += stages.sdef;
+        this.spd += stages.spd;
+        this.evasion += stages.evasion;
+        this.accuracy += stages.accuracy;
+        this.crit += stages.crit;
     }
 }
 /**
@@ -142,7 +113,7 @@ class StatStages {
  * @property {number} damage - The amount of damage dealt by the move.
  * @property {number} healing - The amount of HP healed by the move.
  * @property {string|null} ailment - The ailment inflicted by the move, or null if none.
- * @property {string[]} messages - Additional messages about the move&#x27;s effect.
+ * @property {string[]} messages - Additional messages about the move's effect.
  * @property {StatChange[]} stat_changes - A list of stat changes caused by the move.
  */
 class MoveResult {
@@ -153,30 +124,30 @@ class MoveResult {
     messages;
     stat_changes;
     constructor(success, damage, healing, ailment, messages, stat_changes) {
-        this.success &#x3D; success;
-        this.damage &#x3D; damage;
-        this.healing &#x3D; healing;
-        this.ailment &#x3D; ailment || null;
-        this.messages &#x3D; messages;
-        this.stat_changes &#x3D; stat_changes;
+        this.success = success;
+        this.damage = damage;
+        this.healing = healing;
+        this.ailment = ailment || null;
+        this.messages = messages;
+        this.stat_changes = stat_changes;
     }
 }
 /**
  * Additional information about the mechanics of a Pokemon move.
  *
  * @class MoveMeta
- * @property {number} meta_category_id - The ID of the move&#x27;s meta category (e.g., damage dealing, status inflicting).
+ * @property {number} meta_category_id - The ID of the move's meta category (e.g., damage dealing, status inflicting).
  * @property {string} meta_ailment_id - The ID of the ailment that the move can inflict.
  * @property {number} drain - The damage dealt that is healed back to the user.
- * @property {number} healing - Thethe user&#x27;s max HP that is healed.
+ * @property {number} healing - Thethe user's max HP that is healed.
  * @property {number} crit_rate - The additional critical hit rate of the move.
  * @property {number} ailment_chance - The chance that the move will inflict an ailment.
  * @property {number} flinch_chance - The chance that the move will cause the target to flinch.
  * @property {number} stat_chance - The chance that the move will cause a stat change.
  * @property {number|null} min_hits - The minimum number of times the move can hit, or null if it always hits once.
  * @property {number|null} max_hits - The maximum number of times the move can hit, or null if it always hits once.
- * @property {number|null} min_turns - The minimum number of turns the move&#x27;s effect lasts, or null if it lasts one turn.
- * @property {number|null} max_turns - The maximum number of turns the move&#x27;s effect lasts, or null if it lasts one turn.
+ * @property {number|null} min_turns - The minimum number of turns the move's effect lasts, or null if it lasts one turn.
+ * @property {number|null} max_turns - The maximum number of turns the move's effect lasts, or null if it lasts one turn.
  * @property {StatChange[]} stat_changes - A list of stat changes that the move can cause.
  */
 class MoveMeta {
@@ -193,20 +164,20 @@ class MoveMeta {
     min_turns;
     max_turns;
     stat_changes;
-    constructor(meta_category_id, meta_ailment_id, drain, healing, crit_rate, ailment_chance, flinch_chance, stat_chance, min_hits &#x3D; null, max_hits &#x3D; null, min_turns &#x3D; null, max_turns &#x3D; null, stat_changes &#x3D; []) {
-        this.meta_category_id &#x3D; meta_category_id;
-        this.meta_ailment_id &#x3D; meta_ailment_id;
-        this.drain &#x3D; drain;
-        this.healing &#x3D; healing;
-        this.crit_rate &#x3D; crit_rate;
-        this.ailment_chance &#x3D; ailment_chance;
-        this.flinch_chance &#x3D; flinch_chance;
-        this.stat_chance &#x3D; stat_chance;
-        this.min_hits &#x3D; min_hits;
-        this.max_hits &#x3D; max_hits;
-        this.min_turns &#x3D; min_turns;
-        this.max_turns &#x3D; max_turns;
-        this.stat_changes &#x3D; stat_changes || [];
+    constructor(meta_category_id, meta_ailment_id, drain, healing, crit_rate, ailment_chance, flinch_chance, stat_chance, min_hits = null, max_hits = null, min_turns = null, max_turns = null, stat_changes = []) {
+        this.meta_category_id = meta_category_id;
+        this.meta_ailment_id = meta_ailment_id;
+        this.drain = drain;
+        this.healing = healing;
+        this.crit_rate = crit_rate;
+        this.ailment_chance = ailment_chance;
+        this.flinch_chance = flinch_chance;
+        this.stat_chance = stat_chance;
+        this.min_hits = min_hits;
+        this.max_hits = max_hits;
+        this.min_turns = min_turns;
+        this.max_turns = max_turns;
+        this.stat_changes = stat_changes || [];
     }
     get meta_category() {
         return constants.MOVE_META_CATEGORIES[this.meta_category_id];
@@ -222,16 +193,16 @@ class MoveMeta {
  * @property {number} id - The ID of the move.
  * @property {string} slug - The slug for the move
  * @property {string} name - The name of the move.
- * @property {number|null} power - The power of the move, or null if it doesn&#x27;t deal damage.
+ * @property {number|null} power - The power of the move, or null if it doesn't deal damage.
  * @property {number} pp - The number of Power Points (PP) the move has.
  * @property {number|null} accuracy - The accuracy of the move, or null if it never misses.
  * @property {number} priority - The priority of the move (higher values go first).
- * @property {number} target_id - The ID of the move&#x27;s target (e.g., one opponent, all Pokemon).
- * @property {number} type_id - The ID of the move&#x27;s type (e.g., Electric, Fire).
- * @property {number} damage_class_id - The ID of the move&#x27;s damage class (e.g., Physical, Special, Status).
- * @property {number} effect_id - The ID of the move&#x27;s effect.
- * @property {number|null} effect_chance - The chance that the move&#x27;s effect will occur, or null if it always occurs.
- * @property {MoveMeta} meta - Additional information about the move&#x27;s mechanics.
+ * @property {number} target_id - The ID of the move's target (e.g., one opponent, all Pokemon).
+ * @property {number} type_id - The ID of the move's type (e.g., Electric, Fire).
+ * @property {number} damage_class_id - The ID of the move's damage class (e.g., Physical, Special, Status).
+ * @property {number} effect_id - The ID of the move's effect.
+ * @property {number|null} effect_chance - The chance that the move's effect will occur, or null if it always occurs.
+ * @property {MoveMeta} meta - Additional information about the move's mechanics.
  * @property {DataManagerBase} instance - The DataManagerBase instance
  */
 class Move {
@@ -250,23 +221,23 @@ class Move {
     meta;
     instance;
     constructor(id, slug, name, power, pp, accuracy, priority, target_id, type_id, damage_class_id, effect_id, effect_chance, meta, instance) {
-        this.id &#x3D; id;
-        this.slug &#x3D; slug;
-        this.name &#x3D; name;
-        this.power &#x3D; power;
-        this.pp &#x3D; pp;
-        this.accuracy &#x3D; accuracy;
-        this.priority &#x3D; priority;
-        this.target_id &#x3D; target_id;
-        this.type_id &#x3D; type_id;
-        this.damage_class_id &#x3D; damage_class_id;
-        this.effect_id &#x3D; effect_id;
-        this.effect_chance &#x3D; effect_chance;
-        this.meta &#x3D; meta;
-        this.instance &#x3D; instance;
+        this.id = id;
+        this.slug = slug;
+        this.name = name;
+        this.power = power;
+        this.pp = pp;
+        this.accuracy = accuracy;
+        this.priority = priority;
+        this.target_id = target_id;
+        this.type_id = type_id;
+        this.damage_class_id = damage_class_id;
+        this.effect_id = effect_id;
+        this.effect_chance = effect_chance;
+        this.meta = meta;
+        this.instance = instance;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -293,16 +264,16 @@ class Move {
     */
     calculate_turn(pokemon, opponent) {
         let success;
-        let damage &#x3D; 0;
-        let hits &#x3D; 0;
-        if (this.damage_class_id &#x3D;&#x3D; 1 || this.power &#x3D;&#x3D;&#x3D; null) {
-            success &#x3D; true;
-            damage &#x3D; 0;
-            hits &#x3D; 0;
+        let damage = 0;
+        let hits = 0;
+        if (this.damage_class_id == 1 || this.power === null) {
+            success = true;
+            damage = 0;
+            hits = 0;
         }
         else {
-            success &#x3D;
-                Math.random() &amp;lt;
+            success =
+                Math.random() &lt;
                     (Number(this.accuracy || 0) *
                         (constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.accuracy)] *
                             2 +
@@ -310,92 +281,92 @@ class Move {
                         (Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.evasion)]) *
                             2 +
                             1);
-            hits &#x3D;
+            hits =
                 Math.floor(Math.random() *
                     (Number(this.meta.max_hits || 1) -
                         Number(this.meta.min_hits || 1) +
                         1)) + Number(this.meta.min_hits || 1);
-            let atk &#x3D; 0;
-            let defn &#x3D; 0;
-            if (this.damage_class_id &#x3D;&#x3D; 2) {
-                atk &#x3D;
+            let atk = 0;
+            let defn = 0;
+            if (this.damage_class_id == 2) {
+                atk =
                     Number(pokemon.atk) *
                         Number(constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.atk)]);
-                defn &#x3D;
+                defn =
                     Number(opponent.defn) *
                         Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.defn)]);
             }
             else {
-                atk &#x3D;
+                atk =
                     Number(pokemon.satk) *
                         Number(constants.STAT_STAGE_MULTIPLIERS[String(pokemon.stages.satk)]);
-                defn &#x3D;
+                defn =
                     Number(opponent.sdef) *
                         Number(constants.STAT_STAGE_MULTIPLIERS[String(opponent.stages.sdef)]);
             }
-            damage &#x3D; Math.floor((((2 * Number(pokemon.level)) / 5 + 2) * Number(this.power) * atk) /
+            damage = Math.floor((((2 * Number(pokemon.level)) / 5 + 2) * Number(this.power) * atk) /
                 defn /
                 50 +
                 2);
         }
-        let healing &#x3D; (Number(damage) * Number(this.meta.drain)) / 100;
-        healing +&#x3D; (Number(pokemon.max_hp) * Number(this.meta.healing)) / 100;
+        let healing = (Number(damage) * Number(this.meta.drain)) / 100;
+        healing += (Number(pokemon.max_hp) * Number(this.meta.healing)) / 100;
         for (const ailment of pokemon.ailments) {
-            if (ailment &#x3D;&#x3D;&#x3D; &#x27;Paralysis&#x27;) {
-                if (Math.random() &amp;lt; 0.25) {
-                    success &#x3D; false;
+            if (ailment === 'Paralysis') {
+                if (Math.random() &lt; 0.25) {
+                    success = false;
                 }
             }
-            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Sleep&#x27;) {
+            else if (ailment === 'Sleep') {
                 if (![173, 214].includes(this.id)) {
-                    success &#x3D; false;
+                    success = false;
                 }
             }
-            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Freeze&#x27;) {
+            else if (ailment === 'Freeze') {
                 if (![588, 172, 221, 293, 503, 592].includes(this.id)) {
-                    success &#x3D; false;
+                    success = false;
                 }
             }
-            else if (ailment &#x3D;&#x3D;&#x3D; &#x27;Burn&#x27;) {
-                if (this.damage_class_id &#x3D;&#x3D;&#x3D; 2) {
-                    damage /&#x3D; 2;
+            else if (ailment === 'Burn') {
+                if (this.damage_class_id === 2) {
+                    damage /= 2;
                 }
             }
         }
-        const ailment &#x3D; Math.random() &amp;lt; this.meta.ailment_chance ? this.meta.meta_ailment : null;
-        let typ_mult &#x3D; 1;
+        const ailment = Math.random() &lt; this.meta.ailment_chance ? this.meta.meta_ailment : null;
+        let typ_mult = 1;
         for (const typ of opponent.species.types) {
             try {
-                const mult &#x3D; constants.TYPE_EFFICACY[this.type_id];
+                const mult = constants.TYPE_EFFICACY[this.type_id];
                 if (mult) {
-                    const multi &#x3D; mult[constants.TYPES.indexOf(typ)];
-                    typ_mult *&#x3D; multi || 1;
+                    const multi = mult[constants.TYPES.indexOf(typ)];
+                    typ_mult *= multi || 1;
                 }
             }
             catch (error) { }
         }
-        damage *&#x3D; Number(typ_mult);
-        const messages &#x3D; [];
-        if (typ_mult &#x3D;&#x3D; 0) {
-            messages.push(&#x27;It\&#x27;s not effective...&#x27;);
+        damage *= Number(typ_mult);
+        const messages = [];
+        if (typ_mult == 0) {
+            messages.push('It\'s not effective...');
         }
-        else if (typ_mult &gt; 1) {
-            messages.push(&#x27;It\&#x27;s super effective!&#x27;);
+        else if (typ_mult > 1) {
+            messages.push('It\'s super effective!');
         }
-        else if (typ_mult &amp;lt; 1) {
-            messages.push(&#x27;It\&#x27;s not very effective...&#x27;);
+        else if (typ_mult &lt; 1) {
+            messages.push('It\'s not very effective...');
         }
-        if (hits &gt; 1) {
-            messages.push(&#x60;It hit ${hits} times!&#x60;);
+        if (hits > 1) {
+            messages.push(`It hit ${hits} times!`);
         }
-        const changes &#x3D; [];
+        const changes = [];
         for (const change of this.meta.stat_changes) {
-            if (Math.random() &amp;lt; this.meta.stat_chance) {
+            if (Math.random() &lt; this.meta.stat_chance) {
                 changes.push(change);
             }
         }
-        if (this.type &amp;amp;&amp;amp; this.type in pokemon.species.types) {
-            damage *&#x3D; 1.5;
+        if (this.type &amp;&amp; this.type in pokemon.species.types) {
+            damage *= 1.5;
         }
         return new MoveResult(success, Number(damage), Number(healing), ailment, messages, changes);
     }
@@ -426,23 +397,23 @@ class Item {
     emote;
     shard;
     instance;
-    constructor(id, name, description, cost, page, action, inline, emote &#x3D; null, shard &#x3D; false, instance) {
-        this.id &#x3D; id;
-        this.name &#x3D; name;
-        this.description &#x3D; description;
-        this.cost &#x3D; cost;
-        this.page &#x3D; page;
-        this.action &#x3D; action;
-        this.inline &#x3D; inline;
-        this.emote &#x3D; emote;
-        this.shard &#x3D; shard;
-        this.instance &#x3D; instance;
+    constructor(id, name, description, cost, page, action, inline, emote = null, shard = false, instance) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.page = page;
+        this.action = action;
+        this.inline = inline;
+        this.emote = emote;
+        this.shard = shard;
+        this.instance = instance;
     }
     toString() {
         return this.name;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -467,14 +438,14 @@ class LevelMethod extends MoveMethod {
     instance;
     constructor(level, instance) {
         super();
-        this.level &#x3D; level;
-        this.instance &#x3D; instance;
+        this.level = level;
+        this.instance = instance;
     }
     get text() {
-        return &#x60;Level ${this.level}&#x60;;
+        return `Level ${this.level}`;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -489,9 +460,9 @@ class LevelMethod extends MoveMethod {
  */
 class PokemonMove {
     constructor(move_id, method, instance) {
-        this.move_id &#x3D; move_id;
-        this.method &#x3D; method;
-        this.instance &#x3D; instance;
+        this.move_id = move_id;
+        this.method = method;
+        this.instance = instance;
     }
     move_id;
     method;
@@ -500,7 +471,7 @@ class PokemonMove {
         return this.instance.moves[this.move_id];
     }
     get text() {
-        return &#x60;Move ${this.method}&#x60;;
+        return `Move ${this.method}`;
     }
     /**
     * Simulate a fight between two pokemon instances
@@ -512,7 +483,7 @@ class PokemonMove {
         return this.move.calculate_turn(pokemon, opponent);
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -533,8 +504,8 @@ class EvolutionTrigger {
  * @property {number|null} item_id - The ID of the item that the Pokemon must be holding to evolve, or null if no item is required.
  * @property {number|null} move_id - The ID of the move that the Pokemon must know to evolve, or null if no move is required.
  * @property {number|null} move_type_id - The ID of the type of move that the Pokemon must know to evolve, or null if no specific type is required.
- * @property {number|null} time - The time of day when the Pokemon evolves (e.g., &quot;day&quot;, &quot;night&quot;), or null if time of day doesn&#x27;t matter.
- * @property {number|null} relative_stats - The relative stat requirement for evolution (1 for Attack &gt; Defense, -1 for Defense &gt; Attack, 0 for Attack &#x3D; Defense), or null if no stat requirement.
+ * @property {number|null} time - The time of day when the Pokemon evolves (e.g., "day", "night"), or null if time of day doesn't matter.
+ * @property {number|null} relative_stats - The relative stat requirement for evolution (1 for Attack > Defense, -1 for Defense > Attack, 0 for Attack = Defense), or null if no stat requirement.
  * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
  */
 class LevelTrigger extends EvolutionTrigger {
@@ -547,65 +518,65 @@ class LevelTrigger extends EvolutionTrigger {
     instance;
     constructor(level, item_id, move_id, move_type_id, time, relative_stats, instance) {
         super();
-        this.level &#x3D; level;
-        this.item_id &#x3D; item_id;
-        this.move_id &#x3D; move_id;
-        this.move_type_id &#x3D; move_type_id;
-        this.time &#x3D; time;
-        this.relative_stats &#x3D; relative_stats;
-        this.instance &#x3D; instance;
+        this.level = level;
+        this.item_id = item_id;
+        this.move_id = move_id;
+        this.move_type_id = move_type_id;
+        this.time = time;
+        this.relative_stats = relative_stats;
+        this.instance = instance;
     }
     get item() {
-        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.item_id === null) {
             return null;
         }
         return this.instance.items[this.item_id];
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
     get move() {
-        if (this.move_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.move_id === null) {
             return null;
         }
         return this.instance.moves[this.move_id];
     }
     get move_type() {
-        if (this.move_type_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.move_type_id === null) {
             return null;
         }
         return constants.TYPES[this.move_type_id];
     }
     get text() {
         let text;
-        if (this.level &#x3D;&#x3D;&#x3D; null) {
-            text &#x3D; &#x27;when leveled up&#x27;;
+        if (this.level === null) {
+            text = 'when leveled up';
         }
         else {
-            text &#x3D; &#x60;starting from level ${this.level}&#x60;;
+            text = `starting from level ${this.level}`;
         }
-        if (this.item !&#x3D;&#x3D; null) {
-            text +&#x3D; &#x60; while holding a ${this.item}&#x60;;
+        if (this.item !== null) {
+            text += ` while holding a ${this.item}`;
         }
-        if (this.move !&#x3D;&#x3D; null) {
-            text +&#x3D; &#x60; while knowing ${this.move}&#x60;;
+        if (this.move !== null) {
+            text += ` while knowing ${this.move}`;
         }
-        if (this.move_type !&#x3D;&#x3D; null) {
-            text +&#x3D; &#x60; while knowing a ${this.move_type}-type move&#x60;;
+        if (this.move_type !== null) {
+            text += ` while knowing a ${this.move_type}-type move`;
         }
-        if (this.relative_stats &#x3D;&#x3D;&#x3D; 1) {
-            text +&#x3D; &#x27; when its Attack is higher than its Defense&#x27;;
+        if (this.relative_stats === 1) {
+            text += ' when its Attack is higher than its Defense';
         }
-        else if (this.relative_stats &#x3D;&#x3D;&#x3D; -1) {
-            text +&#x3D; &#x27; when its Defense is higher than its Attack&#x27;;
+        else if (this.relative_stats === -1) {
+            text += ' when its Defense is higher than its Attack';
         }
-        else if (this.relative_stats &#x3D;&#x3D;&#x3D; 0) {
-            text +&#x3D; &#x27; when its Attack is equal to its Defense&#x27;;
+        else if (this.relative_stats === 0) {
+            text += ' when its Attack is equal to its Defense';
         }
-        if (this.time !&#x3D;&#x3D; null) {
-            text +&#x3D; &#x60; in the ${this.time} time&#x60;;
+        if (this.time !== null) {
+            text += ` in the ${this.time} time`;
         }
         return text;
     }
@@ -621,8 +592,8 @@ class LevelTrigger extends EvolutionTrigger {
 class ItemTrigger extends EvolutionTrigger {
     constructor(item_id, instance) {
         super();
-        this.item_id &#x3D; item_id;
-        this.instance &#x3D; instance;
+        this.item_id = item_id;
+        this.instance = instance;
     }
     item_id;
     instance;
@@ -630,10 +601,10 @@ class ItemTrigger extends EvolutionTrigger {
         return this.instance.items[this.item_id];
     }
     get text() {
-        return &#x60;using a ${this.item}&#x60;;
+        return `using a ${this.item}`;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -647,27 +618,27 @@ class ItemTrigger extends EvolutionTrigger {
  * @property {DataManagerBase} instance - The DataManagerBase instance associated with this evolution trigger.
  */
 class TradeTrigger extends EvolutionTrigger {
-    constructor(item_id &#x3D; null, instance) {
+    constructor(item_id = null, instance) {
         super();
-        this.item_id &#x3D; item_id;
-        this.instance &#x3D; instance;
+        this.item_id = item_id;
+        this.instance = instance;
     }
     item_id;
     instance;
     get item() {
-        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.item_id === null) {
             return null;
         }
         return this.instance.items[this.item_id];
     }
     get text() {
-        if (this.item_id &#x3D;&#x3D;&#x3D; null) {
-            return &#x27;when traded&#x27;;
+        if (this.item_id === null) {
+            return 'when traded';
         }
-        return &#x60;when traded while holding a ${this.item}&#x60;;
+        return `when traded while holding a ${this.item}`;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -683,13 +654,13 @@ class OtherTrigger extends EvolutionTrigger {
     instance;
     constructor(instance) {
         super();
-        this.instance &#x3D; instance;
+        this.instance = instance;
     }
     get text() {
-        return &#x27;somehow&#x27;;
+        return 'somehow';
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
@@ -705,21 +676,21 @@ class OtherTrigger extends EvolutionTrigger {
  */
 class Evolution {
     constructor(target_id, trigger, type, instance) {
-        this.target_id &#x3D; target_id;
-        this.trigger &#x3D; trigger;
-        this.type &#x3D; type;
-        this.instance &#x3D; instance;
+        this.target_id = target_id;
+        this.trigger = trigger;
+        this.type = type;
+        this.instance = instance;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
     async evolve_from(target, trigger, instance) {
-        throw new Error(&#x27;Method not implemented.&#x27;);
+        throw new Error('Method not implemented.');
     }
     async evolve_to(target, trigger, instance) {
-        throw new Error(&#x27;Method not implemented.&#x27;);
+        throw new Error('Method not implemented.');
     }
     target_id;
     trigger;
@@ -732,17 +703,17 @@ class Evolution {
         return new Evolution(target, trigger, true, instance);
     }
     get dir() {
-        return this.type ? &#x27;to&#x27; : !this.type ? &#x27;from&#x27; : &#x27;to&#x27;;
+        return this.type ? 'to' : !this.type ? 'from' : 'to';
     }
     get target() {
         return this.instance.pokemon[this.target_id];
     }
     get text() {
-        if (this.target[&#x60;evolution_${this.dir}&#x60;] !&#x3D;&#x3D; null) {
-            const pevo &#x3D; this.target[&#x60;evolution_${this.dir}&#x60;];
-            return &#x60;evolves ${this.dir} ${this.target} ${this.trigger.text}, which ${pevo.text} &#x60;;
+        if (this.target[`evolution_${this.dir}`] !== null) {
+            const pevo = this.target[`evolution_${this.dir}`];
+            return `evolves ${this.dir} ${this.target} ${this.trigger.text}, which ${pevo.text} `;
         }
-        return &#x60;evolves ${this.dir} ${this.target} ${this.trigger.text}&#x60;;
+        return `evolves ${this.dir} ${this.target} ${this.trigger.text}`;
     }
 }
 /**
@@ -754,14 +725,14 @@ class Evolution {
 class EvolutionList {
     constructor(evolutions) {
         if (evolutions instanceof Evolution) {
-            evolutions &#x3D; [evolutions];
+            evolutions = [evolutions];
         }
-        this.items &#x3D; evolutions;
+        this.items = evolutions;
     }
     items;
     get text() {
-        let txt &#x3D; this.items.map(e &#x3D;&gt; e.text).join(&#x27; and &#x27;);
-        txt &#x3D; txt.replace(&#x27; and &#x27;, &#x27;, &#x27;);
+        let txt = this.items.map(e => e.text).join(' and ');
+        txt = txt.replace(' and ', ', ');
         return txt;
     }
 }
@@ -778,12 +749,12 @@ class EvolutionList {
  */
 class Stats {
     constructor(hp, atk, defn, satk, sdef, spd) {
-        this.hp &#x3D; hp;
-        this.atk &#x3D; atk;
-        this.defn &#x3D; defn;
-        this.satk &#x3D; satk;
-        this.sdef &#x3D; sdef;
-        this.spd &#x3D; spd;
+        this.hp = hp;
+        this.atk = atk;
+        this.defn = defn;
+        this.satk = satk;
+        this.sdef = sdef;
+        this.spd = spd;
     }
     hp;
     atk;
@@ -798,20 +769,20 @@ class Stats {
  * @class Species
  * @property {number} id - The ID of the species.
  * @property {string[][]} names - A list of names for the species in different languages. Each sub-array contains a language code and the name in that language.
- * @property {string} slug - The slug for the species (e.g., &quot;pikachu&quot;).
+ * @property {string} slug - The slug for the species (e.g., "pikachu").
  * @property {Stats} base_stats - The base stats for the species.
  * @property {number} height - The height of the species in meters.
  * @property {number} weight - The weight of the species in kilograms.
  * @property {number} dex_number - The Pokedex number of the species.
  * @property {boolean} catchable - Whether the species can be caught in the wild.
- * @property {string[]} types - A list of types for the species (e.g., [&quot;Electric&quot;]).
+ * @property {string[]} types - A list of types for the species (e.g., ["Electric"]).
  * @property {number} abundance - The abundance of the species in the wild (higher values mean more common).
  * @property {number} gender_rate - The gender rate of the species (-1 for genderless, 0-8 for female ratio).
  * @property {boolean} has_gender_differences - Whether the species has gender differences.
  * @property {string|null} description - The description of the species, or null if none.
- * @property {number|null} mega_id - The ID of the species&#x27; Mega Evolution, or null if none.
- * @property {number|null} mega_x_id - The ID of the species&#x27; Mega X Evolution, or null if none.
- * @property {number|null} mega_y_id - The ID of the species&#x27; Mega Y Evolution, or null if none.
+ * @property {number|null} mega_id - The ID of the species' Mega Evolution, or null if none.
+ * @property {number|null} mega_x_id - The ID of the species' Mega X Evolution, or null if none.
+ * @property {number|null} mega_y_id - The ID of the species' Mega Y Evolution, or null if none.
  * @property {EvolutionList|null} evolution_from - The EvolutionList representing how this species evolves from others, or null if none.
  * @property {EvolutionList|null} evolution_to - The EvolutionList representing how this species evolves into others, or null if none.
  * @property {boolean} mythical - Whether the species is a Mythical Pokemon.
@@ -826,35 +797,35 @@ class Stats {
  * @property {PokemonMove[]} moves - A list of PokemonMove objects representing the moves that the species can learn.
  */
 class Species {
-    constructor(id, names, slug, base_stats, height, weight, dex_number, catchable, types, abundance, gender_rate, has_gender_differences, description &#x3D; null, mega_id &#x3D; null, mega_x_id &#x3D; null, mega_y_id &#x3D; null, evolution_from &#x3D; null, evolution_to &#x3D; null, mythical &#x3D; false, legendary &#x3D; false, ultra_beast &#x3D; false, event &#x3D; false, is_form &#x3D; false, form_item &#x3D; null, region, art_credit &#x3D; null, instance, moves &#x3D; []) {
-        this.id &#x3D; id;
-        this.names &#x3D; names;
-        this.slug &#x3D; slug;
-        this.base_stats &#x3D; base_stats;
-        this.height &#x3D; height;
-        this.weight &#x3D; weight;
-        this.dex_number &#x3D; dex_number;
-        this.catchable &#x3D; catchable;
-        this.types &#x3D; types;
-        this.abundance &#x3D; abundance;
-        this.gender_rate &#x3D; gender_rate;
-        this.has_gender_differences &#x3D; has_gender_differences;
-        this.description &#x3D; description;
-        this.mega_id &#x3D; mega_id;
-        this.mega_x_id &#x3D; mega_x_id;
-        this.mega_y_id &#x3D; mega_y_id;
-        this.evolution_from &#x3D; evolution_from;
-        this.evolution_to &#x3D; evolution_to;
-        this.mythical &#x3D; mythical;
-        this.legendary &#x3D; legendary;
-        this.ultra_beast &#x3D; ultra_beast;
-        this.event &#x3D; event;
-        this.is_form &#x3D; is_form;
-        this.form_item &#x3D; form_item;
-        this.region &#x3D; region;
-        this.art_credit &#x3D; art_credit;
-        this.instance &#x3D; instance;
-        this.moves &#x3D; moves;
+    constructor(id, names, slug, base_stats, height, weight, dex_number, catchable, types, abundance, gender_rate, has_gender_differences, description = null, mega_id = null, mega_x_id = null, mega_y_id = null, evolution_from = null, evolution_to = null, mythical = false, legendary = false, ultra_beast = false, event = false, is_form = false, form_item = null, region, art_credit = null, instance, moves = []) {
+        this.id = id;
+        this.names = names;
+        this.slug = slug;
+        this.base_stats = base_stats;
+        this.height = height;
+        this.weight = weight;
+        this.dex_number = dex_number;
+        this.catchable = catchable;
+        this.types = types;
+        this.abundance = abundance;
+        this.gender_rate = gender_rate;
+        this.has_gender_differences = has_gender_differences;
+        this.description = description;
+        this.mega_id = mega_id;
+        this.mega_x_id = mega_x_id;
+        this.mega_y_id = mega_y_id;
+        this.evolution_from = evolution_from;
+        this.evolution_to = evolution_to;
+        this.mythical = mythical;
+        this.legendary = legendary;
+        this.ultra_beast = ultra_beast;
+        this.event = event;
+        this.is_form = is_form;
+        this.form_item = form_item;
+        this.region = region;
+        this.art_credit = art_credit;
+        this.instance = instance;
+        this.moves = moves;
     }
     id;
     names;
@@ -885,8 +856,8 @@ class Species {
     instance;
     moves;
     get name() {
-        const found &#x3D; this.names.find(x &#x3D;&gt; (x[0] ? x[0] &#x3D;&#x3D;&#x3D; &#x27;🇬🇧&#x27; : null));
-        if (found &#x3D;&#x3D; null) {
+        const found = this.names.find(x => (x[0] ? x[0] === '🇬🇧' : null));
+        if (found == null) {
             return null;
         }
         return found[1];
@@ -895,39 +866,39 @@ class Species {
         return this.name;
     }
     toJSON() {
-        const copy &#x3D; { ...this };
+        const copy = { ...this };
         delete copy.instance;
         return copy;
     }
     get moveset() {
-        return this.moves.map(x &#x3D;&gt; this.instance.moves[x.move_id]);
+        return this.moves.map(x => this.instance.moves[x.move_id]);
     }
     get mega() {
-        if (this.mega_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.mega_id === null) {
             return null;
         }
         return this.instance.pokemon[this.mega_id];
     }
     get mega_x() {
-        if (this.mega_x_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.mega_x_id === null) {
             return null;
         }
         return this.instance.pokemon[this.mega_x_id];
     }
     get mega_y() {
-        if (this.mega_y_id &#x3D;&#x3D;&#x3D; null) {
+        if (this.mega_y_id === null) {
             return null;
         }
         return this.instance.pokemon[this.mega_y_id];
     }
     get correct_guesses() {
-        return [this.names.map(x &#x3D;&gt; deaccent(x[1].toLowerCase())), this.slug];
+        return [this.names.map(x => deaccent(x[1].toLowerCase())), this.slug];
     }
     get trade_evolutions() {
-        if (this.evolution_to &#x3D;&#x3D;&#x3D; null) {
+        if (this.evolution_to === null) {
             return [];
         }
-        const evos &#x3D; [];
+        const evos = [];
         for (const e of this.evolution_to.items) {
             if (e.trigger instanceof TradeTrigger) {
                 evos.push(e);
@@ -936,19 +907,19 @@ class Species {
         return evos;
     }
     get evolution_text() {
-        if (this.is_form &amp;amp;&amp;amp; this.form_item !&#x3D;&#x3D; null) {
-            const species &#x3D; this.instance.pokemon[this.dex_number];
-            const item &#x3D; this.instance.items[this.form_item];
-            return &#x60;${this.name} transforms from ${species} when given a ${item.name}.&#x60;;
+        if (this.is_form &amp;&amp; this.form_item !== null) {
+            const species = this.instance.pokemon[this.dex_number];
+            const item = this.instance.items[this.form_item];
+            return `${this.name} transforms from ${species} when given a ${item.name}.`;
         }
-        if (this.evolution_from !&#x3D;&#x3D; null &amp;amp;&amp;amp; this.evolution_to !&#x3D;&#x3D; null) {
-            return &#x60;${this.name} ${this.evolution_from.text} and ${this.evolution_to.text}.&#x60;;
+        if (this.evolution_from !== null &amp;&amp; this.evolution_to !== null) {
+            return `${this.name} ${this.evolution_from.text} and ${this.evolution_to.text}.`;
         }
-        if (this.evolution_from !&#x3D;&#x3D; null) {
-            return &#x60;${this.name} ${this.evolution_from.text}.&#x60;;
+        if (this.evolution_from !== null) {
+            return `${this.name} ${this.evolution_from.text}.`;
         }
-        if (this.evolution_to !&#x3D;&#x3D; null) {
-            return &#x60;${this.name} ${this.evolution_to.text}.&#x60;;
+        if (this.evolution_to !== null) {
+            return `${this.name} ${this.evolution_to.text}.`;
         }
         return null;
     }
@@ -964,26 +935,26 @@ class DataManagerBase {
      * @throws {Error} If the DataManager is not initialized.
      */
     checkinitialized() {
-        throw new Error(&#x27;Method not implemented.&#x27;);
+        throw new Error('Method not implemented.');
     }
     /**
      * A dictionary of Pokemon species, indexed by ID.
-     * @type {Object.&amp;lt;number, Species&gt;}
+     * @type {Object.&lt;number, Species>}
      */
     pokemon;
     /**
      * A dictionary of items, indexed by ID.
-     * @type {Object.&amp;lt;number, Item&gt;}
+     * @type {Object.&lt;number, Item>}
      */
     items;
     /**
      * A dictionary of move effects, indexed by ID.
-     * @type {Object.&amp;lt;number, MoveEffect&gt;}
+     * @type {Object.&lt;number, MoveEffect>}
      */
     effects;
     /**
      * A dictionary of moves, indexed by ID.
-     * @type {Object.&amp;lt;number, Move&gt;}
+     * @type {Object.&lt;number, Move>}
      */
     moves;
     toJSON() {
@@ -1050,8 +1021,8 @@ class DataManagerBase {
     get list_mythical() {
         this.checkinitialized();
         return Object.values(this.pokemon)
-            .filter(v &#x3D;&gt; v.mythical)
-            .map(v &#x3D;&gt; v.id);
+            .filter(v => v.mythical)
+            .map(v => v.id);
     }
     /**
      * Gets a list of Legendary Pokemon species IDs.
@@ -1060,8 +1031,8 @@ class DataManagerBase {
     get list_legendary() {
         this.checkinitialized();
         return Object.values(this.pokemon)
-            .filter(v &#x3D;&gt; v.legendary)
-            .map(v &#x3D;&gt; v.id);
+            .filter(v => v.legendary)
+            .map(v => v.id);
     }
     /**
      * Gets a list of Ultra Beast Pokemon species IDs.
@@ -1070,8 +1041,8 @@ class DataManagerBase {
     get list_ub() {
         this.checkinitialized();
         return Object.values(this.pokemon)
-            .filter(v &#x3D;&gt; v.ultra_beast)
-            .map(v &#x3D;&gt; v.id);
+            .filter(v => v.ultra_beast)
+            .map(v => v.id);
     }
     /**
      * Gets a list of Event Pokemon species IDs.
@@ -1080,8 +1051,8 @@ class DataManagerBase {
     get list_event() {
         this.checkinitialized();
         return Object.values(this.pokemon)
-            .filter(v &#x3D;&gt; v.event)
-            .map(v &#x3D;&gt; v.id);
+            .filter(v => v.event)
+            .map(v => v.id);
     }
     /**
      * Gets a list of Mega Evolution Pokemon species IDs.
@@ -1091,27 +1062,27 @@ class DataManagerBase {
         this.checkinitialized();
         return [
             ...Object.values(this.pokemon)
-                .filter(v &#x3D;&gt; v.mega_id !&#x3D;&#x3D; null)
-                .map(v &#x3D;&gt; v.mega_id),
+                .filter(v => v.mega_id !== null)
+                .map(v => v.mega_id),
             ...Object.values(this.pokemon)
-                .filter(v &#x3D;&gt; v.mega_x_id !&#x3D;&#x3D; null)
-                .map(v &#x3D;&gt; v.mega_x_id),
+                .filter(v => v.mega_x_id !== null)
+                .map(v => v.mega_x_id),
             ...Object.values(this.pokemon)
-                .filter(v &#x3D;&gt; v.mega_y_id !&#x3D;&#x3D; null)
-                .map(v &#x3D;&gt; v.mega_y_id),
+                .filter(v => v.mega_y_id !== null)
+                .map(v => v.mega_y_id),
         ];
     }
     /**
      * Gets a dictionary of species IDs indexed by Pokemon type.
-     * @type {Record&amp;lt;string, number[]&gt;}
+     * @type {Record&lt;string, number[]>}
      */
     get species_id_by_type_index() {
         this.checkinitialized();
-        const ret &#x3D; {};
+        const ret = {};
         for (const pokemon of Object.values(this.pokemon)) {
             for (const typ of pokemon.types) {
                 if (!ret[typ]) {
-                    ret[typ] &#x3D; [];
+                    ret[typ] = [];
                 }
                 ret[typ].push(pokemon.id);
             }
@@ -1120,13 +1091,13 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of species IDs indexed by Pokemon region.
-     * @type {Map&amp;lt;string, number[]&gt;}
+     * @type {Map&lt;string, number[]>}
      */
     get speciesIdByRegionIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const pokemon of Object.values(this.pokemon)) {
-            const region &#x3D; pokemon.region.toLowerCase();
+            const region = pokemon.region.toLowerCase();
             if (!ret.has(region)) {
                 ret.set(region, []);
             }
@@ -1145,17 +1116,17 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of species IDs indexed by move ID.
-     * @type {Map&amp;lt;number, number[]&gt;}
+     * @type {Map&lt;number, number[]>}
      */
     get speciesIdByMoveIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const pokemon of this.allPokemon()) {
             for (const pmove of pokemon.moves) {
                 if (!ret.has(pmove.move_id)) {
                     ret.set(pmove.move_id, []);
                 }
-                const ls &#x3D; ret.get(pmove.move_id);
+                const ls = ret.get(pmove.move_id);
                 if (!ls.includes(pokemon.id)) {
                     ls.push(pokemon.id);
                 }
@@ -1172,10 +1143,10 @@ class DataManagerBase {
         this.checkinitialized();
         if (!moveName) {
             return this.allPokemon()
-                .filter(s &#x3D;&gt; s.moves)
-                .map(s &#x3D;&gt; s.id);
+                .filter(s => s.moves)
+                .map(s => s.id);
         }
-        const move &#x3D; this.moveByName(moveName);
+        const move = this.moveByName(moveName);
         if (!move) {
             return [];
         }
@@ -1191,17 +1162,17 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of species indexed by their dex number.
-     * @type {Map&amp;lt;number, Species[]&gt;}
+     * @type {Map&lt;number, Species[]>}
      */
     get speciesByDexNumberIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const pokemon of Object.values(this.pokemon)) {
             if (!ret.has(pokemon.id)) {
                 ret.set(pokemon.id, []);
             }
             ret.get(pokemon.id).push(pokemon);
-            if (pokemon.id !&#x3D;&#x3D; pokemon.dex_number) {
+            if (pokemon.id !== pokemon.dex_number) {
                 if (!ret.has(pokemon.dex_number)) {
                     ret.set(pokemon.dex_number, []);
                 }
@@ -1226,7 +1197,7 @@ class DataManagerBase {
     */
     allSpeciesByName(name) {
         this.checkinitialized();
-        const st &#x3D; deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;));
+        const st = deaccent(name.toLowerCase().replace('′', '\''));
         return this.speciesByNameIndex.get(st) || [];
     }
     /**
@@ -1240,16 +1211,16 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of species indexed by their name.
-     * @type {Map&amp;lt;string, Species[]&gt;}
+     * @type {Map&lt;string, Species[]>}
      */
     get speciesByNameIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const pokemon of Object.values(this.pokemon)) {
-            const guess &#x3D; pokemon.correct_guesses;
+            const guess = pokemon.correct_guesses;
             for (let name of guess) {
-                if (typeof name !&#x3D; &#x27;string&#x27;)
-                    name &#x3D; name[0];
+                if (typeof name != 'string')
+                    name = name[0];
                 if (!ret.has(name)) {
                     ret.set(name, []);
                 }
@@ -1265,8 +1236,8 @@ class DataManagerBase {
      */
     speciesByName(name) {
         this.checkinitialized();
-        const st &#x3D; deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;));
-        const speciesList &#x3D; this.speciesByNameIndex.get(st);
+        const st = deaccent(name.toLowerCase().replace('′', '\''));
+        const speciesList = this.speciesByNameIndex.get(st);
         return speciesList ? speciesList[0] : null;
     }
     /**
@@ -1280,11 +1251,11 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of items indexed by their name.
-     * @type {Map&amp;lt;string, Item&gt;}
+     * @type {Map&lt;string, Item>}
      */
     get itemByNameIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const item of Object.values(this.items)) {
             ret.set(item.name.toLowerCase(), item);
         }
@@ -1297,7 +1268,7 @@ class DataManagerBase {
      */
     itemByName(name) {
         this.checkinitialized();
-        return this.itemByNameIndex.get(deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;\&#x27;&#x27;)));
+        return this.itemByNameIndex.get(deaccent(name.toLowerCase().replace('′', '\'')));
     }
     /**
      * Finds a move by its ID.
@@ -1310,11 +1281,11 @@ class DataManagerBase {
     }
     /**
      * Gets a Map of moves indexed by their name.
-     * @type {Map&amp;lt;string, Move&gt;}
+     * @type {Map&lt;string, Move>}
      */
     get moveByNameIndex() {
         this.checkinitialized();
-        const ret &#x3D; new Map();
+        const ret = new Map();
         for (const move of Object.values(this.moves)) {
             ret.set(move.name.toLowerCase(), move);
         }
@@ -1327,42 +1298,42 @@ class DataManagerBase {
      */
     moveByName(name) {
         this.checkinitialized();
-        return this.moveByNameIndex.get(deaccent(name.toLowerCase().replace(&#x27;′&#x27;, &#x27;’&#x27;)));
+        return this.moveByNameIndex.get(deaccent(name.toLowerCase().replace('′', '’')));
     }
     /**
  * Returns a random Pokemon species.
  *
- * @param {string} [rarity&#x3D;&#x27;normal&#x27;] - The rarity of the Pokemon to spawn. Can be &#x27;normal&#x27;, &#x27;mythical&#x27;, &#x27;legendary&#x27;, or &#x27;ultra_beast&#x27;.
+ * @param {string} [rarity='normal'] - The rarity of the Pokemon to spawn. Can be 'normal', 'mythical', 'legendary', or 'ultra_beast'.
  * @returns {Species} A random Pokemon species.
  */
-    randomSpawn(rarity &#x3D; &#x27;normal&#x27;) {
+    randomSpawn(rarity = 'normal') {
         this.checkinitialized();
         let pool;
-        if (rarity &#x3D;&#x3D;&#x3D; &#x27;mythical&#x27;) {
-            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.mythical);
+        if (rarity === 'mythical') {
+            pool = this.allPokemon().filter(x => x.catchable &amp;&amp; x.mythical);
         }
-        else if (rarity &#x3D;&#x3D;&#x3D; &#x27;legendary&#x27;) {
-            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.legendary);
+        else if (rarity === 'legendary') {
+            pool = this.allPokemon().filter(x => x.catchable &amp;&amp; x.legendary);
         }
-        else if (rarity &#x3D;&#x3D;&#x3D; &#x27;ultra_beast&#x27;) {
-            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable &amp;amp;&amp;amp; x.ultra_beast);
+        else if (rarity === 'ultra_beast') {
+            pool = this.allPokemon().filter(x => x.catchable &amp;&amp; x.ultra_beast);
         }
         else {
-            pool &#x3D; this.allPokemon().filter(x &#x3D;&gt; x.catchable);
+            pool = this.allPokemon().filter(x => x.catchable);
         }
-        const weights &#x3D; pool.map(x &#x3D;&gt; x.abundance);
-        const randomIndex &#x3D; this.weightedRandomChoice(weights);
+        const weights = pool.map(x => x.abundance);
+        const randomIndex = this.weightedRandomChoice(weights);
         return pool[randomIndex];
     }
     /**
      * Returns a random Pokemon.
      *
-     * @param {string} [rarity&#x3D;&#x27;normal&#x27;] - The rarity of the Pokemon to spawn. Can be &#x27;normal&#x27;, &#x27;mythical&#x27;, &#x27;legendary&#x27;, or &#x27;ultra_beast&#x27;.
+     * @param {string} [rarity='normal'] - The rarity of the Pokemon to spawn. Can be 'normal', 'mythical', 'legendary', or 'ultra_beast'.
      * @returns {PokemonBase} A random Pokemon instance.
      */
-    randomSpawnPokemon(rarity &#x3D; &#x27;normal&#x27;) {
+    randomSpawnPokemon(rarity = 'normal') {
         this.checkinitialized();
-        const spawned &#x3D; this.randomSpawn(rarity);
+        const spawned = this.randomSpawn(rarity);
         return new PokemonBase(spawned, this);
     }
     /**
@@ -1372,42 +1343,20 @@ class DataManagerBase {
      */
     weightedRandomChoice(weights) {
         this.checkinitialized();
-        const total &#x3D; weights.reduce((acc, w) &#x3D;&gt; acc + w, 0);
-        let threshold &#x3D; Math.random() * total;
-        for (let i &#x3D; 0; i &amp;lt; weights.length; i++) {
-            if (weights[i] &gt;&#x3D; threshold) {
+        const total = weights.reduce((acc, w) => acc + w, 0);
+        let threshold = Math.random() * total;
+        for (let i = 0; i &lt; weights.length; i++) {
+            if (weights[i] >= threshold) {
                 return i;
             }
-            threshold -&#x3D; weights[i];
+            threshold -= weights[i];
         }
         return 0;
     }
     get spawnWeights() {
         this.checkinitialized();
-        return Object.values(this.pokemon).map(p &#x3D;&gt; p.abundance);
+        return Object.values(this.pokemon).map(p => p.abundance);
     }
 }
 export { DataManagerBase, MoveMeta, MoveResult, MoveMethod, Move, ItemTrigger, LevelTrigger, LevelMethod, PokemonMove, Species, StatStages, Stats, StatChange, OtherTrigger, TradeTrigger, Item, MoveEffect, Evolution, EvolutionTrigger, EvolutionList, };
-</code></pre>
-          </article>
-        </div>
-      </div>
-      <nav id="jsdoc-toc-nav" role="navigation"></nav>
-    </div>
-  </div>
-  <footer id="jsdoc-footer" class="jsdoc-footer">
-    <div id="jsdoc-footer-container">
-      <p>
-        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 4.0.2 on April 27, 2024.
-      </p>
-    </div>
-  </footer>
-  <script src="scripts/jquery.min.js"></script>
-  <script src="scripts/tree.jquery.js"></script>
-  <script src="scripts/prettify.js"></script>
-  <script src="scripts/jsdoc-toc.js"></script>
-  <script src="scripts/linenumber.js"></script>
-  <script src="scripts/scrollanchor.js"></script>
-</body>
-
-</html>
+</code></pre></article></section></div></div></div><div class="search-container" id="PkfLWpAbet" style="display:none"><div class="wrapper" id="iCxFxjkHbP"><button class="icon-button search-close-button" id="VjLlGakifb" aria-label="close search"><svg><use xlink:href="#close-icon"></use></svg></button><div class="search-box-c"><svg><use xlink:href="#search-icon"></use></svg> <input type="text" id="vpcKVYIppa" class="search-input" placeholder="Search..." autofocus></div><div class="search-result-c" id="fWwVHRuDuN"><span class="search-result-c-text">Type anything to view search result</span></div></div></div><div class="mobile-menu-icon-container"><button class="icon-button" id="mobile-menu" data-isopen="false" aria-label="menu"><svg><use xlink:href="#menu-icon"></use></svg></button></div><div id="mobile-sidebar" class="mobile-sidebar-container"><div class="mobile-sidebar-wrapper"><a href="/" class="sidebar-title sidebar-title-anchor">Home</a><div class="mobile-nav-links"></div><div class="mobile-sidebar-items-c"><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-modules"><div>Modules</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="module-dist_models.html">dist/models</a></div><div class="sidebar-section-children"><a href="module-dist_pokemonbase.html">dist/pokemonbase</a></div></div><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-classes"><div>Classes</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="module-dist_models-DataManagerBase.html">DataManagerBase</a></div><div class="sidebar-section-children"><a href="module-dist_models-Evolution.html">Evolution</a></div><div class="sidebar-section-children"><a href="module-dist_models-EvolutionList.html">EvolutionList</a></div><div class="sidebar-section-children"><a href="module-dist_models-EvolutionTrigger.html">EvolutionTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-Item.html">Item</a></div><div class="sidebar-section-children"><a href="module-dist_models-ItemTrigger.html">ItemTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-LevelMethod.html">LevelMethod</a></div><div class="sidebar-section-children"><a href="module-dist_models-LevelTrigger.html">LevelTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-Move.html">Move</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveEffect.html">MoveEffect</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveMeta.html">MoveMeta</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveMethod.html">MoveMethod</a></div><div class="sidebar-section-children"><a href="module-dist_models-MoveResult.html">MoveResult</a></div><div class="sidebar-section-children"><a href="module-dist_models-OtherTrigger.html">OtherTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_models-PokemonMove.html">PokemonMove</a></div><div class="sidebar-section-children"><a href="module-dist_models-Species.html">Species</a></div><div class="sidebar-section-children"><a href="module-dist_models-StatChange.html">StatChange</a></div><div class="sidebar-section-children"><a href="module-dist_models-StatStages.html">StatStages</a></div><div class="sidebar-section-children"><a href="module-dist_models-Stats.html">Stats</a></div><div class="sidebar-section-children"><a href="module-dist_models-TradeTrigger.html">TradeTrigger</a></div><div class="sidebar-section-children"><a href="module-dist_pokemonbase-PokemonBase.html">PokemonBase</a></div></div></div><div class="mobile-navbar-actions"><div class="navbar-right-item"><button class="icon-button search-button" aria-label="open-search"><svg><use xlink:href="#search-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button theme-toggle" aria-label="toggle-theme"><svg><use class="theme-svg-use" xlink:href="#light-theme-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button font-size" aria-label="change-font-size"><svg><use xlink:href="#font-size-icon"></use></svg></button></div></div></div></div><script type="text/javascript" src="scripts/core.min.js"></script><script src="scripts/search.min.js" defer="defer"></script><script src="scripts/third-party/fuse.js" defer="defer"></script><script type="text/javascript">var tocbotInstance=tocbot.init({tocSelector:"#eed4d2a0bfd64539bb9df78095dec881",contentSelector:".main-content",headingSelector:"h1, h2, h3",hasInnerContainers:!0,scrollContainer:".main-content",headingsOffset:130,onClick:bringLinkToView})</script></body></html>
